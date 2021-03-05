@@ -1,0 +1,15 @@
+.root {
+  @apply relative;
+}
+
+.list {
+  @apply flex flex-row items-center justify-items-end h-full;
+}
+
+.avatarButton {
+  @apply inline-flex justify-center rounded-full;
+}
+
+.avatarButton:focus {
+  @apply outline-none;
+}

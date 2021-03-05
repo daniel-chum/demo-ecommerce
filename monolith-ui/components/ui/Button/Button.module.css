@@ -1,0 +1,11 @@
+.root {
+  @apply cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border border-transparent items-center;
+}
+
+.root[data-active] {
+  @apply bg-gray-600;
+}
+
+.slim {
+  @apply py-2 transform-none normal-case;
+}

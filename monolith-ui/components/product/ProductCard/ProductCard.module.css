@@ -1,0 +1,30 @@
+.root {
+  @apply relative max-h-full w-full box-border overflow-hidden
+    bg-no-repeat bg-center bg-cover transition-transform
+    ease-linear cursor-pointer;
+  height: 100% !important;
+}
+
+.productTitle {
+  @apply pt-0 max-w-full w-full;
+  font-size: 2rem;
+  letter-spacing: 0.4px;
+}
+
+.productPrice {
+  @apply py-4 px-6 bg-primary text-primary font-semibold inline-block text-sm leading-6;
+  letter-spacing: 0.4px;
+}
+
+.wishlistButton {
+  @apply w-10 h-10 flex ml-auto items-center justify-center bg-primary text-primary font-semibold  text-xs leading-6 cursor-pointer;
+}
+
+.imageContainer {
+  @apply flex items-center justify-center;
+  overflow: hidden;
+}
+
+/* .productImage {
+  @apply transform transition-transform duration-500 object-cover;
+} */
