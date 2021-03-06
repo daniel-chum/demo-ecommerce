@@ -1,9 +1,8 @@
-import Link from "next/link";
-import cn from "classnames";
 import { useUI } from "../../ui/context";
-import s from "./UserNav.module.css";
 import { useAuth } from "../../../lib/hooks/auth";
 import DropdownMenu from "../UserNav/DropdownMenu";
+import { User } from "../../icons";
+import s from "./UserNav.module.css";
 
 const UserNav = ({ className, children, ...props }) => {
   const { openModal } = useUI();
@@ -11,19 +10,19 @@ const UserNav = ({ className, children, ...props }) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <nav className={cn(s.root, className)}>
-      <div className={s.mainContainer}>
-        <ul className={s.list}>
-          <li className={s.item}>
+    <nav className={className}>
+      <div>
+        <ul>
+          <li>
             {isAuthenticated ? (
               <DropdownMenu />
             ) : (
               <button
-                className={s.avatarButton}
+                className={s.user}
                 aria-label="Menu"
                 onClick={() => openModal()}
               >
-                Avatar
+                <User />
               </button>
             )}
           </li>

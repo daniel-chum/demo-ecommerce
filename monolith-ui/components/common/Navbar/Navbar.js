@@ -27,8 +27,8 @@ const Navbar = () => {
 
   return (
     <div className={cn(s.root, { "shadow-magical": hasScrolled })}>
-      <div className={s.logo}>
-        <Logo onClick={() => router.push("/")} />
+      <div className={s.logo} onClick={() => router.push("/")}>
+        <Logo />
       </div>
       <UserNav />
     </div>

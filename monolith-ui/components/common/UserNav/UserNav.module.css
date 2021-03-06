@@ -1,15 +1,11 @@
-.root {
-  @apply relative;
-}
+.user {
+  @apply transform duration-300 ease-in-out;
 
-.list {
-  @apply flex flex-row items-center justify-items-end h-full;
-}
+  & svg {
+    @apply fill-current text-primary;
+  }
 
-.avatarButton {
-  @apply inline-flex justify-center rounded-full;
-}
-
-.avatarButton:focus {
-  @apply outline-none;
+  &:hover {
+    @apply scale-125;
+  }
 }
