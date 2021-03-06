@@ -1,12 +1,20 @@
 .root {
-  @apply fixed bg-primary text-primary flex items-center inset-0 z-50 justify-center;
+  @apply fixed text-secondary flex items-center inset-0 z-50 justify-center;
   background-color: rgba(0, 0, 0, 0.35);
 }
 
 .modal {
-  @apply bg-primary p-12 border relative;
+  @apply bg-secondary p-12 border relative;
 }
 
-.modal:focus {
-  @apply outline-none;
+.button {
+  @apply text-gray-500 hover:text-primary transition ease-in-out duration-150 focus:outline-none absolute right-0 top-0 m-6;
+}
+
+.logo {
+  @apply flex justify-center pb-8;
+
+  & svg {
+    @apply fill-current text-primary;
+  }
 }

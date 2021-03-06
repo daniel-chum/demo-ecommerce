@@ -33,6 +33,8 @@ const LoginView = () => {
       console.log(errors.response);
       setMessage(errors.response.data.detail);
       setLoading(false);
+      setUsername("");
+      setPassword("");
     }
   };
 
@@ -51,17 +53,13 @@ const LoginView = () => {
   }, [handleValidation]);
 
   return (
-    <form
-      onSubmit={handleLogin}
-      className="w-80 flex flex-col justify-between p-3"
-    >
-      <div className="flex justify-center pb-12 ">Logo</div>
+    <form onSubmit={handleLogin} className="flex flex-col justify-between p-3">
       <div className="flex flex-col space-y-3">
         {message && (
-          <div className="text-red border border-red p-3">
+          <div className="text-black border border-red p-3">
             {message}. Did you {` `}
             <a
-              className="text-accent-9 inline font-bold hover:underline cursor-pointer"
+              className="text-red-600 inline font-bold hover:underline cursor-pointer"
               onClick={() => setModalView("FORGOT_VIEW")}
             >
               forgot your password?
@@ -90,10 +88,10 @@ const LoginView = () => {
           Log In
         </Button>
         <div className="pt-1 text-center text-sm">
-          <span className="text-accents-7">Don't have an account?</span>
+          <span className="text-gray-500">Don't have an account?</span>
           {` `}
           <a
-            className="text-accent-9 font-bold hover:underline cursor-pointer"
+            className="text-primary font-bold hover:underline cursor-pointer"
             onClick={() => setModalView("SIGNUP_VIEW")}
           >
             Sign Up

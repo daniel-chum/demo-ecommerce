@@ -13,8 +13,6 @@ const Button = forwardRef((props, buttonRef) => {
     width,
     loading = false,
     disabled = false,
-    style = {},
-    Component = "button",
     ...rest
   } = props;
   const ref = useRef(null);
@@ -30,16 +28,12 @@ const Button = forwardRef((props, buttonRef) => {
   );
 
   return (
-    <Component
+    <button
       aria-pressed={active}
       data-variant={variant}
       ref={mergeRefs([ref, buttonRef])}
       className={rootClassName}
       disabled={disabled}
-      style={{
-        width,
-        ...style,
-      }}
       {...rest}
     >
       {children}
@@ -48,7 +42,7 @@ const Button = forwardRef((props, buttonRef) => {
           <LoadingDots />
         </i>
       )}
-    </Component>
+    </button>
   );
 });
 

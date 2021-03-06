@@ -1,5 +1,5 @@
 .root {
-  @apply flex justify-between px-6 py-3 items-center bg-secondary;
+  @apply flex justify-between px-10 py-3 items-center bg-secondary;
 }
 
 .logo {

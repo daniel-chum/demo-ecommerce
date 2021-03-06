@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from "react";
 import Portal from "@reach/portal";
 import s from "./Modal.module.css";
-import { Cross } from "../../icons";
+import { Cross, Logo } from "../../icons";
 import {
   disableBodyScroll,
   enableBodyScroll,
@@ -40,10 +40,13 @@ const Modal = ({ children, open, onClose }) => {
       {open ? (
         <div className={s.root}>
           <div className={s.modal} role="dialog" ref={ref}>
+            <div className={s.logo}>
+              <Logo width="56" height="56" />
+            </div>
             <button
               onClick={() => onClose()}
               aria-label="Close panel"
-              className="hover:text-gray-500 transition ease-in-out duration-150 focus:outline-none absolute right-0 top-0 m-6"
+              className={s.button}
             >
               <Cross className="h-6 w-6" />
             </button>
