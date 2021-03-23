@@ -1,24 +1,37 @@
-.dropdownMenu {
-  @apply fixed right-0 mt-2 origin-top-right outline-none bg-primary z-40 w-full h-full;
+.avatarButton {
+  @apply transform duration-200 ease-in-out;
 
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    @apply scale-110;
+  }
+
+  & svg {
+    @apply fill-current text-primary;
+  }
+}
+
+.dropdownMenu {
+  @apply fixed right-5 mt-2 origin-top-right outline-none bg-secondary z-40 w-full h-full;
   @screen lg {
-    @apply absolute top-10 border shadow-lg w-56 h-auto;
+    @apply absolute top-10 right-6 border shadow-md w-40 h-auto;
+  }
+
+  &::after {
+    content: " ";
+    @apply absolute bottom-full right-5;
+    @apply border-4;
+    border-color: transparent transparent var(--accents-2) transparent;
   }
 }
 
 .link {
-  @apply text-primary flex cursor-pointer px-6 py-3 flex transition ease-in-out duration-150 leading-6 font-medium items-center;
-  text-transform: capitalize;
-}
+  @apply text-accents-2 cursor-pointer px-6 py-3 flex transition ease-in-out duration-200;
 
-/* .link:hover {
-  @apply;
-} */
-
-.link.active {
-  @apply font-bold;
-}
-
-.off {
-  @apply hidden;
+  &:hover {
+    @apply bg-accents-2 text-secondary;
+  }
 }

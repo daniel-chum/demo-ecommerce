@@ -39,11 +39,10 @@ class ListingList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = RetrieveProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'id'
 
     def get_queryset(self):

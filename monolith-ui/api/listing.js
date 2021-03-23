@@ -1,4 +1,4 @@
-import { listingApi } from "./uri";
+import { listingApi, productApi } from "./uri";
 const axios = require("axios");
 
 const getListing = async (getToken) => {
@@ -23,4 +23,14 @@ const addListing = async (getToken, body) => {
   });
 };
 
-export { getListing, addListing };
+const deleteListing = async (getToken, id) => {
+  return axios({
+    method: "delete",
+    url: `${productApi}/${id}`,
+    headers: {
+      authorization: `Bearer ${await getToken()}`,
+    },
+  });
+};
+
+export { getListing, addListing, deleteListing };

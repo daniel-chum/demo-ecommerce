@@ -10,25 +10,20 @@ const UserNav = ({ className, children, ...props }) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <nav className={className}>
-      <div>
-        <ul>
-          <li>
-            {isAuthenticated ? (
-              <DropdownMenu />
-            ) : (
-              <button
-                className={s.user}
-                aria-label="Menu"
-                onClick={() => openModal()}
-              >
-                <User />
-              </button>
-            )}
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div>
+      {isAuthenticated ? (
+        <DropdownMenu />
+      ) : (
+        <button
+          className={s.user}
+          aria-label="Menu"
+          onClick={() => openModal()}
+        >
+          <User />
+          SIGN IN
+        </button>
+      )}
+    </div>
   );
 };
 

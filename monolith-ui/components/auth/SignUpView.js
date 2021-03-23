@@ -58,13 +58,7 @@ const SignUpView = () => {
   }, [handleValidation]);
 
   return (
-    <form
-      onSubmit={handleSignup}
-      className="w-80 flex flex-col justify-between p-3"
-    >
-      <div className="flex justify-center pb-12 ">
-        <p>Testing 123</p>
-      </div>
+    <form onSubmit={handleSignup} className="w-80 px-3">
       <div className="flex flex-col space-y-4">
         {message && (
           <div className="text-red border border-red p-3">{message}</div>
@@ -75,29 +69,26 @@ const SignUpView = () => {
         <Input type="password" placeholder="Password" onChange={setPassword} />
         <span className="text-accents-8">
           <span className="inline-block align-middle ">
-            <Info width="15" height="15" />
+            <Info width="15" height="15" className="text-gray-800" />
           </span>{" "}
-          <span className="leading-6 text-sm">
+          <span className="text-gray-800 text-sm">
             <strong>Info</strong>: Passwords must be longer than 7 chars and
             include numbers.{" "}
           </span>
         </span>
-        <div className="pt-2 w-full flex flex-col">
-          <Button
-            variant="slim"
-            type="submit"
-            loading={loading}
-            disabled={disabled}
-          >
-            Sign Up
-          </Button>
-        </div>
-
+        <Button
+          variant="slim"
+          type="submit"
+          loading={loading}
+          disabled={disabled}
+        >
+          Sign Up
+        </Button>
         <span className="pt-1 text-center text-sm">
-          <span className="text-accents-7">Do you have an account?</span>
+          <span className="text-gray-800">Do you have an account?</span>
           {` `}
           <a
-            className="text-accent-9 font-bold hover:underline cursor-pointer"
+            className="text-gray-800 font-bold hover:underline cursor-pointer"
             onClick={() => setModalView("LOGIN_VIEW")}
           >
             Log In

@@ -9,6 +9,8 @@ urlpatterns = [
     path('api/product/<int:id>',
          ProductDetail.as_view(), name='product-detail'),
     path("api/order", OrderList.as_view(), name="order-list"),
+
+    #Authentication
     path('api/token', Login.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', RefreshToken.as_view(), name='token_refresh'),
     path("api/token/logout", Logout.as_view(), name="logout"),

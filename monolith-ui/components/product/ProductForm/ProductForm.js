@@ -9,11 +9,8 @@ const ProductForm = ({
   price,
 }) => {
   return (
-    <form
-      onSubmit={onSubmit}
-      className="w-80 flex flex-col justify-between p-3"
-    >
-      <div className="flex justify-center pb-12 ">Add Product</div>
+    <form onSubmit={onSubmit} className="w-80 flex flex-col space-y-2">
+      <span className="text-black">Add Product</span>
       <Input
         type="text"
         placeholder="Title"
@@ -28,7 +25,7 @@ const ProductForm = ({
       />
       <input type="file" onChange={setImage} />
       <Button variant="slim" type="submit">
-        Submit
+        Create
       </Button>
     </form>
   );

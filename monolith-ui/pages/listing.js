@@ -1,12 +1,14 @@
-import HomePageProductGrid from "../components/common/HomePageProductGrid/HomePageProductGrid";
+import ProductGrid from "../components/common/ProductGrid/ProductGrid";
 import ProductForm from "../components/product/ProductForm/ProductForm";
-import { getListing, addListing } from "../api/listing";
+import { getListing, addListing, deleteListing } from "../api/listing";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../lib/hooks/auth";
+import { Modal } from "../components/ui";
 
 export default function Listing() {
   const [listings, setListings] = useState([]);
+  const [displayAddProduct, setDisplayAddProduct] = useState(false);
   const router = useRouter();
   const { getToken, isAuthenticated } = useAuth();
 
@@ -15,7 +17,6 @@ export default function Listing() {
       try {
         const response = await getListing(getToken);
         const productArray = response.data;
-        console.log(productArray);
         setListings(productArray);
       } catch (e) {
         console.log(e);
@@ -35,7 +36,6 @@ export default function Listing() {
   const [image, setImage] = useState(null);
 
   const handleUpload = (e) => {
-    console.log(e.target.files);
     setImage(e.target.files[0]);
   };
 
@@ -53,33 +53,60 @@ export default function Listing() {
       }
       try {
         const res = await addListing(getToken, formData);
-        console.log(res.data);
-        setListings([...listings, res.data]);
+        setListings((prevListings) => [...prevListings, res.data]);
         setTitle("");
         setPrice("");
-        console.log(listings);
       } catch (e) {
         console.log(e);
         setTitle("");
-        setPrice(0);
+        setPrice("");
       }
     } else {
       console.log("Title and price must not be blank for listing creation!");
     }
   };
 
+  const handleDeleteButton = async (productId) => {
+    try {
+      const res = await deleteListing(getToken, productId);
+      setListings(listings.filter((product) => product.id !== productId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
-      <h2>Product Page</h2>
-      <ProductForm
-        title={title}
-        price={price}
-        onSubmit={handleAddButton}
-        setTitle={setTitle}
-        setPrice={setPrice}
-        setImage={handleUpload}
+      <h2>Listings</h2>
+      <button
+        className="flex items-center justify-evenly w-28 h-12 rounded
+         bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out 
+         font-medium text-white focus:outline-none"
+        onClick={() =>
+          setDisplayAddProduct((displayAddProduct) => !displayAddProduct)
+        }
+      >
+        Add Product
+      </button>
+      <Modal
+        open={displayAddProduct}
+        onClose={() =>
+          setDisplayAddProduct((displayAddProduct) => !displayAddProduct)
+        }
+      >
+        <ProductForm
+          title={title}
+          price={price}
+          onSubmit={handleAddButton}
+          setTitle={setTitle}
+          setPrice={setPrice}
+          setImage={handleUpload}
+        />
+      </Modal>
+      <ProductGrid
+        productList={listings}
+        handleDeleteButton={handleDeleteButton}
       />
-      <HomePageProductGrid productList={listings} />
     </>
   );
 }

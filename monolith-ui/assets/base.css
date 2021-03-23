@@ -1,7 +1,22 @@
 :root {
-  --primary: #631883;
+  --primary: #05386b;
   --secondary: #ffffff;
   --accents-0: #dee2e6;
   --accents-1: #e9ecef;
   --accents-2: #868e96;
+  --call-to-action: #3ea6ff;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -12,7 +12,7 @@
 }
 
 .logo {
-  @apply flex justify-center pb-8;
+  @apply flex justify-center pb-6;
 
   & svg {
     @apply fill-current text-primary;
