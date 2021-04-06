@@ -32,7 +32,7 @@ export default function Listing() {
   }, []);
 
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [image, setImage] = useState(null);
 
   const handleUpload = (e) => {
@@ -55,11 +55,11 @@ export default function Listing() {
         const res = await addListing(getToken, formData);
         setListings((prevListings) => [...prevListings, res.data]);
         setTitle("");
-        setPrice("");
+        setPrice(0);
       } catch (e) {
         console.log(e);
         setTitle("");
-        setPrice("");
+        setPrice(0);
       }
     } else {
       console.log("Title and price must not be blank for listing creation!");
@@ -93,6 +93,8 @@ export default function Listing() {
         onClose={() =>
           setDisplayAddProduct((displayAddProduct) => !displayAddProduct)
         }
+        width="w-4/12"
+        height="h-4/5"
       >
         <ProductForm
           title={title}

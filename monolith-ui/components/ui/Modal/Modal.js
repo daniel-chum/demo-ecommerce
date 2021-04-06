@@ -7,8 +7,9 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
+import cn from "classnames";
 
-const Modal = ({ children, open, onClose }) => {
+const Modal = ({ children, open, onClose, logo, width, height }) => {
   const ref = useRef();
 
   const handleKey = useCallback(
@@ -39,9 +40,9 @@ const Modal = ({ children, open, onClose }) => {
     <Portal>
       {open ? (
         <div className={s.root}>
-          <div className={s.modal} role="dialog" ref={ref}>
+          <div className={cn(s.modal, width, height)} role="dialog" ref={ref}>
             <div className={s.logo}>
-              <Logo width="56" height="56" />
+              {logo ? <Logo width="56" height="56" /> : null}
             </div>
             <button
               onClick={() => onClose()}

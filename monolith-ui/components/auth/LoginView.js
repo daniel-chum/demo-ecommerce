@@ -71,12 +71,14 @@ const LoginView = () => {
           placeholder="Username"
           onChange={setUsername}
           value={username}
+          className="w-full"
         />
         <Input
           type="password"
           placeholder="Password"
           onChange={setPassword}
           value={password}
+          className="w-full"
         />
 
         <Button

@@ -3,18 +3,18 @@ import s from "./Input.module.css";
 import React from "react";
 
 const Input = (props) => {
-  const { className, onChange, ...rest } = props;
+  const { className, onChange, label, value, ...rest } = props;
 
-  const rootClassName = cn(s.root, {}, className);
+  const rootClassName = cn(s.container, {}, className);
 
   const handleOnChange = (e) => {
     onChange(e.target.value);
   };
 
   return (
-    <label>
+    <div className={rootClassName}>
       <input
-        className={rootClassName}
+        className={s.input}
         onChange={handleOnChange}
         autoComplete="off"
         autoCorrect="off"
@@ -22,7 +22,8 @@ const Input = (props) => {
         spellCheck="false"
         {...rest}
       />
-    </label>
+      <label className={s.label}>{label}</label>
+    </div>
   );
 };
 

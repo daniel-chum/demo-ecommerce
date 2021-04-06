@@ -63,10 +63,28 @@ const SignUpView = () => {
         {message && (
           <div className="text-red border border-red p-3">{message}</div>
         )}
-        <Input placeholder="First Name" onChange={setFirstName} />
-        <Input placeholder="Last Name" onChange={setLastName} />
-        <Input type="username" placeholder="Username" onChange={setUsername} />
-        <Input type="password" placeholder="Password" onChange={setPassword} />
+        <Input
+          placeholder="First Name"
+          className="w-full"
+          onChange={setFirstName}
+        />
+        <Input
+          placeholder="Last Name"
+          className="w-full"
+          onChange={setLastName}
+        />
+        <Input
+          type="username"
+          placeholder="Username"
+          className="w-full"
+          onChange={setUsername}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          className="w-full"
+          onChange={setPassword}
+        />
         <span className="text-accents-8">
           <span className="inline-block align-middle ">
             <Info width="15" height="15" className="text-gray-800" />

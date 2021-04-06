@@ -1,7 +1,23 @@
-.root {
-  @apply bg-secondary py-2 px-6 w-full appearance-none transition duration-150 ease-in-out pr-10 border border-accents-0 text-accents-2;
+.container {
+  @apply bg-secondary  text-accents-2;
+  @apply transition duration-300 ease-in-out;
+  @apply flex flex-col-reverse;
 }
 
-.root:focus {
-  @apply outline-none shadow-outline-normal;
+.label {
+  @apply text-accents-2 text-xs;
+  @apply transition duration-500 ease-in-out;
+}
+
+.input {
+  @apply pt-1.5 outline-none text-lg border-b border-accents-0;
+  @apply transition duration-500 ease-in-out;
+
+  &:focus {
+    @apply border-primary;
+
+    & + .label {
+      @apply text-primary font-semibold;
+    }
+  }
 }

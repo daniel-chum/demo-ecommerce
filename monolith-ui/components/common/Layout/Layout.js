@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       <Navbar />
       <main className="fit">{children}</main>
 
-      <Modal open={displayModal} onClose={closeModal}>
+      <Modal logo={true} open={displayModal} onClose={closeModal}>
         {modalView === "LOGIN_VIEW" && <LoginView />}
         {modalView === "SIGNUP_VIEW" && <SignUpView />}
         {modalView === "FORGOT_VIEW" && <ForgotPassword />}
