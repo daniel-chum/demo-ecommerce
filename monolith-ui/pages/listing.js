@@ -8,7 +8,7 @@ import { Modal } from "../components/ui";
 
 export default function Listing() {
   const [listings, setListings] = useState([]);
-  const [displayAddProduct, setDisplayAddProduct] = useState(false);
+  const [displayProductForm, setdisplayProductForm] = useState(false);
   const router = useRouter();
   const { getToken, isAuthenticated } = useAuth();
 
@@ -33,11 +33,7 @@ export default function Listing() {
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState(null);
-
-  const handleUpload = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const [image, setImage] = useState({});
 
   const handleAddButton = async (e) => {
     e.preventDefault();
@@ -54,12 +50,10 @@ export default function Listing() {
       try {
         const res = await addListing(getToken, formData);
         setListings((prevListings) => [...prevListings, res.data]);
-        setTitle("");
-        setPrice(0);
+        e.target.reset();
+        setImage(null);
       } catch (e) {
         console.log(e);
-        setTitle("");
-        setPrice(0);
       }
     } else {
       console.log("Title and price must not be blank for listing creation!");
@@ -83,17 +77,17 @@ export default function Listing() {
          bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out 
          font-medium text-white focus:outline-none"
         onClick={() =>
-          setDisplayAddProduct((displayAddProduct) => !displayAddProduct)
+          setdisplayProductForm((displayProductForm) => !displayProductForm)
         }
       >
         Add Product
       </button>
       <Modal
-        open={displayAddProduct}
+        open={displayProductForm}
         onClose={() =>
-          setDisplayAddProduct((displayAddProduct) => !displayAddProduct)
+          setdisplayProductForm((displayProductForm) => !displayProductForm)
         }
-        width="w-4/12"
+        width="w-8/12"
         height="h-4/5"
       >
         <ProductForm
@@ -102,7 +96,7 @@ export default function Listing() {
           onSubmit={handleAddButton}
           setTitle={setTitle}
           setPrice={setPrice}
-          setImage={handleUpload}
+          setImage={setImage}
         />
       </Modal>
       <ProductGrid

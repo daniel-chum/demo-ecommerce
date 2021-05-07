@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Project - Daniel C</title>
+        <title>E-commerce - Daniel C</title>
         <meta keywords="web developer, programming, programmer, software developer, software engineer, devops" />
       </Head>
       <Hero

@@ -1,4 +1,4 @@
-import { Button, Input } from "../..//ui";
+import { FileUpload, Input } from "../..//ui";
 
 const ProductForm = ({
   onSubmit,
@@ -22,6 +22,7 @@ const ProductForm = ({
         label="PRICE"
       />
       <span className="text-accents-2 text-xs">IMAGE</span>
+      <FileUpload setImage={setImage}></FileUpload>
       <button
         className="flex items-center justify-evenly w-28 h-12 rounded
          bg-primary hover:bg-primary-bright transition duration-300 ease-in-out
