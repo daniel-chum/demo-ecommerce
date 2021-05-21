@@ -41,7 +41,7 @@ const FileUpload = (props) => {
   }, [files]);
 
   return (
-    <div className="flex flex-col h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white justify-center items-center">
+    <div className="flex flex-col justify-center items-center h-40 rounded-lg border-dashed border-2 border-grey-200 bg-white ">
       {Object.keys(files).length == 0 ? (
         <>
           <span className="block text-gray-400 font-normal cursor-default">
@@ -59,22 +59,24 @@ const FileUpload = (props) => {
         </>
       ) : (
         <>
-          <div className="flex space-x-1">
-            {Object.keys(files).map((fileName) => {
-              let file = files[fileName];
-              let imageURL = URL.createObjectURL(file);
-              return (
-                <FilePreview
-                  key={fileName}
-                  name={fileName}
-                  imageURL={imageURL}
-                  onClick={() => removeFile(fileName)}
-                />
-              );
-            })}
+          <div className="overflow-x-auto w-11/12 ">
+            <div className="flex space-x-1  ">
+              {Object.keys(files).map((fileName) => {
+                let file = files[fileName];
+                let imageURL = URL.createObjectURL(file);
+                return (
+                  <FilePreview
+                    key={fileName}
+                    name={fileName}
+                    imageURL={imageURL}
+                    onClick={() => removeFile(fileName)}
+                  />
+                );
+              })}
+            </div>
           </div>
           <label
-            className="block text-blue-400 font-normal cursor-pointer text-xs pt-2"
+            className="mx-auto text-blue-400 font-normal cursor-pointer text-xs pt-2"
             onClick={handleUploadClick}
           >
             Add more files
@@ -87,7 +89,7 @@ const FileUpload = (props) => {
         onChange={handleUpload}
         accept="image/*"
         title=""
-        className="absolute invisible "
+        className="hidden"
       />
     </div>
   );

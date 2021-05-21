@@ -41,9 +41,11 @@ const Modal = ({ children, open, onClose, logo, width, height }) => {
       {open ? (
         <div className={s.root}>
           <div className={cn(s.modal, width, height)} role="dialog" ref={ref}>
-            <div className={s.logo}>
-              {logo ? <Logo width="56" height="56" /> : null}
-            </div>
+            {logo ? (
+              <div className={s.logo}>
+                <Logo width="56" height="56" />
+              </div>
+            ) : null}
             <button
               onClick={() => onClose()}
               aria-label="Close panel"
@@ -60,3 +62,5 @@ const Modal = ({ children, open, onClose, logo, width, height }) => {
 };
 
 export default Modal;
+
+// {logo ? <Logo width="56" height="56" /> : null}
