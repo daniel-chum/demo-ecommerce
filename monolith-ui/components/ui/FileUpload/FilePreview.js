@@ -1,9 +1,8 @@
 import { TrashBin } from "../../icons/";
-import s from "./FilePreview.module.css";
 
 const FilePreview = ({ imageURL, name, ...props }) => {
   return (
-    <div className="flex-none relative w-28 h-28 border border-gray-300 container">
+    <div className="flex-none relative w-28 h-28 border border-gray-200 container">
       <img
         src={imageURL}
         className="absolute w-full h-full object-scale-down	"

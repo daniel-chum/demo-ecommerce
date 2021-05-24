@@ -9,3 +9,4 @@ export { default as Node } from "./Node";
 export { default as Docker } from "./Docker";
 export { default as Kubernetes } from "./Kubernetes";
 export { default as TrashBin } from "./TrashBin";
+export { default as Arrow } from "./Arrow";

@@ -10,7 +10,7 @@
 }
 
 .input {
-  @apply pt-1.5 outline-none text-lg border-b border-accents-0;
+  @apply pt-1.5 outline-none text-lg border-b border-accents-2;
   @apply transition duration-500 ease-in-out;
 
   &:focus {
