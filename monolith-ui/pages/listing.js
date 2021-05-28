@@ -33,10 +33,11 @@ export default function Listing() {
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState({});
+  const [image, setImage] = useState([]);
 
   const handleAddButton = async (e) => {
     e.preventDefault();
+    console.log(image);
 
     const formData = new FormData();
 
@@ -45,13 +46,21 @@ export default function Listing() {
       formData.append("price", price);
 
       if (image != null) {
-        formData.append("image", image);
+        for (let i = 0; i < image.length; i++) {
+          console.log(image[i].name);
+          console.log(image[i]);
+          formData.append("image", image[i], image[i].name);
+        }
+        // formData.append("image", image);
       }
       try {
+        console.log(formData.getAll("image"));
         const res = await addListing(getToken, formData);
         setListings((prevListings) => [...prevListings, res.data]);
         e.target.reset();
-        setImage(null);
+        setTitle("");
+        setPrice("");
+        setImage([]);
       } catch (e) {
         console.log(e);
       }
@@ -87,8 +96,8 @@ export default function Listing() {
         onClose={() =>
           setdisplayProductForm((displayProductForm) => !displayProductForm)
         }
-        width="w-8/12"
-        height="h-4/5"
+        width="w-5/12"
+        height="h-auto"
       >
         <ProductForm
           title={title}

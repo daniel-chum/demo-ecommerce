@@ -1,13 +1,11 @@
 import React from "react";
-// import { Container } from "@components/ui";
-// import { RightArrow } from "@components/icons";
-import s from "./Hero.module.css";
+
 import Link from "next/link";
 
 const Hero = ({ headline, description, link }) => {
   return (
     <div className="bg-black">
-      <div className={s.root}>
+      <div>
         <h2 className="text-4xl leading-10 font-extrabold text-white sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">
           {headline}
         </h2>

@@ -17,8 +17,8 @@ const Tailwind = ({ ...props }) => {
           id="A"
           x2="100.00%"
         >
-          <stop stop-color="#2383ae" offset="0%" />
-          <stop stop-color="#6dd7b9" offset="100%" />
+          <stop stopColor="#2383ae" offset="0%" />
+          <stop stopColor="#6dd7b9" offset="100%" />
         </linearGradient>
       </defs>
       <g stroke="none">

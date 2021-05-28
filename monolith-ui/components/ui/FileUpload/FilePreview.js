@@ -2,7 +2,7 @@ import { TrashBin } from "../../icons/";
 
 const FilePreview = ({ imageURL, name, ...props }) => {
   return (
-    <div className="flex-none relative w-28 h-28 border border-gray-200 container">
+    <div className="flex-none relative w-24 h-32 border border-gray-300">
       <img
         src={imageURL}
         className="absolute w-full h-full object-scale-down	"

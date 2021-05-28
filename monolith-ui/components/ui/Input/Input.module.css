@@ -15,6 +15,7 @@
 
   &:focus {
     @apply border-primary;
+    @apply text-primary;
 
     & + .label {
       @apply text-primary font-semibold;

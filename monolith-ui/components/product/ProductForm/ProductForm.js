@@ -23,14 +23,16 @@ const ProductForm = ({
       />
       <span className="text-accents-2 text-xs">IMAGE</span>
       <FileUpload setImage={setImage}></FileUpload>
-      <button
-        className="flex items-center justify-evenly w-28 h-12 rounded
+      <div className="ml-auto pt-2 pr-3">
+        <button
+          className="w-28 h-12 rounded
          bg-primary hover:bg-primary-bright transition duration-300 ease-in-out
          font-medium text-white focus:outline-none"
-        type="submit"
-      >
-        Create
-      </button>
+          type="submit"
+        >
+          Create
+        </button>
+      </div>
     </form>
   );
 };
