@@ -18,7 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
             # "email",
         )
 
-
 class CreateProductSerializer(serializers.ModelSerializer):
 
     class Meta:

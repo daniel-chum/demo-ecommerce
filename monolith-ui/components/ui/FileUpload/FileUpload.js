@@ -12,6 +12,7 @@ const FileUpload = (props) => {
     fileInput.current.click();
   };
 
+  
   const removeFile = (fileName) => {
     setFiles((prevState) => {
       const newState = { ...prevState };
