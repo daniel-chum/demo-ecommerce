@@ -22,7 +22,6 @@ class TokenViewBaseWithCookie(TokenViewBase):
 
         resp = Response(serializer.validated_data, status=status.HTTP_200_OK)
 
-        # TODO: this should probably be pulled from the token exp
         expiration = (
             dt.datetime.utcnow() + jwt_settings.REFRESH_TOKEN_LIFETIME
         )

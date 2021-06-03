@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from monolith_api.models import Product, Order
+from monolith_api.models import Product, Order, ProductImages
 from django.contrib.auth.models import User
 from rest_framework_simplejwt import serializers as jwt_serializers
 from rest_framework_simplejwt.settings import api_settings as jwt_settings
@@ -8,32 +8,46 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
-        fields = (
+        fields = [
             # "id",
+            # "first_name",
             "username",
-            "first_name",
-            "last_name",
+            # "last_name",
             # "email",
-        )
+            
+        ]
 
-class CreateProductSerializer(serializers.ModelSerializer):
+class ProductImagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductImages
+        fields = ['image']
+
+class ProductSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(read_only=True)
+    images = ProductImagesSerializer(many=True)
 
     class Meta:
         model = Product
-        fields = '__all__'
-        read_only_fields = ['user']
+        fields = ['id', 'title', 'price', 'user', 'images']
+    
+    def create(self, validated_data):
+        
+        # Images should be sent as images[0]image, images[1]image in postman
+        # Result will be images = ['image': <ImageObject>, 'image': <ImageObject>]
+        images_data = validated_data.pop('images')
+        
+        product = Product.objects.create(**validated_data)
 
+        for image_data in images_data:
 
-class RetrieveProductSerializer(serializers.ModelSerializer):
+            ProductImages.objects.create(product=product, **image_data)
 
-    user = UserSerializer()
-
-    class Meta:
-        model = Product
-        fields = '__all__'
-        read_only_fields = ['user']
+        return product
 
 
 class CreateOrderSerializer(serializers.ModelSerializer):
@@ -46,7 +60,7 @@ class CreateOrderSerializer(serializers.ModelSerializer):
 
 class RetrieveOrderSerializer(serializers.ModelSerializer):
 
-    product = RetrieveProductSerializer(many=True)
+    product = ProductSerializer(many=True)
 
     class Meta:
         model = Order

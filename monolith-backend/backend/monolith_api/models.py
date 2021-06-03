@@ -7,8 +7,11 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ImageField(upload_to='products/', default='lebron-dunk.jpg')
 
+class ProductImages(models.Model):
+
+    image = models.ImageField(upload_to='products/')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
 
 class Order(models.Model):
 
