@@ -12,6 +12,11 @@ export default function Listing() {
   const router = useRouter();
   const { getToken, isAuthenticated } = useAuth();
 
+  // Upload fields
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [image, setImage] = useState([]);
+
   useEffect(() => {
     const getUserListing = async () => {
       try {
@@ -31,11 +36,9 @@ export default function Listing() {
     getUserListing();
   }, []);
 
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image, setImage] = useState([]);
 
-  const handleAddButton = async (e) => {
+
+  const handleCreateButton = async (e) => {
     e.preventDefault();
     console.log(image);
 
@@ -47,14 +50,12 @@ export default function Listing() {
 
       if (image != null) {
         for (let i = 0; i < image.length; i++) {
-          console.log(image[i].name);
-          console.log(image[i]);
-          formData.append("image", image[i], image[i].name);
+          let imageField = `images[${i}]image`
+          formData.append(imageField, image[i], image[i].name);
         }
         // formData.append("image", image);
       }
       try {
-        console.log(formData.getAll("image"));
         const res = await addListing(getToken, formData);
         setListings((prevListings) => [...prevListings, res.data]);
         e.target.reset();
@@ -102,7 +103,7 @@ export default function Listing() {
         <ProductForm
           title={title}
           price={price}
-          onSubmit={handleAddButton}
+          onSubmit={handleCreateButton}
           setTitle={setTitle}
           setPrice={setPrice}
           setImage={setImage}

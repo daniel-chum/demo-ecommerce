@@ -12,12 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "username",
             # "id",
             # "first_name",
-            "username",
             # "last_name",
             # "email",
-            
         ]
 
 class ProductImagesSerializer(serializers.ModelSerializer):

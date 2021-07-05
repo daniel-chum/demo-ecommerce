@@ -32,10 +32,10 @@ const ProductGrid = ({ productList, handleDeleteButton }) => {
           <div className={s.items}>
             <Image
               quality="85"
-              src={product.image || placeholderImg}
+              src={product.images[0].image || placeholderImg}
               alt={product.title || "Product Image"}
-              width={20}
-              height={20}
+              width={30}
+              height={30}
             />
           </div>
           <div className={s.items}>{product.title}</div>
