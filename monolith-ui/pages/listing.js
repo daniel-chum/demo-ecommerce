@@ -1,4 +1,4 @@
-import ProductGrid from "../components/common/ProductGrid/ProductGrid";
+import ProductGrid from "../components/product/ProductForm/ProductGrid/ProductGrid";
 import ProductForm from "../components/product/ProductForm/ProductForm";
 import { getListing, addListing, deleteListing } from "../api/listing";
 import { useState, useEffect } from "react";
