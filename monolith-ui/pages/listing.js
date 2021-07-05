@@ -1,5 +1,5 @@
-import ProductGrid from "../components/product/ProductForm/ProductGrid/ProductGrid";
-import ProductForm from "../components/product/ProductForm/ProductForm";
+import ProductGrid from "../components/product/ProductGrid/ProductGrid";
+import ProductForm from "../components/product/ProductForm";
 import { getListing, addListing, deleteListing } from "../api/listing";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";

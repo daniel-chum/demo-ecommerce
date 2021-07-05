@@ -1,6 +1,5 @@
 import s from "./ProductGrid.module.css";
-import { Cross } from "../../../icons";
-import Link from "next/link";
+import { Cross } from "../../icons";
 import Image from "next/image";
 import cn from "classnames";
 

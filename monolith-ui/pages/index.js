@@ -10,7 +10,7 @@ import {
 } from "../components/icons";
 import Hero from "../components/ui/Hero/Hero";
 import getAllProducts from "../api/get-all-products";
-import ProductGrid from "../components/product/ProductForm/ProductGrid/ProductGrid";
+import ProductGrid from "../components/product/ProductGrid/ProductGrid";
 import { useState, useEffect } from "react";
 
 export default function Home() {

@@ -1,4 +1,4 @@
-import { FileUpload, Input } from "../..//ui";
+import { FileUpload, Input } from "../../ui";
 
 const ProductForm = ({
   onSubmit,
