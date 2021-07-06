@@ -1,9 +1,9 @@
-import s from "./ProductGrid.module.css";
+import s from "./ListingGrid.module.css";
 import { Cross } from "../../icons";
 import Image from "next/image";
 import cn from "classnames";
 
-const ProductGrid = ({ productList, handleDeleteButton }) => {
+const ListingGrid = ({ productList, handleDeleteButton }) => {
   const placeholderImg = "/product-img-placeholder.svg";
 
   return (
@@ -32,7 +32,7 @@ const ProductGrid = ({ productList, handleDeleteButton }) => {
             <Image
               quality="85"
               src={product.images[0].image || placeholderImg}
-              alt={product.title || "Product Image"}
+              alt={product.title || "Listing Image"}
               width={30}
               height={30}
             />
@@ -55,4 +55,4 @@ const ProductGrid = ({ productList, handleDeleteButton }) => {
   );
 };
 
-export default ProductGrid;
+export default ListingGrid;

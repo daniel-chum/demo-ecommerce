@@ -9,19 +9,36 @@ import {
   Kubernetes,
 } from "../components/icons";
 import Hero from "../components/ui/Hero/Hero";
-import getAllProducts from "../api/get-all-products";
-import ProductGrid from "../components/product/ProductGrid/ProductGrid";
+import { getAllProducts } from "../api/products";
+import CardGrid from "../components/product/Card/CardGrid";
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(
+    [
+      {
+    'title': null,
+    'price': null,
+    'user': {
+      'username': null
+    },
+    'images': [
+      {
+        'image': null
+      }
+    ]
+      }
+    ]
+  );
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         const response = await getAllProducts();
         const productArray = response.data;
+
         setProducts(productArray);
+
       } catch (e) {
         console.log(e);
       }
@@ -47,6 +64,7 @@ export default function Home() {
         ‘Natural’."
         link="/about"
       />
+      <CardGrid productList={products} />
       <Marquee gradient={false} speed="100">
         <Next width="200" height="100" style={{ margin: "0px 40px " }} />
         <Django width="250" height="100" style={{ margin: "0px 40px " }} />
@@ -55,8 +73,6 @@ export default function Home() {
         <Docker width="150" height="100" style={{ margin: "0px 40px " }} />
         <Kubernetes width="100" height="100" style={{ margin: "0px 40px " }} />
       </Marquee>
-
-      <ProductGrid productList={products} />
     </div>
   );
 }

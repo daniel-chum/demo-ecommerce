@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import Profile, HomePageProductList, ListingList, ProductDetail, OrderList
+from .views import Profile, AllProductList, ListingList, ProductDetail, OrderList
 from .jwt_views import Login, RefreshToken, Logout
 
 urlpatterns = [
     path("api/profile", Profile.as_view(), name="profile"),
-    path('api/homepage', HomePageProductList.as_view(), name='homepage-product'),
+    path('api/homepage', AllProductList.as_view(), name='homepage-product'),
     path('api/listing', ListingList.as_view(), name='listing-list'),
     path('api/product/<int:id>',
          ProductDetail.as_view(), name='product-detail'),

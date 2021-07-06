@@ -1,5 +1,5 @@
-import ProductGrid from "../components/product/ProductGrid/ProductGrid";
-import ProductForm from "../components/product/ProductForm";
+import ListingGrid from "../components/product/ListingGrid/ListingGrid";
+import ListingForm from "../components/product/ListingGrid/ListingForm";
 import { getListing, addListing, deleteListing } from "../api/listing";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { Modal } from "../components/ui";
 
 export default function Listing() {
   const [listings, setListings] = useState([]);
-  const [displayProductForm, setdisplayProductForm] = useState(false);
+  const [displayListingForm, setdisplayListingForm] = useState(false);
   const router = useRouter();
   const { getToken, isAuthenticated } = useAuth();
 
@@ -87,20 +87,20 @@ export default function Listing() {
          bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out 
          font-medium text-white focus:outline-none"
         onClick={() =>
-          setdisplayProductForm((displayProductForm) => !displayProductForm)
+          setdisplayListingForm((displayListingForm) => !displayListingForm)
         }
       >
-        Add Product
+        Add Listing
       </button>
       <Modal
-        open={displayProductForm}
+        open={displayListingForm}
         onClose={() =>
-          setdisplayProductForm((displayProductForm) => !displayProductForm)
+          setdisplayListingForm((displayListingForm) => !displayListingForm)
         }
         width="w-5/12"
         height="h-auto"
       >
-        <ProductForm
+        <ListingForm
           title={title}
           price={price}
           onSubmit={handleCreateButton}
@@ -109,7 +109,7 @@ export default function Listing() {
           setImage={setImage}
         />
       </Modal>
-      <ProductGrid
+      <ListingGrid
         productList={listings}
         handleDeleteButton={handleDeleteButton}
       />

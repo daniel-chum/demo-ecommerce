@@ -1,6 +1,5 @@
-import cn from "classnames";
+
 import dynamic from "next/dynamic";
-import s from "./Layout.module.css";
 import { useUI } from "../../../components/ui/context";
 import Navbar from "../../common/Navbar/Navbar";
 import { Modal, LoadingDots } from "../../ui";
@@ -31,10 +30,9 @@ const Layout = ({ children }) => {
   const { displayModal, closeModal, modalView } = useUI();
 
   return (
-    <div className={cn(s.root)}>
+    <div className='bg-background'>
       <Navbar />
       <main className="fit">{children}</main>
-
       <Modal logo={true} open={displayModal} onClose={closeModal}>
         {modalView === "LOGIN_VIEW" && <LoginView />}
         {modalView === "SIGNUP_VIEW" && <SignUpView />}

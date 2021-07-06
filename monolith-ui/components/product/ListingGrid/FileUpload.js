@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import FilePreviewContainer from "./FilePreviewContainer";
-import DragAndDrop from "../DragAndDrop/DragAndDrop";
+import FilePreviewContainer from "../../ui/FilePreview/FilePreviewContainer";
+import FilePreview from "../../ui/FilePreview/FilePreview";
+import DragAndDrop from "../../ui/DragAndDrop/DragAndDrop";
 
 const FileUpload = (props) => {
   const { setImage, ...rest } = props;
@@ -12,12 +13,17 @@ const FileUpload = (props) => {
     fileInput.current.click();
   };
 
-  
   const removeFile = (fileName) => {
     setFiles((prevState) => {
       const newState = { ...prevState };
       delete newState[fileName];
       return newState;
+    });
+  };
+
+  const deleteAllFIles = () => {
+    Object.keys(files).forEach((file) => {
+      removeFile(file);
     });
   };
 
@@ -78,12 +84,33 @@ const FileUpload = (props) => {
           </div>
         ) : (
           <>
-            <FilePreviewContainer
-              files={files}
-              setFiles={setFiles}
-              handleUploadClick={handleUploadClick}
-              removeFile={removeFile}
-            />
+            <FilePreviewContainer>
+              {Object.keys(files).map((fileName) => {
+                let image = files[fileName].preview;
+                return (
+                  <FilePreview
+                    key={fileName}
+                    name={fileName}
+                    imageURL={image}
+                    onClick={() => removeFile(fileName)}
+                  />
+                );
+              })}
+            </FilePreviewContainer>
+            <div className="absolute w-full bottom-1.5 grid grid-cols-3">
+              <label
+                className=" text-center text-call-to-action font-normal cursor-pointer text-xs col-start-2"
+                onClick={handleUploadClick}
+              >
+                Add more images
+              </label>
+              <i
+                className="w-min justify-self-end text-gray-600 cursor-pointer text-xs pr-3"
+                onClick={deleteAllFIles}
+              >
+                Reset
+              </i>
+            </div>
           </>
         )}
         <input

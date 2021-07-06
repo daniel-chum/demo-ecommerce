@@ -13,7 +13,7 @@ class Profile(generics.RetrieveAPIView):
         return self.request.user
 
 
-class HomePageProductList(generics.ListAPIView):
+class AllProductList(generics.ListAPIView):
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
@@ -38,7 +38,7 @@ class ListingList(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProductDetail(generics.RetrieveAPIView):
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]

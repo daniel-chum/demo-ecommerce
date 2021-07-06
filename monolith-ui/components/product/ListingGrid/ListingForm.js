@@ -1,6 +1,7 @@
-import { FileUpload, Input } from "../../ui";
+import { Input } from "../../ui";
+import FileUpload from "./FileUpload";
 
-const ProductForm = ({
+const ListingForm = ({
   onSubmit,
   setTitle,
   setPrice,
@@ -37,4 +38,4 @@ const ProductForm = ({
   );
 };
 
-export default ProductForm;
+export default ListingForm;

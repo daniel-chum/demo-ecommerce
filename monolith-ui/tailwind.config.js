@@ -11,6 +11,7 @@ module.exports = {
         "accents-1": "var(--accents-1)",
         "accents-2": "var(--accents-2)",
         "call-to-action": "var(--call-to-action)",
+        'background': "var(--background)"
       },
       boxShadow: {
         "outline-normal": "0 0 0 2px var(--accents-1)",

@@ -1,4 +1,4 @@
-import { TrashBin } from "../../icons/";
+import { TrashBin } from "../../icons";
 
 const FilePreview = ({ imageURL, name, ...props }) => {
   return (

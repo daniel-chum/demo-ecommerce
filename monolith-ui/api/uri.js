@@ -1,4 +1,4 @@
-export const homePageProductListApi = "/api/homepage";
+export const allProductApi = "/api/homepage";
 export const listingApi = "/api/listing";
 export const productApi = "/api/product";
 export const userApi = "/api/profile";
