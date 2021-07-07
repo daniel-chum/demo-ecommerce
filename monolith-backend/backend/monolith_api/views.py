@@ -1,9 +1,6 @@
 from rest_framework import generics, permissions
-from .serializers import ProductSerializer, UserSerializer, CreateOrderSerializer, RetrieveOrderSerializer
-from monolith_api.models import Product, Order
-from django.contrib.auth.models import User
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-
+from .serializers import ProductSerializer, UserSerializer, CartSerializer
+from monolith_api.models import Product, Cart
 
 class Profile(generics.RetrieveAPIView):
     serializer_class = UserSerializer
@@ -26,7 +23,7 @@ class AllProductList(generics.ListAPIView):
 class ListingList(generics.ListCreateAPIView):
 
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 
     def get_queryset(self):
@@ -38,7 +35,7 @@ class ListingList(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 
-class ProductDetail(generics.RetrieveAPIView):
+class ProductDetail(generics.RetrieveAPIView, generics.DestroyAPIView):
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
@@ -48,20 +45,19 @@ class ProductDetail(generics.RetrieveAPIView):
 
         return Product.objects.all()
 
-class OrderList(generics.ListCreateAPIView):
+class CartList(generics.ListCreateAPIView, generics.DestroyAPIView):
 
+    serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-    def get_serializer_class(self):
-
-        if self.request.method == 'GET':
-            return RetrieveOrderSerializer
-        return CreateOrderSerializer
+    lookup_field = 'id'
 
     def get_queryset(self):
-
-        return Order.objects.filter(user=self.request.user)
+        return Cart.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
 
-        serializer.save(user=self.request.user)
+        product_id = self.request.data['product']
+
+        # Create product not already in cart, else do nothing
+        if len(Cart.objects.filter(product=product_id)) == 0:
+            serializer.save(user=self.request.user) 

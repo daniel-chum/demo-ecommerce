@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Profile, AllProductList, ListingList, ProductDetail, OrderList
+from .views import Profile, AllProductList, ListingList, ProductDetail, CartList
 from .jwt_views import Login, RefreshToken, Logout
 
 urlpatterns = [
@@ -8,7 +8,7 @@ urlpatterns = [
     path('api/listing', ListingList.as_view(), name='listing-list'),
     path('api/product/<int:id>',
          ProductDetail.as_view(), name='product-detail'),
-    path("api/order", OrderList.as_view(), name="order-list"),
+    path("api/cart", CartList.as_view(), name="cart-list"),
 
     #Authentication
     path('api/token', Login.as_view(), name='token_obtain_pair'),

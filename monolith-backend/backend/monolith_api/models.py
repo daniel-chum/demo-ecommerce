@@ -13,9 +13,8 @@ class ProductImages(models.Model):
     image = models.ImageField(upload_to='products/')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
 
-class Order(models.Model):
+class Cart(models.Model):
 
-    order_created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='orders')
-    product = models.ManyToManyField(Product,  related_name='orders')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')

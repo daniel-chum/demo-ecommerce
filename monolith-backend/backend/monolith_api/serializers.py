@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from monolith_api.models import Product, Order, ProductImages
+from monolith_api.models import Product, Cart, ProductImages
 from django.contrib.auth.models import User
 from rest_framework_simplejwt import serializers as jwt_serializers
 from rest_framework_simplejwt.settings import api_settings as jwt_settings
@@ -49,22 +49,13 @@ class ProductSerializer(serializers.ModelSerializer):
         return product
 
 
-class CreateOrderSerializer(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
+
+    # product = ProductSerializer()
 
     class Meta:
-        model = Order
-        fields = "__all__"
-        read_only_fields = ['user']
-
-
-class RetrieveOrderSerializer(serializers.ModelSerializer):
-
-    product = ProductSerializer(many=True)
-
-    class Meta:
-        model = Order
-        fields = '__all__'
-
+        model = Cart
+        fields = ['id', 'product']
 
 class TokenObtainPairSerializer(jwt_serializers.TokenObtainPairSerializer):
 
