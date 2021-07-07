@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import FilePreviewContainer from "../../ui/FilePreview/FilePreviewContainer";
 import FilePreview from "../../ui/FilePreview/FilePreview";
 import DragAndDrop from "../../ui/DragAndDrop/DragAndDrop";
+import { TrashBin } from "../../icons";
 
 const FileUpload = (props) => {
   const { setImage, ...rest } = props;
@@ -90,10 +91,20 @@ const FileUpload = (props) => {
                 return (
                   <FilePreview
                     key={fileName}
-                    name={fileName}
                     imageURL={image}
-                    onClick={() => removeFile(fileName)}
-                  />
+                    className="absolute w-full h-full opacity-0 hover:opacity-80 hover:bg-gray-200"
+                  >
+                    <span className="block break-all text-gray-900 text-xs px-2 pt-4">
+                      {fileName}
+                    </span>
+                    <TrashBin
+                      width="16"
+                      height="16"
+                      className=" absolute bottom-1 right-1"
+                      onClick={() => removeFile(fileName)}
+                    />   
+                  </FilePreview>
+                  
                 );
               })}
             </FilePreviewContainer>
