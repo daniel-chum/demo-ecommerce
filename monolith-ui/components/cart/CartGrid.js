@@ -2,9 +2,8 @@ import Image from "next/image";
 import cn from "classnames";
 import { useState } from "react";
 
-const CartGrid = ({ cartList, handleDeleteButton }) => {
+const CartGrid = ({ cartList, handleDeleteButton, handleQuantityButton }) => {
   const placeholderImg = "/product-img-placeholder.svg";
-  const [quantity, setQuantity] = useState(1)
 
   const headerStyle = 'border-t-2 border-b-2 h-12 flex items-center'
 
@@ -38,9 +37,13 @@ const CartGrid = ({ cartList, handleDeleteButton }) => {
               <span>{product.title}</span>
               <button className='text-left' onClick={() => {handleDeleteButton(cart.id)} }>Remove</button>
             </div>
-            <span className="h-16 pt-2 pl-2 pr-2">{cart.quantity}</span>
+            <div>
+              <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, cart.quantity - 1) }}>-</button>
+                <span className="h-16 pt-2 pl-2 pr-2">{cart.quantity}</span>
+              <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, cart.quantity + 1) }}>+</button>
+            </div>
             <span className="h-16 pt-2 pl-2 pr-2">{product.price}</span>
-            <span>{product.price * quantity}</span>
+            <span>{product.price * cart.quantity}</span>
           </>
         )}
       )}

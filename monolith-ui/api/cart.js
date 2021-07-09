@@ -22,6 +22,16 @@ const addCart = async (getToken, body) => {
   });
 };
 
+const partialUpdateCart = async (getToken, cartId, body) => {
+  return axios({
+    method: "patch",
+    url: `${cartApi}/${cartId}`,
+    data: body,
+    headers: {
+      authorization: `Bearer ${await getToken()}`,
+    },
+  });
+};
 const deleteCart = async (getToken, cartId) => {
   return axios({
     method: "delete",
@@ -32,4 +42,4 @@ const deleteCart = async (getToken, cartId) => {
   });
 };
 
-export { getCart, addCart, deleteCart };
+export { getCart, addCart, deleteCart, partialUpdateCart };

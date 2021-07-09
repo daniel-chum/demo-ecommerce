@@ -1,5 +1,5 @@
 import CartGrid from "../components/Cart/CartGrid";
-import { getCart, addCart, deleteCart } from "../api/cart";
+import { getCart, deleteCart, partialUpdateCart } from "../api/cart";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../lib/hooks/auth";
@@ -14,7 +14,7 @@ export default function Cart() {
       try {
         const response = await getCart(getToken);
         const productArray = response.data;
-        console.log(productArray)
+
         setCart(productArray);
       } catch (e) {
         console.log(e);
@@ -31,8 +31,24 @@ export default function Cart() {
 
   const handleDeleteButton = async (cartId) => {
     try {
-      const res = await deleteCart(getToken, cartId);
+      let res = await deleteCart(getToken, cartId);
       setCart(cart.filter((cart) => cart.id !== cartId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleQuantityButton = async (cartId, quantity) => {
+    let body = {
+      'quantity': quantity
+    }
+
+    try {
+      let res = await partialUpdateCart(getToken, cartId, body);
+      let updatedItem = cart.find((cart) => cart.id == res.data.id)
+      updatedItem.quantity = quantity
+
+      setCart([...cart]);
     } catch (e) {
       console.log(e);
     }
@@ -44,6 +60,7 @@ export default function Cart() {
       <CartGrid
         cartList={cart}
         handleDeleteButton={handleDeleteButton}
+        handleQuantityButton={handleQuantityButton}
       />
     </>
   );
