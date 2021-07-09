@@ -1,4 +1,3 @@
-
 import dynamic from "next/dynamic";
 import { useUI } from "../../../components/ui/context";
 import Navbar from "../../common/Navbar/Navbar";

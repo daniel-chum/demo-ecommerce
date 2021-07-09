@@ -1,6 +1,13 @@
+from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from .serializers import ProductSerializer, UserSerializer, CartSerializer
 from monolith_api.models import Product, Cart
+
+class Register(generics.CreateAPIView):
+
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
 class Profile(generics.RetrieveAPIView):
     serializer_class = UserSerializer
