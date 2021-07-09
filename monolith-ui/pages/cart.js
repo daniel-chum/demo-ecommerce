@@ -14,6 +14,7 @@ export default function Cart() {
       try {
         const response = await getCart(getToken);
         const productArray = response.data;
+        console.log(productArray)
         setCart(productArray);
       } catch (e) {
         console.log(e);

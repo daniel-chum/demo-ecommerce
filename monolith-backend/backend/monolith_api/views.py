@@ -29,7 +29,7 @@ class ListingList(generics.ListCreateAPIView):
     def get_queryset(self):
 
         return Product.objects.filter(user=self.request.user)
-        
+
     def perform_create(self, serializer):
 
         serializer.save(user=self.request.user)
@@ -45,7 +45,7 @@ class ProductDetail(generics.RetrieveAPIView, generics.DestroyAPIView):
 
         return Product.objects.all()
 
-class CartList(generics.ListCreateAPIView, generics.DestroyAPIView):
+class CartList(generics.ListCreateAPIView, generics.DestroyAPIView, generics.UpdateAPIView):
 
     serializer_class = CartSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -56,8 +56,8 @@ class CartList(generics.ListCreateAPIView, generics.DestroyAPIView):
 
     def perform_create(self, serializer):
 
-        product_id = self.request.data['product']
+        product_id = self.request.data['product_id']
 
         # Create product not already in cart, else do nothing
-        if len(Cart.objects.filter(product=product_id)) == 0:
-            serializer.save(user=self.request.user) 
+        if len(Cart.objects.filter(product__id=product_id, user=self.request.user)) == 0: # Double underscore for nested serializer field
+            serializer.save(user=self.request.user)

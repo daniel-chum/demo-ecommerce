@@ -38,7 +38,7 @@ const CartGrid = ({ cartList, handleDeleteButton }) => {
               <span>{product.title}</span>
               <button className='text-left' onClick={() => {handleDeleteButton(cart.id)} }>Remove</button>
             </div>
-            <span className="h-16 pt-2 pl-2 pr-2">{quantity}</span>
+            <span className="h-16 pt-2 pl-2 pr-2">{cart.quantity}</span>
             <span className="h-16 pt-2 pl-2 pr-2">{product.price}</span>
             <span>{product.price * quantity}</span>
           </>

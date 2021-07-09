@@ -26,7 +26,7 @@ const ProductCard = ({ product, handleAddButton }) => {
           <div>{`$${product.price}`}</div>
         </div>
       </Link>
-      <button className='bg-primary h-12' onClick={() => { handleAddButton() }}>ADD TO CART</button>
+      <button className='bg-primary h-12' onClick={() => { handleAddButton(product.id) }}>ADD TO CART</button>
     </div>
   );
 };

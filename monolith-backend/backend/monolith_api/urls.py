@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/product/<int:id>',
          ProductDetail.as_view(), name='product-detail'),
     path("api/cart", CartList.as_view(), name="cart-list"),
+    path("api/cart/<int:id>", CartList.as_view(), name="cart-delete"),
 
     #Authentication
     path('api/token', Login.as_view(), name='token_obtain_pair'),

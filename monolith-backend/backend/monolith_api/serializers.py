@@ -33,13 +33,13 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'price', 'user', 'images']
-    
+
     def create(self, validated_data):
-        
+
         # Images should be sent as images[0]image, images[1]image in postman
         # Result will be images = ['image': <ImageObject>, 'image': <ImageObject>]
         images_data = validated_data.pop('images')
-        
+
         product = Product.objects.create(**validated_data)
 
         for image_data in images_data:
@@ -51,11 +51,20 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class CartSerializer(serializers.ModelSerializer):
 
-    # product = ProductSerializer()
+    product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(queryset = Product.objects.all(), write_only=True)
 
     class Meta:
         model = Cart
-        fields = ['id', 'product']
+        fields = ['id', 'product', 'quantity', 'product_id']
+
+    def create(self, validated_data):
+
+        product = validated_data.pop('product_id')
+
+        cart = Cart.objects.create(product=product, **validated_data)
+
+        return cart
 
 class TokenObtainPairSerializer(jwt_serializers.TokenObtainPairSerializer):
 
