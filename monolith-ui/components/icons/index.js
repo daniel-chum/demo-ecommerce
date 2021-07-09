@@ -10,3 +10,4 @@ export { default as Docker } from "./Docker";
 export { default as Kubernetes } from "./Kubernetes";
 export { default as TrashBin } from "./TrashBin";
 export { default as Arrow } from "./Arrow";
+export { default as Cart } from "./Cart";

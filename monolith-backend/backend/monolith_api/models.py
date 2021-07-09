@@ -15,6 +15,8 @@ class ProductImages(models.Model):
 
 class Cart(models.Model):
 
+    created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='orders')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
+        User, on_delete=models.CASCADE, related_name='cart')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart')
+    quantity = models.PositiveIntegerField(default=1)

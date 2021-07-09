@@ -17,6 +17,7 @@ export default function Home() {
   const [products, setProducts] = useState(
     [
       {
+    'id': 0,
     'title': null,
     'price': null,
     'user': {
@@ -64,7 +65,7 @@ export default function Home() {
         ‘Natural’."
         link="/about"
       />
-      <CardGrid productList={products} />
+      <CardGrid products={products} />
       <Marquee gradient={false} speed="100">
         <Next width="200" height="100" style={{ margin: "0px 40px " }} />
         <Django width="250" height="100" style={{ margin: "0px 40px " }} />
