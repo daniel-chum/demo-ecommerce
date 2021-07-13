@@ -84,12 +84,14 @@ export default function Home() {
           </section>
         </li>
         <li>
-          <h1>Slide 3 Heading</h1>
-          <p className='text-center'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
-            Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
-            Nam id nulla sed ligula malesuada convallis. Morbi et faucibus justo, vitae consequat urna.
-          </p>
+          <section className='relative flex flex-col h-full px-4 items-end justify-center'>
+            <h1>Slide 3 Heading</h1>
+            <p className='text-center'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
+              Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
+              Nam id nulla sed ligula malesuada convallis. Morbi et faucibus justo, vitae consequat urna.
+            </p>
+          </section>
         </li>
       </Carousel>
       <CardGrid products={products} />
