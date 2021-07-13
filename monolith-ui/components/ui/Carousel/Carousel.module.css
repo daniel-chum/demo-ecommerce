@@ -1,7 +1,7 @@
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
-  animation-name: fade;
+  animation-name: slide;
   animation-duration: 1.5s;
 }
 
@@ -13,4 +13,12 @@
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
 }
