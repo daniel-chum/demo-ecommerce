@@ -74,7 +74,14 @@ export default function Home() {
           </section>
         </li>
         <li>
-          <section className='relative flex flex-col h-full px-4 items-end justify-center'>
+          <Image
+            quality="100"
+            src='https://images.unsplash.com/photo-1624916888948-7015aa2b25b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=100'
+            alt='Second Banner'
+            layout='fill'
+            objectFit='cover'
+          />
+          <section className='relative flex flex-col h-full px-4 items-center justify-center'>
           <h1>Slide 2 Heading</h1>
             <p className='text-center'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.

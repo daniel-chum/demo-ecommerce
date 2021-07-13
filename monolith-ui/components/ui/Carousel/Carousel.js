@@ -26,7 +26,7 @@ const Carousel = ({
   }
 
   return (
-    <div className='relative w-full h-60 bg-primary'>
+    <div className='relative w-full h-60'>
       <button
         className='z-50 absolute top-1/2 transform -translate-y-2/4 left-3  focus:outline-none text-white'
         onClick={() => plusNumber(-1)}
@@ -34,13 +34,13 @@ const Carousel = ({
         &#10094;
       </button>
 
-      <ol className='flex w-full h-full'>
+      <ol className='relative flex w-full h-full'>
         { props.children.map((child, index) => {
 
-          let visibility = index == selectedIndex ? 'block' : "hidden"
+          let visibility = index == selectedIndex ? 'left-0' : index > selectedIndex ? "-right-full" : "-left-full"
 
           return React.cloneElement(child, {
-            className: cn(`${visibility}`, s.fade)
+            className: cn(`${visibility} absolute w-full h-full transition-all duration-500 ease-in-out`)
             })
           })
         }

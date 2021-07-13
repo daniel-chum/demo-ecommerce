@@ -1,24 +1,33 @@
-.fade {
+.slide {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: slide;
   animation-duration: 1.5s;
 }
 
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
 @-webkit-keyframes slide {
-    100% { left: 0; }
+    from { transform: translateX(-100%); }
+    to {transform: translateX((0%))}
 }
 
 @keyframes slide {
-    100% { left: 0; }
+    from { transform: translateX(-100%); }
+    to {transform: translateX((0%))}
 }
+
+/* .slideRight {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: slideRight;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes slideRight {
+    from { transform: translateX(100%); }
+    to {transform: translateX((0%))}
+}
+
+@keyframes slideRight {
+    from { transform: translateX(100%); }
+    to {transform: translateX((0%))}
+} */
