@@ -36,8 +36,6 @@ export default function Listing() {
     getUserListing();
   }, []);
 
-
-
   const handleCreateButton = async (e) => {
     e.preventDefault();
     console.log(image);
@@ -84,7 +82,7 @@ export default function Listing() {
       <h2>Listings</h2>
       <button
         className="flex items-center justify-evenly w-28 h-12 rounded
-         bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out 
+         bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out
          font-medium text-white focus:outline-none"
         onClick={() =>
           setdisplayListingForm((displayListingForm) => !displayListingForm)

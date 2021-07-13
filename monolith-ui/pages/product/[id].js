@@ -23,9 +23,9 @@ const ProductItem = () => {
     }
   );
   const [picIndex, setPicIndex] = useState(0)
-  
+
   const router = useRouter();
-  const { id } = router.query 
+  const { id } = router.query
 
 
   // const handleOrderClick = () => {
@@ -41,8 +41,8 @@ const ProductItem = () => {
   //     console.log("Error occurred while trying to add order.");
   //   }
   // };
-  
-  
+
+
   useEffect(() => {
       const getProductDetails = async () => {
         try {
@@ -60,7 +60,7 @@ const ProductItem = () => {
 
       getProductDetails();
   }, [id]);
-  
+
   return (
     <div className='grid grid-cols-7' style={{ padding: "0% 15%" }}>
       <section className='col-span-4'>
@@ -90,7 +90,8 @@ const ProductItem = () => {
       </section>
       <section className='col-span-3'>
         <h1>{product.title}</h1>
-        <span>{`$${product.price}`}</span>
+        <h2>{`$${product.price}`}</h2>
+        <span>{product.user.username}</span>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

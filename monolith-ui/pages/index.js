@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from 'next/image'
 import Marquee from "react-fast-marquee";
 import {
   Tailwind,
@@ -8,10 +9,11 @@ import {
   Docker,
   Kubernetes,
 } from "../components/icons";
-import Hero from "../components/ui/Hero/Hero";
+import { Carousel } from '../components/ui'
 import { getAllProducts } from "../api/products";
 import CardGrid from "../components/product/Card/CardGrid";
 import { useState, useEffect } from "react";
+
 
 export default function Home() {
   const [products, setProducts] = useState(
@@ -51,20 +53,45 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>E-commerce - Daniel C</title>
+        <title>Demo - Daniel C</title>
         <meta keywords="web developer, programming, programmer, software developer, software engineer, devops" />
       </Head>
-      <Hero
-        headline="Welcome to my page"
-        description="
-        The Yeezy BOOST 350 V2 lineup continues to grow. We recently had the
-        ‘Carbon’ iteration, and now release details have been locked in for
-        this ‘Natural’ joint. Revealed by Yeezy Mafia earlier this year, the
-        shoe was originally called ‘Abez’, which translated to ‘Tin’ in
-        Hebrew. It’s now undergone a name change, and will be referred to as
-        ‘Natural’."
-        link="/about"
-      />
+      <Carousel>
+        <li>
+          <Image
+            quality="100"
+            src='https://images.unsplash.com/photo-1516116412344-6663387e8590?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=100'
+            alt='First Banner'
+            layout='fill'
+            objectFit='cover'
+          />
+          <section className='relative flex flex-col h-full px-4 items-end justify-center'>
+            <h1 className='text-white'>Welcome to my demo project</h1>
+            <p className=' w-1/2 text-center text-white'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
+              Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
+            </p>
+          </section>
+        </li>
+        <li>
+          <section className='relative flex flex-col h-full px-4 items-end justify-center'>
+          <h1>Slide 2 Heading</h1>
+            <p className='text-center'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
+              Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
+              Nam id nulla sed ligula malesuada convallis. Morbi et faucibus justo, vitae consequat urna.
+            </p>
+          </section>
+        </li>
+        <li>
+          <h1>Slide 3 Heading</h1>
+          <p className='text-center'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
+            Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
+            Nam id nulla sed ligula malesuada convallis. Morbi et faucibus justo, vitae consequat urna.
+          </p>
+        </li>
+      </Carousel>
       <CardGrid products={products} />
       <Marquee gradient={false} speed="100">
         <Next width="200" height="100" style={{ margin: "0px 40px " }} />

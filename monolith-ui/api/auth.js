@@ -1,4 +1,4 @@
-import { tokenApi, refreshTokenApi, logOutApi } from "./uri";
+import { tokenApi, refreshTokenApi, registerApi, logOutApi } from "./uri";
 
 const axios = require("axios");
 
@@ -20,6 +20,15 @@ const fetchNewToken = () => {
   });
 };
 
+const register = (body) => {
+  return axios({
+    method: "post",
+    url: registerApi,
+    data: body
+  });
+};
+
+
 const logOut = () => {
   return axios({
     method: "post",
@@ -27,4 +36,4 @@ const logOut = () => {
   });
 };
 
-export { fetchToken, fetchNewToken, logOut };
+export { fetchToken, fetchNewToken, register, logOut };

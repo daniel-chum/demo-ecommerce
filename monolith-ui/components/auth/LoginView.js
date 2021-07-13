@@ -13,7 +13,7 @@ const LoginView = () => {
   const [disabled, setDisabled] = useState(false);
   const { setModalView, closeModal } = useUI();
 
-  const { login } = useAuth();
+  const { logIn } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const LoginView = () => {
     try {
       setLoading(true);
       setMessage("");
-      await login(username, password);
+      await logIn(username, password);
       setLoading(false);
       closeModal();
     } catch (errors) {

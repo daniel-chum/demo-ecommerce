@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { fetchToken, fetchNewToken, logOut } from "../../api/auth";
+import { fetchToken, fetchNewToken, register, logOut } from "../../api/auth";
 import getUser from "../../api/user";
 
 export const AuthContext = React.createContext({});
@@ -12,66 +12,19 @@ export const AuthProvider = ({ children }) => {
   const [accessTokenExpiry, setAccessTokenExpiry] = useState(null);
 
   useEffect(() => {
+    const initAuth = async () => {
+      setLoading(true);
+      if (!accessTokenIsValid()) {
+        console.log("Invalid access token. Refetching..");
+        await refreshToken();
+      } else {
+        setIsAuthenticated(true);
+        setLoading(false);
+      }
+    };
+
     initAuth();
   }, []);
-
-  const accessTokenIsValid = () => {
-    if (accessToken === "") {
-      return false;
-    }
-    const expiryDateFromToken = new Date(accessTokenExpiry); //From epoch to date format
-    console.log(`Checking token expiry: ${expiryDateFromToken}`);
-    return expiryDateFromToken.getTime() > Date.now();
-  };
-
-  const setNotAuthenticated = () => {
-    setIsAuthenticated(false);
-    setLoading(false);
-    setUser({});
-  };
-
-  const handleNewToken = (data) => {
-    setAccessToken(data.access);
-    const expiryInt = data.access_expires * 1000; // seconds to milliseconds
-    setAccessTokenExpiry(expiryInt);
-    setIsAuthenticated(true);
-    setLoading(false);
-  };
-
-  const refreshToken = async () => {
-    setLoading(true);
-    try {
-      const resp = await fetchNewToken();
-      const tokenData = await resp.data;
-      handleNewToken(tokenData);
-      if (user === null) {
-        console.log("No user loaded so loading from refreshed token");
-        await initUser(tokenData.access);
-      }
-      return tokenData.access;
-    } catch (e) {
-      console.log("User must be logged in succesfully.");
-      setNotAuthenticated();
-      return;
-    }
-  };
-
-  const initAuth = async () => {
-    setLoading(true);
-    if (!accessTokenIsValid()) {
-      console.log("Invalid access token. Refetching..");
-      await refreshToken();
-    } else {
-      setIsAuthenticated(true);
-      setLoading(false);
-    }
-  };
-
-  const initUser = async (token) => {
-    const resp = await getUser(token);
-    const user = await resp.json();
-    setUser(user);
-  };
 
   const getToken = async () => {
     // Returns an access token if there's one or refetches a new one
@@ -95,7 +48,48 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (username, password) => {
+  const refreshToken = async () => {
+    setLoading(true);
+    try {
+      const resp = await fetchNewToken();
+      const tokenData = await resp.data;
+      handleNewToken(tokenData);
+      if (user === null) {
+        console.log("No user loaded so loading from refreshed token");
+        await initUser(tokenData.access);
+      }
+      return tokenData.access;
+    } catch (e) {
+      console.log("User must be logged in succesfully.");
+      setNotAuthenticated();
+      return;
+    }
+  };
+
+  const accessTokenIsValid = () => {
+    if (accessToken === "") {
+      return false;
+    }
+    const expiryDateFromToken = new Date(accessTokenExpiry); //From epoch to date format
+    console.log(`Checking token expiry: ${expiryDateFromToken}`);
+    return expiryDateFromToken.getTime() > Date.now();
+  };
+
+  const handleNewToken = (data) => {
+    setAccessToken(data.access);
+    const expiryInt = data.access_expires * 1000; // seconds to milliseconds
+    setAccessTokenExpiry(expiryInt);
+    setIsAuthenticated(true);
+    setLoading(false);
+  };
+
+  const initUser = async (token) => {
+    const resp = await getUser(token);
+    const user = await resp.json();
+    setUser(user);
+  };
+
+  const logIn = async (username, password) => {
     const resp = await fetchToken(username, password);
     if (resp.statusText === "OK") {
       const tokenData = await resp.data;
@@ -120,12 +114,29 @@ export const AuthProvider = ({ children }) => {
     await logOut();
   };
 
+  const signUp = async (body) => {
+    const resp = await register(body)
+
+    if (resp.statusText === "Created") {
+      try {
+        await logIn(body.username, body.password)
+      } catch (e) { console.log(e) }
+    }
+  }
+
+  const setNotAuthenticated = () => {
+    setIsAuthenticated(false);
+    setLoading(false);
+    setUser({});
+  };
+
   const value = {
     isAuthenticated,
     user,
     loading,
-    login,
+    logIn,
     logout,
+    signUp,
     getToken,
   };
 

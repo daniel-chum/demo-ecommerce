@@ -8,6 +8,6 @@ module.exports = {
     ];
   },
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "images.unsplash.com"],
   },
 };

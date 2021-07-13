@@ -9,13 +9,17 @@ class Register(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    # def perform_create(self, serializer):
+    #     if
+
+
+
 class Profile(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
         return self.request.user
-
 
 class AllProductList(generics.ListAPIView):
 

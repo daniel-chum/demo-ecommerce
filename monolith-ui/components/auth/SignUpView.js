@@ -8,6 +8,7 @@ const SignUpView = () => {
   // Form State
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,30 +16,33 @@ const SignUpView = () => {
   const [dirty, setDirty] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const { signup } = useAuth();
+  const { signUp } = useAuth();
   const { setModalView, closeModal } = useUI();
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!dirty && !disabled) {
-      setDirty(true);
-      handleValidation();
-    }
+    // if (!dirty && !disabled) {
+    //   setDirty(true);
+    //   handleValidation();
+    // }
 
     try {
       setLoading(true);
       setMessage("");
-      await signup({
-        username,
-        firstName,
-        lastName,
-        password,
+      await signUp({
+        username: username,
+        email: '',
+        first_name: firstName,
+        last_name: lastName,
+        password: password,
+        password2: password2
       });
       setLoading(false);
       closeModal();
-    } catch ({ errors }) {
-      setMessage(errors[0].message);
+    } catch ( errors ) {
+      let errorMessage = JSON.stringify(errors.response.data)
+      setMessage(errorMessage);
       setLoading(false);
     }
   };
@@ -58,21 +62,11 @@ const SignUpView = () => {
   }, [handleValidation]);
 
   return (
-    <form onSubmit={handleSignup} className="w-80 px-3">
+    <form onSubmit={handleSignup} className="w-96 px-3">
       <div className="flex flex-col space-y-4">
         {message && (
-          <div className="text-red border border-red p-3">{message}</div>
+          <div className="text-black border border-primary p-3">{message}</div>
         )}
-        <Input
-          placeholder="First Name"
-          className="w-full"
-          onChange={setFirstName}
-        />
-        <Input
-          placeholder="Last Name"
-          className="w-full"
-          onChange={setLastName}
-        />
         <Input
           type="username"
           placeholder="Username"
@@ -85,7 +79,23 @@ const SignUpView = () => {
           className="w-full"
           onChange={setPassword}
         />
-        <span className="text-accents-8">
+        <Input
+          type="password"
+          placeholder="Confirm Password"
+          className="w-full"
+          onChange={setPassword2}
+        />
+        <Input
+          placeholder="Optional: First Name"
+          className="w-full"
+          onChange={setFirstName}
+        />
+        <Input
+          placeholder="Optional: Last Name"
+          className="w-full"
+          onChange={setLastName}
+        />
+        {/* <span className="text-accents-8">
           <span className="inline-block align-middle ">
             <Info width="15" height="15" className="text-gray-800" />
           </span>{" "}
@@ -93,7 +103,7 @@ const SignUpView = () => {
             <strong>Info</strong>: Passwords must be longer than 7 chars and
             include numbers.{" "}
           </span>
-        </span>
+        </span> */}
         <Button
           variant="slim"
           type="submit"
