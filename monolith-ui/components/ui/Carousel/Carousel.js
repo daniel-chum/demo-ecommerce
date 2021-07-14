@@ -8,17 +8,22 @@ const Carousel = ({
 
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const plusNumber = (number) => {
+  const addNumber = (number) => {
 
+    console.log("in add number")
     let length = props.children.length - 1
     let newIndex = selectedIndex + number
 
     if (newIndex < 0) {
+
       setSelectedIndex(length)
+
       return
     }
     if (newIndex > length) {
+
       setSelectedIndex(0)
+
       return
     }
 
@@ -29,31 +34,36 @@ const Carousel = ({
     <div className='relative w-full h-60 overflow-hidden'>
       <button
         className='z-50 absolute top-1/2 transform -translate-y-2/4 left-3  focus:outline-none text-white'
-        onClick={() => plusNumber(-1)}
+        onClick={() => addNumber(-1)}
       >
         &#10094;
       </button>
 
       <ol
-        className='flex h-full transition-all duration-500 ease-in-out'
+        className='absolute w-full h-full  '
         style={{
-          width: `${props.children.length * 100}%`,
-          transform: `translateX(-${selectedIndex * 100 / props.children.length}%)`
-
+          transform: `translateX(-${selectedIndex * 100}%)`
         }}
       >
+
         {props.children.map((child, index) => {
 
+          let visibility = selectedIndex == index ? "opacity-100 " : "opacity-0"
+
           return React.cloneElement(child, {
-            className: 'relative w-full h-full',
+            className: `${visibility} absolute w-full h-full transition-all duration-500 ease-in-out`,
+            style: {
+              left: `${index * 100}%`
+            }
             })
           })
         }
+
       </ol>
 
       <button
         className='absolute top-1/2 transform -translate-y-2/4 right-3 focus:outline-none text-white'
-        onClick={() => plusNumber(1)}
+        onClick={() => addNumber(1)}
       >
         &#10095;
       </button>
