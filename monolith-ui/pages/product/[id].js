@@ -3,11 +3,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getProduct } from '../../api/products'
 import FilePreviewContainer from "../../components/ui/FilePreview/FilePreviewContainer";
-import FilePreview from "../../components/ui/FilePreview/FilePreview";
-import cn from "classnames";
+import { addCart } from '../../api/cart'
+import { useAuth } from "../../lib/hooks/auth";
+import cn from 'classnames'
 
 const ProductItem = () => {
   const placeholderImg = "/product-img-placeholder.svg";
+  const { getToken, isAuthenticated } = useAuth();
+
   const [product, setProduct] = useState(
     {
     'title': null,
@@ -28,19 +31,17 @@ const ProductItem = () => {
   const { id } = router.query
 
 
-  // const handleOrderClick = () => {
-  //   const body = {
-  //     product: [id],
-  //   };
+  const handleCartButton = async (productId) => {
+    let body = {
+      'product_id': productId
+    }
 
-  //   try {
-  //     createOrder(getToken, body).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (e) {
-  //     console.log("Error occurred while trying to add order.");
-  //   }
-  // };
+    try {
+      const res = await addCart(getToken, body);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 
   useEffect(() => {
@@ -64,26 +65,28 @@ const ProductItem = () => {
   return (
     <div className='grid grid-cols-7' style={{ padding: "0% 15%" }}>
       <section className='col-span-4'>
-        <div className='h-96 w-11/12 relative mx-auto'>
+        <div className='w-full relative mx-auto border border-gray-300' style={{aspectRatio: "1/1"}}>
           <Image
-            quality="85"
+            quality="100"
             src={product.images[picIndex].image || placeholderImg}
             alt={product.title || "Product Image"}
             layout='fill'
-            objectFit='fill'
-            // width={300}
-            // height={400}
-            />
+            objectFit='contain'
+          />
         </div>
         <FilePreviewContainer>
           {(product.images).map((image, index) => {
             return (
-              <FilePreview
+              <div
                 key={image.image}
-                imageURL={image.image}
-                className={cn("absolute w-full h-full", { "opacity-40 bg-gray-200": index != picIndex })}
+                className={cn("relative w-32 h-32 border border-gray-300", { "opacity-40 bg-gray-200": index != picIndex })}
                 onClick={() => { setPicIndex(index) }}
-              />
+              >
+                <img
+                  src={image.image}
+                  className="absolute w-full h-full object-scale-down	"
+                />
+              </div>
             );
           })}
         </FilePreviewContainer>

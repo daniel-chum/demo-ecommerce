@@ -3,8 +3,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        'open-sans': ["'Open Sans', sans-serif"],
+        'rubik': ["'Rubik', sans-serif"],
+      },
+      fontSize: {
+        'sm': '.825rem'
+      },
       colors: {
         primary: "var(--primary)",
+        "dark": "var(--dark)",
         "primary-bright": "var(--primary-bright)",
         secondary: "var(--secondary)",
         "accents-0": "var(--accents-0)",

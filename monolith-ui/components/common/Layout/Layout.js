@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
   const { displayModal, closeModal, modalView } = useUI();
 
   return (
-    <div className='bg-background'>
+    <div>
       <Navbar />
       <main className="fit">{children}</main>
       <Modal logo={true} open={displayModal} onClose={closeModal}>
