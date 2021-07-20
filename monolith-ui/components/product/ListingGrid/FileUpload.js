@@ -66,7 +66,7 @@ const FileUpload = (props) => {
 
   return (
     <DragAndDrop handleDrop={addNewFiles}>
-      <div className="h-44 rounded-lg border-dashed border-2 border-gray-300">
+      <div className="h-48 rounded-lg border-dashed border-2 border-gray-300">
         {Object.keys(files).length == 0 ? (
           <div className="flex flex-col justify-center items-center h-full">
             <span className="block text-gray-400 font-normal cursor-default">
@@ -83,12 +83,12 @@ const FileUpload = (props) => {
             </label>
           </div>
         ) : (
-          <>
-            <FilePreviewContainer>
+            <div className='pt-4' >
+              <FilePreviewContainer showArrow={true}>
               {Object.keys(files).map((fileName) => {
                 let image = files[fileName].preview;
                 return (
-                  <div className="flex-none relative w-32 h-32 border border-gray-300">
+                  <div className="flex-none relative border border-gray-300" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)' }}>
                     <img
                       src={image}
                       className="absolute w-full h-full object-scale-down	"
@@ -122,7 +122,7 @@ const FileUpload = (props) => {
                 Reset
               </i>
             </div>
-          </>
+          </div>
         )}
         <input
           ref={fileInput}

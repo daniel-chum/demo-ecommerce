@@ -7,7 +7,6 @@ const FilePreviewContainer = ({
   ...props
 }) => {
   const scrollWindow = useRef();
-
   const [scrollable, setScrollable] = useState(false);
 
   useEffect(() => {
@@ -18,38 +17,48 @@ const FilePreviewContainer = ({
     }
   });
 
+  const scrollBarOnHover = props.scrollBarOnHover ? 'overflow-hidden hover:overflow-x-auto' : 'overflow-x-auto'
+
   return (
-    <div className="relative h-full">
-      <div className="flex items-center px-1 pt-2">
-        <Arrow
-          className={cn("transform rotate-180", { invisible: !scrollable })}
-          width="15"
-          height="30"
-          fill="#2870b8"
-          onClick={() => {
-            scrollWindow.current.scrollLeft -= 90;
-          }}
-        />
+    <>
+      <div className="flex items-center">
+        {props.showArrow &&
+          <Arrow
+            className={cn("transform rotate-180 ml-2", { invisible: !scrollable })}
+            width="15"
+            height="30"
+            fill="var(--primary)"
+            onClick={() => {
+              scrollWindow.current.scrollLeft -= 90;
+            }}
+          />
+        }
+
         <div
           className={cn(
-            "flex w-full overflow-x-auto space-x-1.5 mx-1.5",
-            s.scrollbar
+            "flex w-full h-full space-x-2",
+            scrollBarOnHover,
+            s.scrollbar,
+            { 'mx-3': props.showArrow }
           )}
           ref={scrollWindow}
         >
           {props.children}
         </div>
-        <Arrow
-          className={cn({ invisible: !scrollable })}
-          width="15"
-          height="30"
-          fill="#2870b8"
-          onClick={() => {
-            scrollWindow.current.scrollLeft += 90;
-          }}
-        />
+
+        {props.showArrow &&
+          <Arrow
+            className={cn('mr-2', { invisible: !scrollable })}
+            width="15"
+            height="30"
+            fill="var(--primary)"
+            onClick={() => {
+              scrollWindow.current.scrollLeft += 90;
+            }}
+          />
+        }
       </div>
-    </div>
+    </>
   );
 };
 
