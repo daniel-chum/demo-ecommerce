@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import FilePreviewContainer from "../../ui/FilePreview/FilePreviewContainer";
 import DragAndDrop from "../../ui/DragAndDrop/DragAndDrop";
-import { TrashBin } from "../../icons";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const FileUpload = (props) => {
   const { setImage, ...rest } = props;
@@ -88,7 +90,7 @@ const FileUpload = (props) => {
               {Object.keys(files).map((fileName) => {
                 let image = files[fileName].preview;
                 return (
-                  <div className="flex-none relative border border-gray-300" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)' }}>
+                  <div className="flex-none relative border border-gray-300" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)', scrollSnapAlign: 'start' }}>
                     <img
                       src={image}
                       className="absolute w-full h-full object-scale-down	"
@@ -97,12 +99,9 @@ const FileUpload = (props) => {
                       <span className="block break-all text-gray-900 text-xs px-2 pt-4">
                         {fileName}
                       </span>
-                      <TrashBin
-                        width="16"
-                        height="16"
-                        className=" absolute bottom-1 right-1"
-                        onClick={() => removeFile(fileName)}
-                      />
+                      <div className=" absolute bottom-2 right-2" onClick={() => removeFile(fileName)}>
+                        <FontAwesomeIcon icon={faTrash} className='h-4 text-gray-600 cursor-pointer' />
+                      </div>
                     </div>
                   </div>
                 );

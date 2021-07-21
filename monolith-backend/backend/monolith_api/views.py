@@ -12,8 +12,6 @@ class Register(generics.CreateAPIView):
     # def perform_create(self, serializer):
     #     if
 
-
-
 class Profile(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]

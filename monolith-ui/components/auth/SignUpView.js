@@ -13,19 +13,12 @@ const SignUpView = () => {
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [dirty, setDirty] = useState(false);
-  const [disabled, setDisabled] = useState(false);
 
   const { signUp } = useAuth();
   const { setModalView, closeModal } = useUI();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
-    // if (!dirty && !disabled) {
-    //   setDirty(true);
-    //   handleValidation();
-    // }
 
     try {
       setLoading(true);
@@ -46,20 +39,6 @@ const SignUpView = () => {
       setLoading(false);
     }
   };
-
-  const handleValidation = useCallback(() => {
-    // Test for Alphanumeric password
-    const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password);
-
-    // Unable to send form unless fields are valid.
-    if (dirty) {
-      setDisabled(password.length < 7 || !validPassword);
-    }
-  }, [password, dirty]);
-
-  useEffect(() => {
-    handleValidation();
-  }, [handleValidation]);
 
   return (
     <form onSubmit={handleSignup} className="w-96 px-3">
@@ -95,20 +74,10 @@ const SignUpView = () => {
           className="w-full"
           onChange={setLastName}
         />
-        {/* <span className="text-accents-8">
-          <span className="inline-block align-middle ">
-            <Info width="15" height="15" className="text-gray-800" />
-          </span>{" "}
-          <span className="text-gray-800 text-sm">
-            <strong>Info</strong>: Passwords must be longer than 7 chars and
-            include numbers.{" "}
-          </span>
-        </span> */}
         <Button
           variant="slim"
           type="submit"
           loading={loading}
-          disabled={disabled}
         >
           Sign Up
         </Button>

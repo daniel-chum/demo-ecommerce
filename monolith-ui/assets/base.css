@@ -4,12 +4,11 @@
   --primary-bright: #064e96;
   --secondary: #ffffff;
   --accents-0: #dee2e6;
-  --accents-1: #e9ecef;
+  --accents-3: #e9ecef;
   --accents-2: #60636a;
   --call-to-action: #3ea6ff;
   --background: #f2f2f2;
-}
-
+}3
 .fadeIn {
   animation-name: fadeIn;
   animation-duration: 0.4s;
@@ -22,4 +21,23 @@
   to {
     opacity: 1;
   }
+}
+
+body {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 18px; /* "auto" or "thin" */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(237, 237, 237, 0.968); /* color of the tracking area */
+  border-radius: 60px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(206, 202, 202); /* color of the scroll thumb */
+  border-radius: 60px; /* roundness of the scroll thumb */
+  border: 4px solid rgba(237, 237, 237, 0.968);
 }

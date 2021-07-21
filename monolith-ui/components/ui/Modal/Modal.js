@@ -1,13 +1,17 @@
 import { useRef, useEffect, useCallback } from "react";
 import Portal from "@reach/portal";
 import s from "./Modal.module.css";
-import { Cross, Logo } from "../../icons";
+import { Logo } from "../../icons";
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 import cn from "classnames";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+
 
 const Modal = ({ children, open, onClose, logo, width, height }) => {
   const ref = useRef();
@@ -51,7 +55,7 @@ const Modal = ({ children, open, onClose, logo, width, height }) => {
               aria-label="Close panel"
               className={s.button}
             >
-              <Cross className="h-6 w-6" />
+              <FontAwesomeIcon icon={faTimesCircle} className='h-6 text-gray-600 cursor-pointer' />
             </button>
             {children}
           </div>

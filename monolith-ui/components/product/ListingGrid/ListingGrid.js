@@ -1,7 +1,9 @@
 import s from "./ListingGrid.module.css";
-import { Cross } from "../../icons";
 import Image from "next/image";
 import cn from "classnames";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 
 const ListingGrid = ({ productList, handleDeleteButton }) => {
   const placeholderImg = "/product-img-placeholder.svg";
@@ -46,7 +48,7 @@ const ListingGrid = ({ productList, handleDeleteButton }) => {
               onClick={() => handleDeleteButton(product.id)}
               type="button"
             >
-              <Cross />
+              <FontAwesomeIcon icon={faTimesCircle} className='h-4 text-gray-600 cursor-pointer' />
             </button>
           </div>
         </>

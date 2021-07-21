@@ -14,7 +14,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 const ProductItem = () => {
   const placeholderImg = "/product-img-placeholder.svg";
-  const { getToken, cart, setCart, isAuthenticated } = useAuth();
+  const { getToken, cart, setCart } = useAuth();
 
   const [picIndex, setPicIndex] = useState(0)
   const [cartQuantity, setCartQuantity] = useState(1)
@@ -24,14 +24,6 @@ const ProductItem = () => {
   const router = useRouter();
   const { id } = router.query
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setAddedToCartAnimation(false);
-    }, 2500);
-
-    return () => clearTimeout(timeout);
-  }, [addedToCartAnimation]);
-
   // Load products details from API once the component is mounted
   useEffect(() => {
       const getProductDetails = async () => {
@@ -40,8 +32,6 @@ const ProductItem = () => {
           if (id === undefined) {
             return
           }
-
-          console.log(cart)
 
           const response = await getProduct(id);
           const product = response.data;
@@ -55,6 +45,14 @@ const ProductItem = () => {
 
       getProductDetails();
   }, [id]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAddedToCartAnimation(false);
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [addedToCartAnimation]);
 
   const handleQuantityInput = e => {
     const { target } = e;
@@ -70,10 +68,12 @@ const ProductItem = () => {
     }
 
     try {
+
       const res = await addCart(getToken, body);
 
-      console.log(res)
-      // setCart[ ...cart, res]
+      if (res.data.id) {
+        setCart([ ...cart, res.data])
+      }
 
       setAddedToCartAnimation(true);
 

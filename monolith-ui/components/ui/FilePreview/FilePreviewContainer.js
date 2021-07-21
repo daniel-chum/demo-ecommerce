@@ -1,7 +1,9 @@
-import { Arrow } from "../../icons";
 import { useRef, useEffect, useState } from "react";
 import cn from "classnames";
 import s from "./FilePreviewContainer.module.css";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const FilePreviewContainer = ({
   ...props
@@ -21,17 +23,16 @@ const FilePreviewContainer = ({
 
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center mx-1.5">
         {props.showArrow &&
-          <Arrow
-            className={cn("transform rotate-180 ml-2", { invisible: !scrollable })}
-            width="15"
-            height="30"
-            fill="var(--primary)"
+          <button
+            className={cn("focus:outline-none", { invisible: !scrollable })}
             onClick={() => {
               scrollWindow.current.scrollLeft -= 90;
             }}
-          />
+          >
+            <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>
+          </button>
         }
 
         <div
@@ -47,15 +48,14 @@ const FilePreviewContainer = ({
         </div>
 
         {props.showArrow &&
-          <Arrow
-            className={cn('mr-2', { invisible: !scrollable })}
-            width="15"
-            height="30"
-            fill="var(--primary)"
+          <button
+            className={cn("transform rotate-180 focus:outline-none", { invisible: !scrollable })}
             onClick={() => {
               scrollWindow.current.scrollLeft += 90;
             }}
-          />
+          >
+            <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>
+          </button>
         }
       </div>
     </>

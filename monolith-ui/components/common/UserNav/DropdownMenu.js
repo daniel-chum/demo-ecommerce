@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { Cart, User } from "../../icons";
-import { useAuth } from "../../../lib/hooks/auth";
+import { useState } from "react";
 import s from './DropdownMenu.module.css'
 import cn from 'classnames'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 const LINKS = [
   {
@@ -16,34 +17,38 @@ const LINKS = [
   },
 ];
 
-const DropdownMenu = () => {
+const DropdownMenu = ({logout, cart }) => {
   const [display, setDisplay] = useState(false);
-  const { logout } = useAuth();
-  const ref = useRef();
 
   return (
-    <div className='flex  justify-center items-center'>
-      <Link href='/cart'>
-        <a>
-          <div className='flex justify-center items-center pr-8'>
+    <div className='flex justify-center items-center'>
+      <div className='relative flex justify-center items-center pr-6'>
+        <span className='absolute right-4 bottom-4
+                        text-black text-xs font-semibold
+                        bg-primary border rounded-full h-5 w-5 flex justify-center items-center'
+        >
+          {cart.length}
+        </span>
+        <Link href='/cart'>
+          <a className='contents'>
             <button className='focus:outline-none'>
-              <Cart />
+              <FontAwesomeIcon icon={faShoppingCart} className='h-6 cursor-pointer'/>
             </button>
-          </div>
-        </a>
-      </Link>
+          </a>
+        </Link>
+      </div>
       <div
         onMouseEnter={() => setDisplay(!display)}
         onMouseLeave={() => setDisplay(!display)}
         className='relative'
       >
-        <div className='focus:outline-none'>
-          <User />
+        <div>
+          <FontAwesomeIcon icon={faUser} className='h-6 cursor-pointer'/>
         </div>
         {display && (
           <ul
             className={cn(s.dropdownMenu,
-              "fadeIn fixed right-5 mt-4 origin-top-right outline-none bg-secondary z-40 w-full h-full " +
+              "fadeIn absolute right-5 mt-4 bg-gray-50 z-40 border border-gray-300 " +
               "lg:absolute lg:-right-2 lg:shadow-md lg:w-40 lg:h-auto")}
           >
             {LINKS.map(({ name, href }) => (
@@ -52,7 +57,7 @@ const DropdownMenu = () => {
                   <Link href={href}>
                     <a
                       className="text-accents-2 cursor-pointer px-6 py-3 flex transition ease-in-out duration-200
-                                border-accents-0 hover:bg-accents-2 hover:text-secondary"
+                                 hover:bg-accents-2 hover:text-secondary"
                       onClick={() => {
                         setDisplay(false);
                       }}
@@ -66,7 +71,7 @@ const DropdownMenu = () => {
             <li>
               <a
                 className= "text-accents-2 cursor-pointer px-6 py-3 flex transition ease-in-out duration-200
-                            border-t border-accents-0 hover:bg-accents-2 hover:text-secondary"
+                            border-t border-gray-300 hover:bg-accents-2 hover:text-secondary"
                 onClick={() => logout()}
               >
                 Logout

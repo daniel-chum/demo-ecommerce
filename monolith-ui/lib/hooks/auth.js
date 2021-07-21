@@ -31,17 +31,19 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
+  // Call cart api on login
   useEffect(() => {
+
+    if (isAuthenticated === false) { return }
+
     const getUserCart = async () => {
       try {
         const response = await getCart(getToken);
         const productArray = response.data;
-
         console.log(productArray)
         setCart(productArray);
       } catch (e) {
-        console.log(e);
-        console.log("User must be logged in to view listing page.");
+        console.log(e.message)
       }
     };
 
@@ -106,20 +108,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   const initUser = async (token) => {
-    const resp = await getUser(token);
-    const user = await resp.json();
-    setUser(user);
+    try {
+      const resp = await getUser(token);
+      const user = await resp.data;
+      setUser(user);
+    } catch (e) { console.log(e) }
   };
 
   const logIn = async (username, password) => {
     const resp = await fetchToken(username, password);
+
     if (resp.statusText === "OK") {
       const tokenData = await resp.data;
       handleNewToken(tokenData);
       try {
         await initUser(tokenData.access);
       } catch (e) {
-        console.log(e, "Cannot get user information.");
+        console.log(e)
+        console.log("Cannot get user information.");
       }
     } else {
       setIsAuthenticated(false);
