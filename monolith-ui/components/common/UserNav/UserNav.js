@@ -10,7 +10,7 @@ const UserNav = ({ className, children, ...props }) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div>
+    <>
       {isAuthenticated ? (
         <DropdownMenu />
       ) : (
@@ -23,7 +23,7 @@ const UserNav = ({ className, children, ...props }) => {
           SIGN IN
         </button>
       )}
-    </div>
+    </>
   );
 };
 

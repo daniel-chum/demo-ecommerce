@@ -1,21 +1,9 @@
 .dropdownMenu {
-  @apply fixed right-5 mt-2 origin-top-right outline-none bg-secondary z-40 w-full h-full;
-  @screen lg {
-    @apply absolute top-10 right-6 border shadow-md w-40 h-auto;
-  }
 
   &::after {
     content: " ";
-    @apply absolute bottom-full right-5;
-    @apply border-4;
+    @apply absolute bottom-full right-2;
+    border-width: 10px;
     border-color: transparent transparent var(--accents-2) transparent;
-  }
-}
-
-.link {
-  @apply text-accents-2 cursor-pointer px-6 py-3 flex transition ease-in-out duration-200;
-
-  &:hover {
-    @apply bg-accents-2 text-secondary;
   }
 }

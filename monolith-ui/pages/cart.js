@@ -1,32 +1,25 @@
 import CartGrid from "../components/Cart/CartGrid";
-import { getCart, deleteCart, partialUpdateCart } from "../api/cart";
-import { useState, useEffect } from "react";
+import {  deleteCart, partialUpdateCart } from "../api/cart";
+import {  useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../lib/hooks/auth";
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
+
   const router = useRouter();
-  const { getToken, isAuthenticated } = useAuth();
+  const { cart, setCart, isAuthenticated, getToken } = useAuth();
 
   useEffect(() => {
-    const getUserCart = async () => {
-      try {
-        const response = await getCart(getToken);
-        const productArray = response.data;
+    const getRes = async () => {
+      const resp = await getToken()
 
-        setCart(productArray);
-      } catch (e) {
-        console.log(e);
-        console.log("User must be logged in to view listing page.");
+      if (!resp) {
+        router.push("/");
+        return;
       }
-    };
-
-    if (!isAuthenticated) {
-      router.push("/");
-      return;
     }
-    getUserCart();
+
+    getRes()
   }, []);
 
   const handleDeleteButton = async (cartId) => {
@@ -56,12 +49,16 @@ export default function Cart() {
 
   return (
     <>
-      <h2>Shopping Cart</h2>
-      <CartGrid
-        cartList={cart}
-        handleDeleteButton={handleDeleteButton}
-        handleQuantityButton={handleQuantityButton}
-      />
+      {isAuthenticated && (
+        <>
+          <h2>Shopping Cart</h2>
+          <CartGrid
+            cartList={cart}
+            handleDeleteButton={handleDeleteButton}
+            handleQuantityButton={handleQuantityButton}
+          />
+        </>
+      )}
     </>
   );
 }

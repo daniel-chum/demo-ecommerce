@@ -10,30 +10,51 @@ import cn from 'classnames';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faPinterest, faWhatsappSquare } from '@fortawesome/free-brands-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 const ProductItem = () => {
   const placeholderImg = "/product-img-placeholder.svg";
-  const { getToken, isAuthenticated } = useAuth();
+  const { getToken, cart, setCart, isAuthenticated } = useAuth();
 
-  const [product, setProduct] = useState(
-    {
-    'title': null,
-    'price': null,
-    'user': {
-      'username': null
-    },
-    'images': [
-      {
-        'image': null
-      }
-    ]
-    }
-  );
   const [picIndex, setPicIndex] = useState(0)
   const [cartQuantity, setCartQuantity] = useState(1)
+  const [addedToCartAnimation, setAddedToCartAnimation] = useState(false)
+  const [product, setProduct] = useState({ 'title': null, 'price': null, 'user': { 'username': null }, 'images': [{ 'image': null }] });
 
   const router = useRouter();
   const { id } = router.query
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAddedToCartAnimation(false);
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [addedToCartAnimation]);
+
+  // Load products details from API once the component is mounted
+  useEffect(() => {
+      const getProductDetails = async () => {
+        try {
+
+          if (id === undefined) {
+            return
+          }
+
+          console.log(cart)
+
+          const response = await getProduct(id);
+          const product = response.data;
+
+          setProduct(product);
+
+        } catch (e) {
+          console.log(e);
+        }
+      };
+
+      getProductDetails();
+  }, [id]);
 
   const handleQuantityInput = e => {
     const { target } = e;
@@ -50,27 +71,16 @@ const ProductItem = () => {
 
     try {
       const res = await addCart(getToken, body);
+
+      console.log(res)
+      // setCart[ ...cart, res]
+
+      setAddedToCartAnimation(true);
+
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-      const getProductDetails = async () => {
-        try {
-
-          const response = await getProduct(id);
-          const product = response.data;
-
-          setProduct(product);
-
-        } catch (e) {
-          console.log(e);
-        }
-      };
-
-      getProductDetails();
-  }, [id]);
 
   return (
     <div className='mx-48 3xl:mx-80 pt-4'>
@@ -89,7 +99,7 @@ const ProductItem = () => {
             {(product.images).map((image, index) => {
               let visiblity = (index === picIndex) ? "opacity-100 z-50" : "opacity-0 z-0";
               return (
-                <div className={`${visiblity} bg-gray-100 absolute w-full h-full transition duration-300`}>
+                <div key={image.image} className={`${visiblity} bg-gray-100 absolute w-full h-full transition duration-300`}>
                   <Image
                     quality="100"
                     src={image.image || placeholderImg}
@@ -157,8 +167,17 @@ const ProductItem = () => {
           </div>
         </section>
       </div>
+      { addedToCartAnimation && (
+        <div
+          className='fixed w-60 h-40 bg-gray-900 bg-opacity-90 text-white border flex flex-col items-center justify-evenly z-50'
+          style={{ left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }}
+        >
+          <FontAwesomeIcon icon={faCheckCircle} className='h-20'/>
+          <span className='text-lg font-rubik'>Item added to cart!</span>
+        </div>
+      )}
     </div>
-    );
+  );
 };
 
 export default ProductItem;

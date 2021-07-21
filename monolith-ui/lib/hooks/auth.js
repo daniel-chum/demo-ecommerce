@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
+import Router from "next/router";
 import { fetchToken, fetchNewToken, register, logOut } from "../../api/auth";
 import getUser from "../../api/user";
+import { getCart } from "../../api/cart";
 
 export const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [accessTokenExpiry, setAccessTokenExpiry] = useState(null);
+
+  const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -25,6 +30,23 @@ export const AuthProvider = ({ children }) => {
 
     initAuth();
   }, []);
+
+  useEffect(() => {
+    const getUserCart = async () => {
+      try {
+        const response = await getCart(getToken);
+        const productArray = response.data;
+
+        console.log(productArray)
+        setCart(productArray);
+      } catch (e) {
+        console.log(e);
+        console.log("User must be logged in to view listing page.");
+      }
+    };
+
+    getUserCart();
+  }, [isAuthenticated]);
 
   const getToken = async () => {
     // Returns an access token if there's one or refetches a new one
@@ -53,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const resp = await fetchNewToken();
       const tokenData = await resp.data;
-      handleNewToken(tokenData);
+      await handleNewToken(tokenData);
       if (user === null) {
         console.log("No user loaded so loading from refreshed token");
         await initUser(tokenData.access);
@@ -75,7 +97,7 @@ export const AuthProvider = ({ children }) => {
     return expiryDateFromToken.getTime() > Date.now();
   };
 
-  const handleNewToken = (data) => {
+  const handleNewToken = async (data) => {
     setAccessToken(data.access);
     const expiryInt = data.access_expires * 1000; // seconds to milliseconds
     setAccessTokenExpiry(expiryInt);
@@ -97,7 +119,7 @@ export const AuthProvider = ({ children }) => {
       try {
         await initUser(tokenData.access);
       } catch (e) {
-        console.log("Cannot get user information.");
+        console.log(e, "Cannot get user information.");
       }
     } else {
       setIsAuthenticated(false);
@@ -108,10 +130,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
+    await logOut();
+    Router.push("/");
     setAccessToken("");
     setAccessTokenExpiry(null);
     setNotAuthenticated();
-    await logOut();
+
   };
 
   const signUp = async (body) => {
@@ -127,17 +151,20 @@ export const AuthProvider = ({ children }) => {
   const setNotAuthenticated = () => {
     setIsAuthenticated(false);
     setLoading(false);
+    setCart([]);
     setUser({});
   };
 
   const value = {
-    isAuthenticated,
     user,
     loading,
+    cart,
+    isAuthenticated,
     logIn,
     logout,
     signUp,
     getToken,
+    setCart
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
