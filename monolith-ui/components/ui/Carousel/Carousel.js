@@ -112,16 +112,10 @@ const Carousel = ({
 
   }, [])
 
-  return (
-    <div className='relative w-full mx-auto overflow-hidden' style={{ height: '40vh'}}>
-      <button
-        className='z-40 absolute top-1/2 transform -translate-y-2/4 focus:outline-none text-white bg-gray-800 bg-opacity-10 hover:bg-opacity-20 h-12 w-12 rounded-full '
-        style= {{left:'5%'}}
-        onClick={() => handleNewIndex(selectedIndex - 1)}
-      >
-        &#10094;
-      </button>
+  const arrowsOnHover = props.children.length <= 1 ? 'hidden' : (props.arrowsOnHover) ? 'opacity-0 hover:opacity-100' : 'opacity-100'
 
+  return (
+    <div className='relative mx-auto overflow-hidden' style={props.style}>
       <ol
         className='relative w-full h-full transition-all duration-300 ease-in-out'
         ref={slider}
@@ -138,26 +132,36 @@ const Carousel = ({
         }
 
       </ol>
-
-      <button
-        className='absolute top-1/2 transform -translate-y-2/4 right-3 focus:outline-none text-white bg-gray-800 bg-opacity-10 hover:bg-opacity-20 h-12 w-12 rounded-full'
-        style= {{right:'5%'}}
-        onClick={() => handleNewIndex(selectedIndex + 1)}
-      >
-        &#10095;
-      </button>
-      <div className='absolute bottom-1 w-full h-6 space-x-2 text-center'>
+      <div className={`${arrowsOnHover} absolute top-0 h-full w-full`}>
+        <button
+          className='z-40 absolute top-1/2 transform -translate-y-2/4 focus:outline-none text-white bg-gray-800 bg-opacity-10 hover:bg-opacity-20 h-12 w-12 rounded-full'
+          style= {{left:'5%'}}
+          onClick={() => handleNewIndex(selectedIndex - 1)}
+        >
+          &#10094;
+        </button>
+        <button
+          className='absolute top-1/2 transform -translate-y-2/4 right-3 focus:outline-none text-white bg-gray-800 bg-opacity-10 hover:bg-opacity-20 h-12 w-12 rounded-full'
+          style= {{right:'5%'}}
+          onClick={() => handleNewIndex(selectedIndex + 1)}
+        >
+          &#10095;
+        </button>
+      </div>
+      <div className='absolute bottom-0.5 w-full h-6 space-x-2 text-center'>
         {props.children.map((child, index) => {
 
           let color = index == selectedIndex ? 'bg-secondary' : "bg-gray-500"
 
-          return (
-            <span
-              key={index}
-              className={`${color} w-3 h-3 rounded-full inline-block transition duration-300 ease-in-out`}
-              onClick={() => handleNewIndex(index) }
-            ></span>
-          )
+          if (props.children.length > 1) {
+            return (
+              <span
+                key={index}
+                className={`${color} w-3 h-3 rounded-full inline-block transition duration-300 ease-in-out`}
+                onClick={() => handleNewIndex(index)}
+              ></span>
+            )
+          }
           })
         }
       </div>

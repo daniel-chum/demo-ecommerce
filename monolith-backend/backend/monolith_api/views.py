@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework import status
 from .serializers import ProductSerializer, UserSerializer, CartSerializer
 from monolith_api.models import Product, Cart
 
@@ -70,3 +72,18 @@ class CartList(generics.ListCreateAPIView, generics.DestroyAPIView, generics.Upd
         # Create product not already in cart, else do nothing
         if len(Cart.objects.filter(product__id=product_id, user=self.request.user)) == 0: # Double underscore for nested serializer field
             serializer.save(user=self.request.user)
+
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+
+        quantity = request.data['quantity']
+
+        try:
+            if int(quantity) < 1:
+                message = {'Insufficient quantity': 'Quantity must be more than 0'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError:
+            message = {'Insufficient quantity': 'Quantity is blank'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+        return self.update(request, *args, **kwargs)

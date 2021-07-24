@@ -86,26 +86,26 @@ const FileUpload = (props) => {
           </div>
         ) : (
             <div className='pt-4' >
-              <FilePreviewContainer showArrow={true}>
-              {Object.keys(files).map((fileName) => {
-                let image = files[fileName].preview;
-                return (
-                  <div className="flex-none relative border border-gray-300" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)', scrollSnapAlign: 'start' }}>
-                    <img
-                      src={image}
-                      className="absolute w-full h-full object-scale-down	"
-                    />
-                    <div className='absolute w-full h-full opacity-0 hover:opacity-80 hover:bg-gray-200'>
-                      <span className="block break-all text-gray-900 text-xs px-2 pt-4">
-                        {fileName}
-                      </span>
-                      <div className=" absolute bottom-2 right-2" onClick={() => removeFile(fileName)}>
-                        <FontAwesomeIcon icon={faTrash} className='h-4 text-gray-600 cursor-pointer' />
+              <FilePreviewContainer showArrow={true} scrollBar={true}>
+                {Object.keys(files).map((fileName) => {
+                  let image = files[fileName].preview;
+                  return (
+                    <div className="flex-none relative" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)', scrollSnapAlign: 'start' }}>
+                      <img
+                        src={image}
+                        className="absolute w-full h-full object-scale-down	"
+                      />
+                      <div className='absolute w-full h-full opacity-0 hover:opacity-80 hover:bg-gray-200'>
+                        <span className="block break-all text-gray-900 text-xs px-2 pt-4">
+                          {fileName}
+                        </span>
+                        <div className=" absolute bottom-2 right-2" onClick={() => removeFile(fileName)}>
+                          <FontAwesomeIcon icon={faTrash} className='h-4 text-gray-600 cursor-pointer' />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </FilePreviewContainer>
             <div className="absolute w-full bottom-1.5 grid grid-cols-3">
               <label

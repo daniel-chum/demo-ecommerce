@@ -5,6 +5,7 @@
 }
 
 .scrollbar::-webkit-scrollbar {
+  display: absolute;
   padding-top: 5px;
   height: 16px;
 }

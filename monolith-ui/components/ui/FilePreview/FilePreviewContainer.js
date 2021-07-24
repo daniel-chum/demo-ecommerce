@@ -19,16 +19,19 @@ const FilePreviewContainer = ({
     }
   });
 
-  const scrollBarOnHover = props.scrollBarOnHover ? 'overflow-hidden hover:overflow-x-auto' : 'overflow-x-auto'
+  const scrollBarOnHover = props.scrollBarOnHover ? 'overflow-hidden hover:overflow-x-auto' : props.scrollBar ? 'overflow-x-auto' : "overflow-hidden"
 
   return (
     <>
-      <div className="flex items-center mx-1.5">
+      <div className="relative flex items-center mx-1.5">
         {props.showArrow &&
           <button
-            className={cn("focus:outline-none", { invisible: !scrollable })}
+          className={cn(
+              "focus:outline-none left-3 z-40", { invisible: !scrollable },
+              { 'absolute': props.arrowInContainer },
+            )}
             onClick={() => {
-              scrollWindow.current.scrollLeft -= 90;
+              scrollWindow.current.scrollLeft -= 100;
             }}
           >
             <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>
@@ -40,7 +43,7 @@ const FilePreviewContainer = ({
             "flex w-full h-full space-x-2",
             scrollBarOnHover,
             s.scrollbar,
-            { 'mx-3': props.showArrow }
+            { 'mx-2': props.showArrow }
           )}
           ref={scrollWindow}
         >
@@ -49,9 +52,12 @@ const FilePreviewContainer = ({
 
         {props.showArrow &&
           <button
-            className={cn("transform rotate-180 focus:outline-none", { invisible: !scrollable })}
+          className={cn(
+              "transform rotate-180 right-3 z-40 focus:outline-none", { invisible: !scrollable },
+              { 'absolute': props.arrowInContainer },
+            )}
             onClick={() => {
-              scrollWindow.current.scrollLeft += 90;
+              scrollWindow.current.scrollLeft += 100;
             }}
           >
             <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>

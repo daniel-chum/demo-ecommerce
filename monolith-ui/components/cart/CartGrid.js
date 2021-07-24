@@ -1,55 +1,80 @@
 import Image from "next/image";
-import cn from "classnames";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const CartGrid = ({ cartList, handleDeleteButton, handleQuantityButton }) => {
+const CartGrid = ({ cartList, handleDeleteButton, handleQuantityButton, className }) => {
   const placeholderImg = "/product-img-placeholder.svg";
 
-  const HEADER = ['PRODUCT DETAILS', 'QUANTITY', 'PRICE', 'TOTAL']
-  const HEADER_WIDTH = ['w-2/5', 'w-1/5', 'w-1/5', 'w-1/5']
-  const HEADER_AlIGNMENT = ['justify-left', 'justify-center', 'justify-center', 'justify-center']
+  const HEADER = ['', 'PRODUCT', 'PRICE', 'QUANTITY', 'TOTAL', '']
 
   return (
-    <div className='m-auto w-5/6'>
-      <div className="flex w-full ">
+    <table className={`${className}`}>
+      <thead
+        className='grid justify-items-center items-center'
+        style={{
+          gridTemplateColumns: '12% 44% repeat(3, 1fr) 5%'
+        }}>
+        <tr className="contents">
         {HEADER.map((header, index) => {
           return (
-            <span key={header} className={cn('border-t-2 border-b-2 h-12 flex items-center', HEADER_WIDTH[index], HEADER_AlIGNMENT[index])}>
+            <th key={index} className='h-12 border-t-2 border-b-2 flex justify-center items-center w-full font-rubik'>
               {header}
-            </span>
+            </th>
           )
         }
-      )}
-      </div>
-      <ol className="grid grid-cols-5 gap-y-2">
+          )}
+        </tr>
+      </thead>
+      <tbody className='h-full'>
         {cartList.map((cart) => {
           const product = cart.product;
           return (
-            <li key={cart.id} className="contents">
-              <div className='relative w-1/2' style={{aspectRatio: '1/1'}}>
-                <Image
-                  quality="100"
-                  src={product.images[0].image || placeholderImg}
-                  alt={product.title || "Product Image"}
-                  layout='fill'
-                  objectFit='contain'
+            <tr key={cart.id} className="flex justify-center items-center border-b py-4">
+              <td className='pl-4' style={{ width: '12%' }}>
+                <div className='relative w-11/12 bg-gray-100' style={{ aspectRatio: '1/1' }}>
+                  <Image
+                    quality="100"
+                    src={product.images[0].image || placeholderImg}
+                    alt={product.title || "Product Image"}
+                    layout='fill'
+                    objectFit='contain'
+                  />
+                </div>
+              </td>
+              <td className='px-4 font-rubik text-center' style={{ width: '44%' }}>
+                <div className='relative flex flex-col'>
+                  <span>{product.title}</span>
+                  <div className='absolute -bottom-5 left-0 w-full mx-auto text-xs'>
+                    <label className='italic'>Listed by: </label>
+                    <span>{product.user.username}</span>
+                  </div>
+                </div>
+              </td>
+              <td className="text-center font-rubik font-light" style={{ width: '13%' }}>${product.price}</td>
+              <td className='flex justify-center gap-x-1.5' style={{ width: '13%' }}>
+                <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, parseInt(cart.quantity) - 1) }}>
+                  <FontAwesomeIcon icon={faMinus} className='h-3 text-gray-600 cursor-pointer' />
+                </button>
+                <input
+                  className='border rounded-sm w-10 font-rubik font-light text-sm text-center focus:outline-none'
+                  type="number"
+                  min='1'
+                  value={cart.quantity}
+                  onChange={(e) => { handleQuantityButton(cart.id, e.target.value) }}
                 />
-              </div>
-              <div className='flex flex-col'>
-                <span>{product.title}</span>
-                <button className='text-left' onClick={() => {handleDeleteButton(cart.id)} }>Remove</button>
-              </div>
-              <div>
-                <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, cart.quantity - 1) }}>-</button>
-                  <span className="h-16 pt-2 pl-2 pr-2">{cart.quantity}</span>
-                <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, cart.quantity + 1) }}>+</button>
-              </div>
-              <span className="h-16 pt-2 pl-2 pr-2">{product.price}</span>
-              <span>{product.price * cart.quantity}</span>
-            </li>
+                <button className='focus:outline-none' onClick={() => { handleQuantityButton(cart.id, parseInt(cart.quantity) + 1) }}>
+                  <FontAwesomeIcon icon={faPlus} className='h-3 text-gray-600 cursor-pointer' />
+                </button>
+              </td>
+              <td className="text-center text-primary font-rubik font-light" style={{ width: '13%' }}>${(product.price * cart.quantity).toFixed(2)}</td>
+              <td className='flex justify-center items-center' style={{ width: '5%' }} onClick={() => handleDeleteButton(cart.id) }>
+                <FontAwesomeIcon icon={faTimes} className='h-3 text-gray-600 cursor-pointer' />
+              </td>
+            </tr>
           )}
-          )}
-      </ol>
-    </div>
+        )}
+      </tbody>
+    </table>
   );
 };
 

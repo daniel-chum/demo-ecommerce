@@ -24,15 +24,11 @@ export default function Listing() {
         const productArray = response.data;
         setListings(productArray);
       } catch (e) {
+        router.push("/");
         console.log(e);
-        console.log("User must be logged in to view listing page.");
       }
     };
 
-    if (!isAuthenticated) {
-      router.push("/");
-      return;
-    }
     getUserListing();
   }, []);
 
@@ -78,39 +74,46 @@ export default function Listing() {
   };
 
   return (
-    <>
-      <h2>Listings</h2>
-      <button
-        className="flex items-center justify-evenly w-28 h-12 rounded
-         bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out
-         font-medium text-white focus:outline-none"
-        onClick={() =>
-          setdisplayListingForm((displayListingForm) => !displayListingForm)
-        }
-      >
-        Add Listing
-      </button>
-      <Modal
-        open={displayListingForm}
-        onClose={() =>
-          setdisplayListingForm((displayListingForm) => !displayListingForm)
-        }
-        width="w-5/12"
-        height="h-auto"
-      >
-        <ListingForm
-          title={title}
-          price={price}
-          onSubmit={handleCreateButton}
-          setTitle={setTitle}
-          setPrice={setPrice}
-          setImage={setImage}
-        />
-      </Modal>
-      <ListingGrid
-        productList={listings}
-        handleDeleteButton={handleDeleteButton}
-      />
-    </>
+    <div className='pt-10 mx-40'>
+      {isAuthenticated && (
+        <>
+          <label className='flex justify-between items-center'>
+            <h2 className='font-rubik font-bold text-2xl'>Listings</h2>
+            <button
+              className="flex items-center justify-evenly w-28 h-12 rounded
+              bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out
+              font-medium text-white focus:outline-none"
+              onClick={() =>
+                setdisplayListingForm((displayListingForm) => !displayListingForm)
+              }
+            >
+              Add Listing
+            </button>
+          </label>
+          <Modal
+            open={displayListingForm}
+            onClose={() =>
+              setdisplayListingForm((displayListingForm) => !displayListingForm)
+            }
+            width="w-5/12"
+            height="h-auto"
+          >
+            <ListingForm
+              title={title}
+              price={price}
+              onSubmit={handleCreateButton}
+              setTitle={setTitle}
+              setPrice={setPrice}
+              setImage={setImage}
+            />
+          </Modal>
+          <ListingGrid
+            className='w-full'
+            productList={listings}
+            handleDeleteButton={handleDeleteButton}
+          />
+        </>
+      )}
+    </div>
   );
 }

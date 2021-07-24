@@ -41,3 +41,19 @@ body {
   border-radius: 60px; /* roundness of the scroll thumb */
   border: 4px solid rgba(237, 237, 237, 0.968);
 }
+
+/* Chrome, Safari, Edge, Opera
+  Input add and minus arrows
+*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox
+  Input add and minus arrows
+*/
+input[type=number] {
+  -moz-appearance: textfield;
+}

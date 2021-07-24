@@ -5,7 +5,7 @@ const Slider = ({
     ...props
 }) => {
     return(
-        <Carousel>
+        <Carousel style={ { height: '40vh' } }>
             <li className='bg-primary'>
                 <div className='w-4/5 h-full mx-auto flex justify-center items-center'>
                     <section className='relative pl-20 flex flex-col h-full items-start justify-center'>

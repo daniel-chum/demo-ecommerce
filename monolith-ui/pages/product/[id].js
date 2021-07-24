@@ -150,8 +150,9 @@ const ProductItem = () => {
           </div>
           <div className='pt-8 flex'>
             <input
-              className='border text-center w-20 h-12 mr-6'
+              className='border text-center font-rubik w-20 h-12 mr-6'
               type="number"
+              placeholder='Qty'
               onChange={handleQuantityInput}
               value={cartQuantity}
               min='1'

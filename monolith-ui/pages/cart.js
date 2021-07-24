@@ -1,6 +1,7 @@
 import CartGrid from "../components/Cart/CartGrid";
-import {  deleteCart, partialUpdateCart } from "../api/cart";
-import {  useEffect } from "react";
+import CheckOut from "../components/Cart/CheckOut";
+import { deleteCart, partialUpdateCart } from "../api/cart";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../lib/hooks/auth";
 
@@ -10,7 +11,7 @@ export default function Cart() {
   const { cart, setCart, isAuthenticated, getToken } = useAuth();
 
   useEffect(() => {
-    const getRes = async () => {
+    const checkAuthentication = async () => {
       const resp = await getToken()
 
       if (!resp) {
@@ -18,8 +19,7 @@ export default function Cart() {
         return;
       }
     }
-
-    getRes()
+    checkAuthentication()
   }, []);
 
   const handleDeleteButton = async (cartId) => {
@@ -43,22 +43,29 @@ export default function Cart() {
 
       setCart([...cart]);
     } catch (e) {
-      console.log(e);
+      console.log(e.response.data);
     }
   };
 
   return (
-    <>
+    <div className='mx-28'>
+      <h1 className='pt-10 font-rubik font-bold text-2xl text-center'>Cart</h1>
       {isAuthenticated && (
-        <>
-          <h2>Shopping Cart</h2>
+        <div className='flex mt-10'>
           <CartGrid
+            className='w-9/12'
             cartList={cart}
             handleDeleteButton={handleDeleteButton}
             handleQuantityButton={handleQuantityButton}
           />
-        </>
+          <CheckOut
+            className='flex-grow h-full ml-8 px-6'
+            cartList={cart}
+            handleDeleteButton={handleDeleteButton}
+            handleQuantityButton={handleQuantityButton}
+          />
+        </div>
       )}
-    </>
+    </div>
   );
 }
