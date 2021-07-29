@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
-import { Info } from "../icons/";
+import { useState } from "react";
+
 import { useUI } from "../../components/ui/context";
 import { Button, Input } from "../../components/ui";
 import { useAuth } from "../../lib/hooks/auth";
@@ -11,7 +11,6 @@ const SignUpView = () => {
   const [password2, setPassword2] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const { signUp } = useAuth();
@@ -21,7 +20,7 @@ const SignUpView = () => {
     e.preventDefault();
 
     try {
-      setLoading(true);
+
       setMessage("");
       await signUp({
         username: username,
@@ -31,53 +30,45 @@ const SignUpView = () => {
         password: password,
         password2: password2
       });
-      setLoading(false);
       closeModal();
     } catch ( errors ) {
-      let errorMessage = JSON.stringify(errors.response.data)
+      let errorMessage = JSON.stringify(errors.response.data).replace(/[{"}]/g,"").replace(":", ": ").replace("password2", "Confirm Password")
       setMessage(errorMessage);
-      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSignup} className="w-96 px-3">
-      <div className="flex flex-col space-y-4">
+    <form onSubmit={handleSignup} className="w-96 pt-6 px-3 font-rubik">
+      <div className="relative flex flex-col space-y-4">
         {message && (
           <div className="text-black border border-primary p-3">{message}</div>
         )}
         <Input
           type="username"
-          placeholder="Username"
-          className="w-full"
+          label="Username"
           onChange={setUsername}
         />
         <Input
           type="password"
-          placeholder="Password"
-          className="w-full"
+          label="Password"
           onChange={setPassword}
         />
         <Input
           type="password"
-          placeholder="Confirm Password"
-          className="w-full"
+          label="Confirm Password"
           onChange={setPassword2}
         />
         <Input
-          placeholder="Optional: First Name"
-          className="w-full"
+          label="First Name (Optional)"
           onChange={setFirstName}
         />
         <Input
-          placeholder="Optional: Last Name"
-          className="w-full"
+          label="Last Name (Optional)"
           onChange={setLastName}
         />
         <Button
           variant="slim"
           type="submit"
-          loading={loading}
         >
           Sign Up
         </Button>
@@ -85,7 +76,7 @@ const SignUpView = () => {
           <span className="text-gray-800">Do you have an account?</span>
           {` `}
           <a
-            className="text-gray-800 font-bold hover:underline cursor-pointer"
+            className="font-bold hover:underline cursor-pointer"
             onClick={() => setModalView("LOGIN_VIEW")}
           >
             Log In

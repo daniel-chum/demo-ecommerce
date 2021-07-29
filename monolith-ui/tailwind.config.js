@@ -12,14 +12,13 @@ module.exports = {
       },
       colors: {
         primary: "var(--primary)",
-        "dark": "var(--dark)",
         "primary-bright": "var(--primary-bright)",
         secondary: "var(--secondary)",
-        "accents-0": "var(--accents-0)",
-        "accents-1": "var(--accents-1)",
-        "accents-2": "var(--accents-2)",
+        "secondary-bright": "var(--secondary-bright)",
         "call-to-action": "var(--call-to-action)",
-        'background': "var(--background)"
+        'background': "var(--background)",
+        'background-2': "var(--background-2)",
+        'font-gray': "var(--font-gray)"
       },
       screens: {
         '3xl': '1600px'

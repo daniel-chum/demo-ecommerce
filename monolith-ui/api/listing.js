@@ -26,7 +26,7 @@ const addListing = async (getToken, body) => {
 const deleteListing = async (getToken, id) => {
   return axios({
     method: "delete",
-    url: `${productApi}/${id}`,
+    url: `${listingApi}/${id}`,
     headers: {
       authorization: `Bearer ${await getToken()}`,
     },

@@ -8,14 +8,16 @@ import { addCart } from '../../api/cart'
 import { useAuth } from "../../lib/hooks/auth";
 import cn from 'classnames';
 
+import { PopUp }  from '../../components/ui'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faPinterest, faWhatsappSquare } from '@fortawesome/free-brands-svg-icons';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 const ProductItem = () => {
   const placeholderImg = "/product-img-placeholder.svg";
   const { getToken, cart, setCart } = useAuth();
 
+  const [loading, setLoading] = useState(false)
   const [picIndex, setPicIndex] = useState(0)
   const [cartQuantity, setCartQuantity] = useState(1)
   const [addedToCartAnimation, setAddedToCartAnimation] = useState(false)
@@ -62,6 +64,7 @@ const ProductItem = () => {
   }
 
   const handleCartButton = async (productId) => {
+    setLoading(true)
     let body = {
       'product_id': productId,
       'quantity': cartQuantity
@@ -72,14 +75,14 @@ const ProductItem = () => {
       const res = await addCart(getToken, body);
 
       if (res.data.id) {
-        setCart([ ...cart, res.data])
+        setCart([...cart, res.data])
       }
 
       setAddedToCartAnimation(true);
 
     } catch (e) {
       console.log(e);
-    }
+    } finally { setLoading(false) }
   };
 
   return (
@@ -94,12 +97,12 @@ const ProductItem = () => {
         <li className='font-rubik font-light'>Sub-Category</li>
       </ol>
       <div className='grid grid-cols-7 pt-10 pb-10'>
-        <section className='col-span-3 justify-self-end w-full  pr-10'>
-          <div className= 'relative w-full mb-3 ' style={{ aspectRatio: "1/1" }}>
+        <section className='col-span-3 pr-10'>
+          <div className= 'relative mb-3 ' style={{ aspectRatio: "1/1" }}>
             {(product.images).map((image, index) => {
-              let visiblity = (index === picIndex) ? "opacity-100 z-50" : "opacity-0 z-0";
+              let visiblity = (index === picIndex) ? "opacity-100 z-30" : "opacity-0 z-0";
               return (
-                <div key={image.image} className={`${visiblity} bg-gray-100 absolute w-full h-full transition duration-300`}>
+                <div key={image.image} className={`${visiblity} bg-secondary absolute w-full h-full transition duration-300`}>
                   <Image
                     quality="100"
                     src={image.image || placeholderImg}
@@ -112,13 +115,12 @@ const ProductItem = () => {
             })
             }
           </div>
-          <FilePreviewContainer showArrow={false} scrollBarOnHover={true}>
+          <FilePreviewContainer viewableElementsInContainer={3} showArrow={true}>
             {(product.images).map((image, index) => {
               return (
                 <div
                   key={image.image}
-                  className={cn("relative flex-none " /*, { "opacity-90 bg-gray-100": index != picIndex } */)}
-                  style={{ aspectRatio: '1/1', width: 'calc(33.3% - 0.375rem)',  scrollSnapAlign: 'start' }}
+                  className={cn( 'bg-secondary'/* { "opacity-90 bg-gray-100": index != picIndex } */)}
                   onClick={() => { setPicIndex(index) }}
                 >
                   <img
@@ -148,7 +150,7 @@ const ProductItem = () => {
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           </div>
-          <div className='pt-8 flex'>
+          <div className='pt-8 flex' on>
             <input
               className='border text-center font-rubik w-20 h-12 mr-6'
               type="number"
@@ -168,15 +170,10 @@ const ProductItem = () => {
           </div>
         </section>
       </div>
-      { addedToCartAnimation && (
-        <div
-          className='fixed w-60 h-40 bg-gray-900 bg-opacity-90 text-white border flex flex-col items-center justify-evenly z-50'
-          style={{ left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }}
-        >
-          <FontAwesomeIcon icon={faCheckCircle} className='h-20'/>
-          <span className='text-lg font-rubik'>Item added to cart!</span>
-        </div>
-      )}
+      <PopUp display={addedToCartAnimation}>Item added to cart!</PopUp>
+      <PopUp display={loading} loader={true}>
+            <span className='animate-pulse'>LOADING ...</span>
+      </PopUp>
     </div>
   );
 };

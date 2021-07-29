@@ -1,75 +1,60 @@
-import { useState, useRef, useEffect } from "react";
+import {  useRef } from "react";
 import FilePreviewContainer from "../../ui/FilePreview/FilePreviewContainer";
 import DragAndDrop from "../../ui/DragAndDrop/DragAndDrop";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
-const FileUpload = (props) => {
-  const { setImage, ...rest } = props;
+const FileUpload = ( { files, setFiles } ) => {
 
   const fileInput = useRef();
-  const [files, setFiles] = useState({});
 
   const handleUploadClick = () => {
     fileInput.current.click();
   };
 
-  const removeFile = (fileName) => {
+  const removeFile = (file) => {
+    URL.revokeObjectURL(file.preview)
+
     setFiles((prevState) => {
-      const newState = { ...prevState };
-      delete newState[fileName];
+      const newState = [ ...prevState ];
+      newState.splice(newState.indexOf(file), 1);
       return newState;
     });
   };
 
   const deleteAllFIles = () => {
-    Object.keys(files).forEach((file) => {
-      removeFile(file);
-    });
+    files.forEach(image => {
+        URL.revokeObjectURL(image.preview);
+      });
+    setFiles([]);
   };
 
   const handleUpload = (e) => {
-    const { files: newFiles } = e.target;
+    const { files } = e.target;
 
-    if (newFiles.length) {
-      let uploadedFiles = addNewFiles(newFiles);
-    }
-  };
+    addNewFiles(files)
+  }
 
-  const addNewFiles = (newFiles) => {
-    for (let file of newFiles) {
-      setFiles((prevState) => ({
-        ...prevState,
-        [file.name]: {
-          file: file,
-          preview: URL.createObjectURL(file),
-        },
-      }));
-    }
-    return { ...files };
-  };
+  const addNewFiles = (files) => {
+    const filesToUpload = [...files].map(file => {
+      return {
+        file: file,
+        preview: URL.createObjectURL(file)
+      }
+    })
 
-  const convertNestedObjectToArray = (nestedObj) =>
-    Object.keys(nestedObj).map((key) => nestedObj[key].file); // Get file without preview property
-
-  useEffect(() => {
-    const filesAsArray = convertNestedObjectToArray(files);
-    setImage(filesAsArray);
-  }, [files]);
-
-  useEffect(() => {
-    return () => {
-      Object.keys(files).forEach((file) => {
-        URL.revokeObjectURL(files[file].preview);
-      });
-    };
-  }, []);
+    setFiles((prevState) => {
+      const newState = [...prevState];
+      newState.push(...filesToUpload);
+      return newState;
+    })
+  }
 
   return (
     <DragAndDrop handleDrop={addNewFiles}>
-      <div className="h-48 rounded-lg border-dashed border-2 border-gray-300">
-        {Object.keys(files).length == 0 ? (
+      <div className="h-44 3xl:h-52 px-4 rounded-lg border-dashed border-2 border-gray-300">
+        {files.length == 0 ? (
           <div className="flex flex-col justify-center items-center h-full">
             <span className="block text-gray-400 font-normal cursor-default">
               Drop your images here
@@ -85,43 +70,44 @@ const FileUpload = (props) => {
             </label>
           </div>
         ) : (
-            <div className='pt-4' >
+          <>
+            <div className='pt-4 mx-1.5' >
               <FilePreviewContainer showArrow={true} scrollBar={true}>
-                {Object.keys(files).map((fileName) => {
-                  let image = files[fileName].preview;
+                {files.map((file) => {
+                  let imageLink = file.preview;
+
                   return (
-                    <div className="flex-none relative" style={{ aspectRatio: '1/1', width: 'calc(25% - 0.375rem)', scrollSnapAlign: 'start' }}>
+                    <div key={imageLink}>
                       <img
-                        src={image}
+                        src={imageLink}
                         className="absolute w-full h-full object-scale-down	"
                       />
                       <div className='absolute w-full h-full opacity-0 hover:opacity-80 hover:bg-gray-200'>
                         <span className="block break-all text-gray-900 text-xs px-2 pt-4">
-                          {fileName}
+                          {file.file.name}
                         </span>
-                        <div className=" absolute bottom-2 right-2" onClick={() => removeFile(fileName)}>
+                        <div className=" absolute bottom-2 right-2" onClick={() => removeFile(file)}>
                           <FontAwesomeIcon icon={faTrash} className='h-4 text-gray-600 cursor-pointer' />
                         </div>
                       </div>
                     </div>
                   );
                 })}
-            </FilePreviewContainer>
-            <div className="absolute w-full bottom-1.5 grid grid-cols-3">
-              <label
-                className=" text-center text-call-to-action font-normal cursor-pointer text-xs col-start-2"
-                onClick={handleUploadClick}
-              >
-                Add more images
-              </label>
-              <i
-                className="w-min justify-self-end text-gray-600 cursor-pointer text-xs pr-3"
-                onClick={deleteAllFIles}
-              >
-                Reset
-              </i>
+              </FilePreviewContainer>
             </div>
-          </div>
+            <label
+              className="absolute left-1/2 transform -translate-x-1/2 transform bottom-2 cursor-pointer"
+              onClick={handleUploadClick}
+            >
+              <FontAwesomeIcon icon={faPlusCircle} className='h-4 text-white  bg-secondary border-secondary rounded-full border cursor-pointer' />
+            </label>
+            <i
+              className="absolute bottom-2 right-3 text-gray-600 cursor-pointer text-xs"
+              onClick={deleteAllFIles}
+            >
+              Reset
+            </i>
+          </>
         )}
         <input
           ref={fileInput}

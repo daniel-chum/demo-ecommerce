@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FilePreviewContainer from "../../ui/FilePreview/FilePreviewContainer";
+import Link from 'next/link';
 import Carousel from "../../ui/Carousel";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
@@ -16,19 +16,18 @@ const ListingGrid = ({ productList, handleDeleteButton, className }) => {
     return date.toLocaleDateString('en-US', {  year: 'numeric', month: 'long', day: 'numeric' });
   }
 
-
   return (
-    <table className={`${className}`}>
+    <table className={`${className} font-rubik`}>
       <thead
         className='grid w-full justify-items-center items-center'
         style={{
-          gridTemplateColumns: '8% 10% 15% 50% 10% 7%'
+          gridTemplateColumns: '8% 18% 8% 40% 15% 10%'
         }}>
         <tr className="contents">
           {HEADER.map((header, index) => {
             let firstElement = index == 0 ? 'justify-self-start' : null
             return (
-              <th key={index} className={firstElement}>
+              <th key={index}>
                 {header}
               </th>
             )
@@ -38,34 +37,41 @@ const ListingGrid = ({ productList, handleDeleteButton, className }) => {
       </thead>
       <tbody>
       {productList.map((product) => (
-        <tr key={product.id} className="flex justify-center items-center border-b py-4">
-          <td style={{ width: '8%' }}>
-            {product.id}
+        <tr key={product.id} className="flex justify-center items-center bg-white border my-2">
+          <td className='text-center' style={{ width: '8%' }}>
+            <Link href={`/product/${product.id}`}>
+              <a>
+                <u className='text-primary font-semibold '>{product.id}</u>
+              </a>
+            </Link>
           </td>
-          <td style={{ width: '8%' }}>
-            {convertDate(product.created)}
+          <td className='text-center' style={{ width: '18%' }}>
+            <span className=' font-light'>{convertDate(product.created)}</span>
           </td>
-          <td style={{ width: '15%', aspectRatio: '1/1' }}>
-            <Carousel style={{ height: '100%' }} arrowsOnHover={true}>
-              {product['images'].map((image, index) => {
-                let link = image.image
-                return (
-                  <div className='flex-none bg-gray-100 ' style={{ aspectRatio: '1/1' }}>
-                    <Image
-                      quality="100"
-                      src={link || placeholderImg}
-                      alt={product.title || "Listing Image"}
-                      layout='fill'
-                      objectFit='contain'
-                    />
-                  </div>
-                )
-              })}
-            </Carousel>
+          <td className='flex justify-center items-center' style={{ width: '8%', height:'calc(40px + 6vh)'}}>
+            <div className='h-5/6' style={{ aspectRatio: "1/1" }}>
+              <Carousel style={{ height: '100%' }} arrowsOnHover={true} dotSize='h-1.5 w-1.5' dotGap='space-x-1'>
+                {product['images'].map((image, index) => {
+                  let link = image.image
+                  return (
+                    <div key={index} className='flex-none bg-gray-100'>
+                      <Image
+                        quality="100"
+                        src={link || placeholderImg}
+                        alt={product.title || "Listing Image"}
+                        layout='fill'
+                        objectFit='contain'
+                      />
+                    </div>
+                  )
+                }
+                )}
+              </Carousel>
+            </div>
           </td>
-          <td className="text-center font-rubik font-light px-6" style={{ width: '50%' }}>{product.title}</td>
-          <td className="text-center font-rubik font-light" style={{ width: '10%' }}>${product.price}</td>
-          <td className="flex justify-center items-center" style={{ width: '7%' }}>
+          <td className="text-center  px-6" style={{ width: '40%' }}>{product.title}</td>
+          <td className="text-center  font-light" style={{ width: '15%' }}>${product.price}</td>
+          <td className="flex justify-center items-center" style={{ width: '10%' }}>
             <button
               className="h-5 w-5 flex justify-center items-center focus:outline-none"
               productid={product.id}

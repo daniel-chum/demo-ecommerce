@@ -4,7 +4,7 @@ import { getListing, addListing, deleteListing } from "../api/listing";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../lib/hooks/auth";
-import { Modal } from "../components/ui";
+import { Modal, PopUp } from "../components/ui";
 
 export default function Listing() {
   const [listings, setListings] = useState([]);
@@ -13,9 +13,14 @@ export default function Listing() {
   const { getToken, isAuthenticated } = useAuth();
 
   // Upload fields
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image, setImage] = useState([]);
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [images, setImages] = useState([]);
+
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [itemCreatedAnimation, setItemCreatedAnimation] = useState(false);
+  const [itemDeletedAnimation, setItemDeletedAnimation] = useState(false);
 
   useEffect(() => {
     const getUserListing = async () => {
@@ -34,55 +39,80 @@ export default function Listing() {
 
   const handleCreateButton = async (e) => {
     e.preventDefault();
-    console.log(image);
 
+    console.log('in create button')
+    setLoading(true)
     const formData = new FormData();
 
     if (title != "" && price != "") {
       formData.append("title", title);
       formData.append("price", price);
 
-      if (image != null) {
-        for (let i = 0; i < image.length; i++) {
+      if (images != null) {
+        for (let i = 0; i < images.length; i++) {
           let imageField = `images[${i}]image`
-          formData.append(imageField, image[i], image[i].name);
+          formData.append(imageField, images[i].file, images[i].file.name);
         }
-        // formData.append("image", image);
       }
+
       try {
         const res = await addListing(getToken, formData);
+
         setListings((prevListings) => [...prevListings, res.data]);
-        e.target.reset();
+
+        setItemCreatedAnimation(true);
+
         setTitle("");
         setPrice("");
-        setImage([]);
-      } catch (e) {
-        console.log(e);
-      }
+        setImages([]);
+        setMessage("");
+
+      } catch (errors) {
+        let errorMessage = JSON.stringify(errors.response.data).replace(/[\[{"}\]]/g,"").replace(":", ": ")
+        setMessage(errorMessage)
+      } finally { setLoading(false) }
+
     } else {
-      console.log("Title and price must not be blank for listing creation!");
+      setMessage("All fields must be filled for listing creation!");
+      setLoading(false)
     }
   };
 
   const handleDeleteButton = async (productId) => {
+    setLoading(true)
     try {
-      const res = await deleteListing(getToken, productId);
+      await deleteListing(getToken, productId);
       setListings(listings.filter((product) => product.id !== productId));
+      setItemDeletedAnimation(true);
     } catch (e) {
       console.log(e);
-    }
+    } finally { setLoading(false) }
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setItemCreatedAnimation(false);
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [itemCreatedAnimation]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setItemDeletedAnimation(false);
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [itemDeletedAnimation]);
+
   return (
-    <div className='pt-10 mx-40'>
+    <div className='pt-10 px-56 3xl:px-96 bg-background pb-28' style={{ minHeight: '80vh' }}>
       {isAuthenticated && (
         <>
-          <label className='flex justify-between items-center'>
+          <label className='flex items-center'>
             <h2 className='font-rubik font-bold text-2xl'>Listings</h2>
             <button
-              className="flex items-center justify-evenly w-28 h-12 rounded
-              bg-red-500 hover:bg-red-700 transition duration-300 ease-in-out
-              font-medium text-white focus:outline-none"
+              className="ml-10 w-36 h-12 rounded bg-primary font-semibold font-rubik text-secondary focus:outline-none"
               onClick={() =>
                 setdisplayListingForm((displayListingForm) => !displayListingForm)
               }
@@ -92,8 +122,9 @@ export default function Listing() {
           </label>
           <Modal
             open={displayListingForm}
-            onClose={() =>
-              setdisplayListingForm((displayListingForm) => !displayListingForm)
+            onClose={() => {
+                setdisplayListingForm((displayListingForm) => !displayListingForm)
+              }
             }
             width="w-5/12"
             height="h-auto"
@@ -101,17 +132,27 @@ export default function Listing() {
             <ListingForm
               title={title}
               price={price}
+              images={images}
+              message={message}
               onSubmit={handleCreateButton}
               setTitle={setTitle}
               setPrice={setPrice}
-              setImage={setImage}
+              setImages={setImages}
             />
+            <PopUp display={itemCreatedAnimation}>Item created!</PopUp>
+            <PopUp display={loading} loader={true}>
+              <span className='animate-pulse'>LOADING ...</span>
+            </PopUp>
           </Modal>
           <ListingGrid
-            className='w-full'
+            className='w-full mt-10'
             productList={listings}
             handleDeleteButton={handleDeleteButton}
           />
+          <PopUp display={itemDeletedAnimation}>Item deleleted!</PopUp>
+          <PopUp display={loading} loader={true}>
+            <span className='animate-pulse'>LOADING ...</span>
+          </PopUp>
         </>
       )}
     </div>

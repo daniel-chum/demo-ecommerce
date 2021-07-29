@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import cn from "classnames";
 import s from "./FilePreviewContainer.module.css";
 
@@ -10,6 +10,7 @@ const FilePreviewContainer = ({
 }) => {
   const scrollWindow = useRef();
   const [scrollable, setScrollable] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(1);
 
   useEffect(() => {
     if (scrollWindow.current.scrollWidth === scrollWindow.current.clientWidth) {
@@ -21,50 +22,74 @@ const FilePreviewContainer = ({
 
   const scrollBarOnHover = props.scrollBarOnHover ? 'overflow-hidden hover:overflow-x-auto' : props.scrollBar ? 'overflow-x-auto' : "overflow-hidden"
 
-  return (
-    <>
-      <div className="relative flex items-center mx-1.5">
-        {props.showArrow &&
-          <button
-          className={cn(
-              "focus:outline-none left-3 z-40", { invisible: !scrollable },
-              { 'absolute': props.arrowInContainer },
-            )}
-            onClick={() => {
-              scrollWindow.current.scrollLeft -= 100;
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>
-          </button>
-        }
+  const handleArrowClick = (scrollAmount, indexAddAmount) => {
+    scrollWindow.current.scrollLeft += scrollAmount;
+    if (selectedImageIndex + indexAddAmount >= 1 && selectedImageIndex + indexAddAmount <= props.children.length) {
+      setSelectedImageIndex(selectedImageIndex + indexAddAmount)
+    }
+  }
 
+  return (
+    <div className={cn(props.className, 'relative')}>
+      <div className={cn({ 'w-11/12 mx-auto': props.showArrow && scrollable && !props.arrowInContainer})}>
         <div
           className={cn(
             "flex w-full h-full space-x-2",
-            scrollBarOnHover,
             s.scrollbar,
-            { 'mx-2': props.showArrow }
+            scrollBarOnHover
           )}
           ref={scrollWindow}
         >
-          {props.children}
-        </div>
 
-        {props.showArrow &&
-          <button
-          className={cn(
-              "transform rotate-180 right-3 z-40 focus:outline-none", { invisible: !scrollable },
-              { 'absolute': props.arrowInContainer },
-            )}
-            onClick={() => {
-              scrollWindow.current.scrollLeft += 100;
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className='h-5 text-gray-700'/>
-          </button>
-        }
+          {props.children.map((child, index) => {
+            let childWidth = props.viewableElementsInContainer ? 1 / props.viewableElementsInContainer : 1 / 4
+            return React.cloneElement(child, {
+              key:  index,
+              className: `${child.props.className} flex-none relative  bg-gray-100`,
+              style: { aspectRatio: '1/1', width: `calc(${childWidth * 100}% - 0.375rem)`, scrollSnapAlign: 'start' },
+              })
+            })
+          }
+
+        </div>
       </div>
-    </>
+      {(props.showArrow || props.arrowInContainer) &&
+        <>
+          <button
+            className={cn(
+                "focus:outline-none absolute top-1/2 transform -translate-y-2/4 z-40 h-full", { invisible: !scrollable },
+                { 'left-1': props.arrowInContainer },
+              )}
+              onClick={() => {
+                handleArrowClick(-100, -1)
+              }}
+              type='button'
+            >
+          <FontAwesomeIcon icon={faChevronLeft} className=' text-gray-700' style={{ height: '15%' }}/>
+            </button>
+          <button
+            className={cn(
+                "transform rotate-180 focus:outline-none absolute top-1/2 transform -translate-y-2/4 z-50 right-0 h-full", { invisible: !scrollable },
+                { 'right-1': props.arrowInContainer },
+              )}
+              onClick={() => {
+                handleArrowClick(100, 1)
+              }}
+              type='button'
+            >
+              <FontAwesomeIcon icon={faChevronLeft}  className=' text-gray-700' style={{ height: '15%' }}/>
+          </button>
+
+        </>
+      }
+      {(props.showIndexing && props.children.length > 1 ) &&
+        <>
+          <span className='relative left-1/2 transform -translate-x-1/2 font-rubik'>
+            {selectedImageIndex + "/" + props.children.length}
+          </span>
+        </>
+      }
+    </div>
   );
 };
 

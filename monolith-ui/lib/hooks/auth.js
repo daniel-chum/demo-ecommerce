@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     getUserCart();
+
   }, [isAuthenticated]);
 
   const getToken = async () => {
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }) => {
       const resp = await fetchNewToken();
       const tokenData = await resp.data;
       await handleNewToken(tokenData);
-      if (user === null) {
+      if (Object.keys(user).length === 0) {
         console.log("No user loaded so loading from refreshed token");
         await initUser(tokenData.access);
       }
@@ -111,7 +112,7 @@ export const AuthProvider = ({ children }) => {
       const resp = await getUser(token);
       const user = await resp.data;
       setUser(user);
-    } catch (e) { console.log(e) }
+    } catch (e) { console.log(e.response.data) }
   };
 
   const logIn = async (username, password) => {

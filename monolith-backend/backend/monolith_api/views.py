@@ -31,11 +31,11 @@ class AllProductList(generics.ListAPIView):
         return Product.objects.all()
 
 
-class ListingList(generics.ListCreateAPIView):
+class ListingList(generics.ListCreateAPIView, generics.DestroyAPIView):
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
-
+    lookup_field = 'id'
 
     def get_queryset(self):
 
@@ -45,8 +45,19 @@ class ListingList(generics.ListCreateAPIView):
 
         serializer.save(user=self.request.user)
 
+    def create(self, request, *args, **kwargs):
 
-class ProductDetail(generics.RetrieveAPIView, generics.DestroyAPIView):
+        if len(request.data) > 5:
+            message = {'Images': ['Maximum 3 images.']}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class ProductDetail(generics.RetrieveAPIView):
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]

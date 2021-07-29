@@ -7,13 +7,17 @@ const CheckOut = ({ cartList, className }) => {
 
     useEffect(() => {
 
-        if (cartList.length === 0) { return }
+        if (cartList.length === 0) {
+            setShippingFee(0)
+            return
+        }
 
         const subTotal = cartList.reduce((accumulator, currentValue) => {
             return accumulator + (parseFloat(currentValue.product.price) * currentValue.quantity)
         }, 0)
 
         setSubTotal(subTotal)
+        setShippingFee(5)
 
     }, [cartList])
 
@@ -42,7 +46,7 @@ const CheckOut = ({ cartList, className }) => {
                 <span className='font-rubik text-primary'>${(subTotal + shippingFee).toFixed(2)}</span>
             </div>
             <button
-                className='bg-primary rounded-md h-12 font-rubik font-medium text-white focus:outline-none'
+                className='bg-primary rounded-md h-12 font-rubik font-semibold text-secondary focus:outline-none'
             >
             CHECKOUT
             </button>

@@ -1,8 +1,6 @@
 import cn from "classnames";
 import React, { forwardRef, useRef } from "react";
 import mergeRefs from "react-merge-refs";
-import s from "./Button.module.css";
-import { LoadingDots } from "../../ui";
 
 const Button = forwardRef((props, buttonRef) => {
   const {
@@ -18,11 +16,9 @@ const Button = forwardRef((props, buttonRef) => {
   const ref = useRef(null);
 
   const rootClassName = cn(
-    s.root,
+    'cursor-pointer focus:outline-secondary bg-primary transition ease-in-out duration-150 font-semibold',
     {
-      [s.slim]: variant === "slim",
-      [s.loading]: loading,
-      [s.disabled]: disabled,
+      'py-2 transform-none normal-case': variant === "slim",
     },
     className
   );
@@ -37,11 +33,6 @@ const Button = forwardRef((props, buttonRef) => {
       {...rest}
     >
       {children}
-      {loading && (
-        <i className="pl-2 m-0 flex">
-          <LoadingDots />
-        </i>
-      )}
     </button>
   );
 });

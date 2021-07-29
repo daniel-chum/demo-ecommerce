@@ -1,23 +1,13 @@
 import dynamic from "next/dynamic";
 import { useUI } from "../../../components/ui/context";
 import Navbar from "../../common/Navbar/Navbar";
-import { Modal, LoadingDots } from "../../ui";
+import Footer from "../../common/Footer/Footer";
+import { Modal } from "../../ui";
 
 import LoginView from "../../../components/auth/LoginView";
 
-const Loading = () => (
-  <div className="w-80 h-80 flex items-center text-center justify-center p-3">
-    <LoadingDots />
-  </div>
-);
-
-const dynamicProps = {
-  loading: () => <Loading />,
-};
-
 const SignUpView = dynamic(
   () => import("../../../components/auth/SignUpView"),
-  dynamicProps
 );
 
 // const ForgotPassword = dynamic(
@@ -32,6 +22,7 @@ const Layout = ({ children }) => {
     <div>
       <Navbar />
       <main>{children}</main>
+      <Footer />
       <Modal logo={true} open={displayModal} onClose={closeModal}>
         {modalView === "LOGIN_VIEW" && <LoginView />}
         {modalView === "SIGNUP_VIEW" && <SignUpView />}

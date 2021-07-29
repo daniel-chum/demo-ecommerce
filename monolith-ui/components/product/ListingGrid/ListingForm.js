@@ -5,30 +5,32 @@ const ListingForm = ({
   onSubmit,
   setTitle,
   setPrice,
-  setImage,
+  setImages,
   title,
   price,
+  images,
+  message
 }) => {
   return (
-    <form onSubmit={onSubmit} className="flex flex-col space-y-2">
-      <span className="text-accents-2">Product Details</span>
+    <form onSubmit={onSubmit} className="flex flex-col space-y-2 z-40 font-rubik">
+        {message && (
+          <div className="text-black font-rubik border border-primary p-3">{message}</div>
+        )}
       <Input type="text" onChange={setTitle} value={title} label="TITLE" />
       <Input
         type="number"
-        className="pt-8"
+        className="pt-2"
         min="0"
         step="0.01"
         onChange={setPrice}
         value={price}
         label="PRICE"
       />
-      <span className="text-accents-2 text-xs">IMAGE</span>
-      <FileUpload setImage={setImage}></FileUpload>
-      <div className="ml-auto pt-2 pr-3">
+      <span className="text-secondary-bright pt-4 pl-1">IMAGE</span>
+      <FileUpload files={images} setFiles={setImages}></FileUpload>
+      <div className="ml-auto pt-8 pr-3">
         <button
-          className="w-28 h-12 rounded
-         bg-primary hover:bg-primary-bright transition duration-300 ease-in-out
-         font-medium text-white focus:outline-none"
+          className="w-36 h-12 rounded bg-primary font-semibold text-secondary focus:outline-none"
           type="submit"
         >
           Create

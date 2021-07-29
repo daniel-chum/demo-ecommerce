@@ -1,6 +1,5 @@
 import { useRef, useEffect, useCallback } from "react";
 import Portal from "@reach/portal";
-import s from "./Modal.module.css";
 import { Logo } from "../../icons";
 import {
   disableBodyScroll,
@@ -43,19 +42,17 @@ const Modal = ({ children, open, onClose, logo, width, height }) => {
   return (
     <Portal>
       {open ? (
-        <div className={s.root}>
-          <div className={cn(s.modal, width, height)} role="dialog" ref={ref}>
-            {logo ? (
-              <div className={s.logo}>
-                <Logo width="56" height="56" />
-              </div>
-            ) : null}
+        <div className='fixed flex items-center inset-0 z-50 justify-center z-40 bg-gray-200 bg-opacity-40'>
+          <div className={cn('bg-white p-12 border relative', width, height)} role="dialog" ref={ref}>
+            {logo &&
+              <Logo className='flex justify-center'/>
+            }
             <button
               onClick={() => onClose()}
               aria-label="Close panel"
-              className={s.button}
+              className='focus:outline-none absolute right-0 top-0 m-6'
             >
-              <FontAwesomeIcon icon={faTimesCircle} className='h-6 text-gray-600 cursor-pointer' />
+              <FontAwesomeIcon icon={faTimesCircle} className='h-6 text-secondary-bright cursor-pointer' />
             </button>
             {children}
           </div>

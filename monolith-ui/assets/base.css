@@ -1,19 +1,18 @@
 :root {
   --primary: #3ce4b3;
-  --dark: #0a1b2b;
-  --primary-bright: #064e96;
-  --secondary: #ffffff;
-  --accents-0: #dee2e6;
-  --accents-3: #e9ecef;
-  --accents-2: #60636a;
+  --primary-bright: #dbfaf1;
+  --secondary: #0a1b2b;
+  --secondary-bright: #3b4654;
   --call-to-action: #3ea6ff;
-  --background: #f2f2f2;
-}3
+  --font-gray: #4f535c;
+  --background: #fafcfc;
+  --background-2: #6f7d8c;
+}
 .fadeIn {
   animation-name: fadeIn;
   animation-duration: 0.4s;
 }
-
+1
 @keyframes fadeIn {
   from {
     opacity: 0.3;

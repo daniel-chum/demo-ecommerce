@@ -1,9 +1,0 @@
-.dropdownMenu {
-
-  &::after {
-    content: " ";
-    @apply absolute bottom-full right-2;
-    border-width: 10px;
-    border-color: transparent transparent var(--accents-2) transparent;
-  }
-}
