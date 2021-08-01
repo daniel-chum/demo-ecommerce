@@ -23,15 +23,12 @@ class Profile(generics.RetrieveAPIView):
         return self.request.user
 
 class ProductList(generics.ListAPIView):
-
+    
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     pagination_class= ProductPagination
-
-    def get_queryset(self):
-
-        return Product.objects.order_by('-created')
-
+    
 class ListingList(generics.ListCreateAPIView, generics.DestroyAPIView):
 
     serializer_class = ProductSerializer

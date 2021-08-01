@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }) => {
       const resp = await getUser(token);
       const user = await resp.data;
       setUser(user);
-    } catch (e) { console.log(e.response.data) }
+    } catch (e) { console.log(e) }
   };
 
   const logIn = async (username, password) => {

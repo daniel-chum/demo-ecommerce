@@ -1,0 +1,18 @@
+const Pagination = (...props) => {
+
+	return (
+		<>
+              		<p className='h-4 text-gray-600 cursor-pointer'>{'< Prev'}</p>
+	      		<div>
+	        	{
+	      			<p className='mx-10 font-light text-base'>
+                  		{`Showing ${(page-1) * products?.results.length + 1}-${products?.results.length * page} of ${products?.count} results`}
+              			</p>
+			}
+	     		 </div>
+              		<p className='h-4 text-gray-600 cursor-pointer'>{'Next >'}</p>
+         	</>
+	)
+}
+
+export default Pagination;

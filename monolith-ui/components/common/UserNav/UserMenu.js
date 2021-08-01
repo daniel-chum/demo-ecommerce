@@ -56,7 +56,7 @@ const UserMenu = ({ user, cart, logout }) => {
                     <Link href={href}>
                       <a
                         className="cursor-pointer px-6 py-3 flex transition ease-in-out duration-200
-                                   hover:text-primary"
+                                   hover:bg-gray-200"
                         onClick={() => {
                           setDisplay(false);
                         }}
@@ -70,7 +70,7 @@ const UserMenu = ({ user, cart, logout }) => {
               <li>
                 <a
                   className="cursor-pointer px-6 py-3 flex transition ease-in-out duration-200
-                              border-t border-gray-300 hover:text-primary"
+                              border-t border-gray-300 hover:bg-gray-200"
                   onClick={() => logout()}
                 >
                   Logout

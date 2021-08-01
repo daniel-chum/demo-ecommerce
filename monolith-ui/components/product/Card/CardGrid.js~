@@ -5,7 +5,7 @@ const CardGrid = ({ products, ...props }) => {
 
   return (
     <>
-      {products ?  
+      {products &&
         (
         <ul
           className={`${props.className} grid`}
@@ -21,7 +21,7 @@ const CardGrid = ({ products, ...props }) => {
             </React.Fragment>
           ))}
         </ul>
-        ) : null
+        )
       }
     </>
   );

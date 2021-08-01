@@ -1,10 +1,12 @@
 import { allProductApi, productApi } from "./uri";
 const axios = require("axios");
 
-const getAllProducts = async () => {
+const getProductList = async (page) => {
   return axios({
     method: "get",
-    url: allProductApi,
+    url: `${productApi}`,
+    params: { page: page }
+
   });
 };
 
@@ -15,4 +17,4 @@ const getProduct = async (id) => {
   });
 };
 
-export { getAllProducts, getProduct }
+export { getProductList, getProduct }

@@ -63,7 +63,7 @@ export default function Cart() {
   }, [itemDeletedAnimation]);
 
   return (
-    <div className='mx-28'  style={{ minHeight: '80vh' }}>
+    <div className='mx-28 3xl:mx-60'  style={{ minHeight: '80vh' }}>
       <h1 className='pt-10 font-rubik font-bold text-2xl text-center'>Cart</h1>
       {isAuthenticated && (
         <div className='flex mt-10'>

@@ -54,7 +54,7 @@ export default function About() {
                     </button>
                 </span>
             </section>
-            <section className='py-10 w-8/12  mx-auto flex flex-wrap justify-center space-x-20'>
+            <section className='py-10 w-8/12  mx-auto flex flex-wrap justify-center gap-x-20'>
                 <div className='relative' style={{ width: 'calc(10rem + 20%)', height: 'calc(10rem + 25vh)'}}>
                     <Image
                         quality="100"

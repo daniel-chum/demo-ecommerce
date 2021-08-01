@@ -6,7 +6,7 @@ const ProductCard = ({ product, handleButton }) => {
   const placeholderImg = "/product-img-placeholder.svg";
   return (
 
-    <li className='product-card w-full h-full flex flex-col items-center'>
+    <li className='product-card w-full h-full flex flex-col items-center leading-none font-rubik font-medium text-secondary text-sm tracking-tight gap-y-2'>
       <Link href={`/product/${product.id}`}>
         <a className='contents'>
           <div className='relative w-full cursor-pointer bg-gray-100' style={{aspectRatio: '1/1'}}>
@@ -20,8 +20,8 @@ const ProductCard = ({ product, handleButton }) => {
           </div>
         </a>
       </Link>
-        <span className='pt-2.5 text-center leading-none font-rubik font-medium text-dark text-sm tracking-tight'>{product.title}</span>
-        <span className='pt-2 leading-none font-rubik font-medium text-dark text-sm tracking-tight'>{`$${product.price}`}</span>
+        <span>{product.title}</span>
+        <span>{`$${product.price}`}</span>
     </li>
   );
 };

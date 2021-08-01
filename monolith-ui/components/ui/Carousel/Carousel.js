@@ -118,7 +118,7 @@ const Carousel = ({
   const dotGap = props.dotGap? props.dotGap : 'space-x-2'
 
   return (
-    <div className='relative mx-auto overflow-hidden' style={props.style}>
+    <section className='relative mx-auto overflow-hidden' style={props.style}>
       <ol
         className='relative w-full h-full transition-all duration-300 ease-in-out'
         ref={slider}
@@ -173,7 +173,7 @@ const Carousel = ({
           })
         }
       </div>
-    </div>
+    </section>
   );
 };
 

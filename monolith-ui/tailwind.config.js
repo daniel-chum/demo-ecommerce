@@ -4,11 +4,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'open-sans': ["'Open Sans', sans-serif"],
         'rubik': ["'Rubik', sans-serif"],
+        'oswald': ["'Oswald', sans-serif"],
       },
       fontSize: {
         'sm': '.825rem'
+      },
+      letterSpacing: {
+        'tighest': '-.09em'
       },
       colors: {
         primary: "var(--primary)",
