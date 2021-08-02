@@ -93,7 +93,7 @@ export default function Home() {
           <p className='pt-4 w-1/2 mx-auto font-light text-base text-center'>
             Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.
           </p>
-          <CardGrid style={{ paddingTop: '2.5rem' }} products={products} />
+          <CardGrid className='pt-10' childPerRow={5} products={products} />
           <div className='text-center pt-10'>
             <Link href='/shop/1'>
               <a>

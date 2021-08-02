@@ -20,7 +20,6 @@ export default function Shop() {
 
     useEffect(() => {
 
-        console.log('will run')
         if (!router.isReady) return;
         getProduct(page);
 
@@ -31,7 +30,6 @@ export default function Shop() {
         const response = await getProductList(page);
         const productArray = response.data;
 
-        console.log(productArray)
         setProducts(productArray)
 
         } catch (e) {
@@ -59,11 +57,11 @@ export default function Shop() {
                     getValues={getValues}
                 />
                 <div className='flex flex-wrap items-center justify-between text-ba mt-7'>
-                <p className='space-x-1.5'>
+                <p className='flex text-center'>
                     <span>Price:</span>
-                    <span className='font-medium'>${minVal}</span>
+                    <p className='font-medium w-12 mx-2'>${minVal}</p>
                     <span>-</span>
-                    <span className='font-medium'>${maxVal}</span>
+                    <p className='font-medium w-12 ml-2'>${maxVal}</p>
                 </p>
                 <button
                     className='bg-secondary h-10 border border-white rounded-xl ml-3 px-6 text-primary text-sm font-medium focus:outline-none'
@@ -114,7 +112,7 @@ export default function Shop() {
                 </select>
                 </div>
             </div>
-            <CardGrid style={{ paddingTop: '2.5rem' }} products={products?.results} />
+            <CardGrid className='pt-10' products={products?.results} />
             <div className='flex flex-wrap justify-center items-center gap-x-4 mt-10 px-6 py-5 border border-gray-300' >
                 <Pagination page={page} next={products?.next} previous={products?.previous} count={products?.count} display={products?.display} />
             </div>

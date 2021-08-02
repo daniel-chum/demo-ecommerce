@@ -21,7 +21,7 @@ const ProductItem = () => {
   const [picIndex, setPicIndex] = useState(0)
   const [cartQuantity, setCartQuantity] = useState(1)
   const [addedToCartAnimation, setAddedToCartAnimation] = useState(false)
-  const [product, setProduct] = useState({ 'title': null, 'price': null, 'user': { 'username': null }, 'images': [{ 'image': null }] });
+  const [product, setProduct] = useState({ 'title': '', 'price': '', 'user': { 'username': '' }, 'images': [{ 'image': placeholderImg }] });
 
   const router = useRouter();
   const { id } = router.query
@@ -31,7 +31,7 @@ const ProductItem = () => {
       const getProductDetails = async () => {
         try {
 
-          if (id === undefined) {
+          if (!router.isReady) {
             return
           }
 
@@ -42,11 +42,12 @@ const ProductItem = () => {
 
         } catch (e) {
           console.log(e);
+          router.push(`/`);
         }
       };
 
       getProductDetails();
-  }, [id]);
+  }, [router.isReady]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -86,7 +87,7 @@ const ProductItem = () => {
   };
 
   return (
-    <div className='mx-48 3xl:mx-80 pt-4'>
+    <div className='mx-48 3xl:mx-80 py-10'>
       <ol className='flex space-x-4 items-center'>
         <Link href='/'>
           <li className='font-rubik font-light text-primary cursor-pointer'>Home</li>
@@ -102,7 +103,7 @@ const ProductItem = () => {
             {(product.images).map((image, index) => {
               let visiblity = (index === picIndex) ? "opacity-100 z-30" : "opacity-0 z-0";
               return (
-                <div key={image.image} className={`${visiblity} bg-secondary absolute w-full h-full transition duration-300`}>
+                <div key={image.image} className={`${visiblity} bg-gray-100 absolute w-full h-full transition duration-300`}>
                   <Image
                     quality="100"
                     src={image.image || placeholderImg}

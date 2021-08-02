@@ -74,7 +74,7 @@ export default function Cart() {
             handleQuantityButton={handleQuantityButton}
           />
           <CheckOut
-            className='flex-grow h-full ml-8 px-6'
+            className='flex-grow h-full ml-8 px-6 bg-background'
             cartList={cart}
             handleDeleteButton={handleDeleteButton}
             handleQuantityButton={handleQuantityButton}
