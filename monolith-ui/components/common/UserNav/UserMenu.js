@@ -12,8 +12,8 @@ const LINKS = [
     href: "/listing",
   },
   {
-    name: "Profile",
-    href: "/profile",
+    name: "Account",
+    href: "/account",
   },
 ];
 

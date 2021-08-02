@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         'rubik': ["'Rubik', sans-serif"],
         'oswald': ["'Oswald', sans-serif"],
+        'chicle': ["'Chicle', cursive"],
       },
       fontSize: {
         'sm': '.825rem'

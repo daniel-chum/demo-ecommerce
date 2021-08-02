@@ -15,7 +15,6 @@ const CardGrid = ({ products, childPerRow, ...props }) => {
   useEffect(() => {
 
     if (componentRef.current) {
-      console.log(componentRef.current.offsetWidth)
       setWidth(componentRef.current.offsetWidth)
     }
 
