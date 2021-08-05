@@ -48,11 +48,9 @@ COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
-# copy entrypoint-prod.sh
-COPY ./entrypoint.prod.sh $APP_HOME
-
 # copy project
 COPY . $APP_HOME
+RUN chmod +x $APP_HOME/entrypoint.prod.sh
 
 # chown all the files to the dan user
 RUN chown -R dan:dan $APP_HOME
