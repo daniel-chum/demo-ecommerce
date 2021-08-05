@@ -20,6 +20,9 @@ RUN apk update \
 COPY /requirements.txt requirements.txt
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
+RUN python -m pip install pip
+RUN python -m pip install Pillow
+
 COPY . .
 #########
 # FINAL #
