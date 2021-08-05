@@ -16,7 +16,7 @@ const ProductCard = ({ product, handleButton, ...props }) => {
             <div className='relative w-full cursor-pointer bg-gray-100' style={{aspectRatio: '1/1'}}>
               <Image
               quality="100"
-              src={product.images[0].image || placeholderImg}
+              src={product?.images[0]?.image || placeholderImg}
               alt={product.title || "Product Image"}
               layout='fill'
               objectFit='contain'

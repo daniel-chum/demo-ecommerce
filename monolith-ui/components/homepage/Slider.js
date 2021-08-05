@@ -5,54 +5,80 @@ const Slider = ({
     ...props
 }) => {
     return(
-        <Carousel style={{ height: '40vh' }}>
-            <li className='bg-primary'>
-                <div className='w-4/5 h-full mx-auto flex justify-center items-center'>
-                    <section className='relative pl-20 flex flex-col h-full items-start justify-center'>
-                        <h1 className='text-dark text-6xl tracking-tighter italic font-extrabold font-open-sans'>TAKE FLIGHT</h1>
-                        <p className='text-dark font-normal font-open-sans' >
-                            BIG SALE UP TO 20% OFF
-                        </p>
-                    </section>
-                    <div className='h-full flex justify-center items-center'>
+        <Carousel style={{ height: 'max(650px, 78vh)' }}>
+            <li className='z-50'>
+                <div
+                    className='absolute z-50 pl-52 transform translate-y-1/3 flex flex-col h-full
+                                font-rubik text-secondary'>
+                    <h1 className='text-7xl 3xl:text-8xl tracking-tighter italic font-extrabold'>TAKE FLIGHT</h1>
+                    <p className='mt-10 text-2xl font-normal' >
+                        BIG SALE UP TO 60% OFF
+                    </p>
+                    <button
+                        className='w-max mt-10 px-16 py-3 border-2 text-xl font-bold border-secondary rounded-lg  text-secondary'
+                        type='button'
+                        >
+                            Shop now
+                    </button>
+                </div>
+                 <div className='relative w-full h-full z-40'>
                         <Image
                             quality="100"
-                            src='/lebron-12.png'
+                            src='/lebron-soldiers.png'
                             alt='Sneaker Banner'
-                            width= '500'
-                            height='250'
+                            layout='fill'
+                            objectFit='cover'
                         />
-                    </div>
                 </div>
             </li>
-            <li className='bg-primary'>
-                <div className='absolute h-full right-7 top-7'>
-                <Image
-                    quality="100"
-                    src='/lebron-12.png'
-                    alt='Sneaker Banner'
-                    width= '500'
-                    height='250'
-                />
+            <li className='z-50'>
+                <div
+                    className='absolute z-50 pl-60 pt-32 flex flex-col h-full
+                                font-chicle text-green-600'>
+                    <h1 className=' w-1/3  text-7xl 3xl:text-8xl tracking-wide'>Super GROCERY FAIR</h1>
+                    <p className='mt-10 text-2xl font-normal' >
+                        LIGHT UP YOUR LIFE WITH SAVINGS
+                    </p>
+                    <button
+                        className='w-max mt-10 px-16 py-3 border-2 text-xl font-bold font-rubik border-green-400 rounded-lg text-green-400'
+                        type='button'
+                        >
+                            Shop now
+                    </button>
                 </div>
-                <section className='relative flex flex-col h-full px-4 items-start justify-center'>
-                    <h1 className='text-black'>Welcome to my demo project</h1>
-                    <p className=' w-1/2 text-center text-black'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
-                        Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
-                    </p>
-                </section>
+                 <div className='relative w-full h-full z-40'>
+                        <Image
+                            quality="100"
+                            src='/groceries-banner.png'
+                            alt='Groceries Banner'
+                            layout='fill'
+                            objectFit='cover'
+                        />
+                </div>
             </li>
-            <li>
-                <div className='relative h-full'>
-                <section className='relative flex flex-col h-full px-4 items-end justify-center'>
-                    <h1>Slide 3 Heading</h1>
-                    <p className='text-center'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nulla ligula, tempor in elementum eu, hendrerit quis sem.
-                    Maecenas ultricies non enim sit amet vehicula. Sed euismod gravida varius. Nunc eget ex a neque elementum ultrices.
-                    Nam id nulla sed ligula malesuada convallis. Morbi et faucibus justo, vitae consequat urna.
+            <li className='z-50'>
+                <div
+                    className='absolute z-50 pl-72 pt-32 flex flex-col h-full
+                               font-oswald text-secondary-bright'>
+                    <h1 className=' w-1/3  text-7xl 3xl:text-8xl font-bold '>Modern Comfort Series</h1>
+                    <p className='mt-10 text-2xl font-normal font-rubik tracking-tight' >
+                        Free shipping worldwide
                     </p>
-                </section>
+                    <button
+                        className='w-max mt-10 px-16 py-3 border-2 text-xl font-medium bg-secondary-bright rounded-lg text-white'
+                        type='button'
+                        >
+                            Shop now
+                    </button>
+                </div>
+                 <div className='relative w-full h-full z-40'>
+                        <Image
+                            quality="100"
+                            src='/furniture.png'
+                            alt='Groceries Banner'
+                            layout='fill'
+                            objectFit='cover'
+                        />
                 </div>
             </li>
         </Carousel>

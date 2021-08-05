@@ -1,0 +1,21 @@
+.scrollbar {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: rgb(208, 207, 207) rgb(250, 250, 250); /* scroll thumb and track */
+}
+
+.scrollbar::-webkit-scrollbar {
+  padding-top: 5px;
+  height: 16px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: rgb(250, 250, 250); /* color of the tracking area */
+  border-radius: 60px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(208, 207, 207); /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+  border: 4px solid rgb(250, 250, 250);
+}

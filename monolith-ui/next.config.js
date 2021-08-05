@@ -8,6 +8,7 @@ module.exports = {
     ];
   },
   images: {
-    domains: ["localhost", "images.unsplash.com"],
+    domains: ["localhost"],
+    loader: 'imgix'
   },
 };

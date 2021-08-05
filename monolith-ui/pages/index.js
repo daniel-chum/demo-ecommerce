@@ -30,16 +30,16 @@ export default function Home() {
     <div className='font-rubik text-font-gray'>
       <Slider />
       <div className='mx-auto' style={{ width: '80%' }}>
-        <section className='my-20 text-center'>
+        <section className='mb-20 mt-12 text-center'>
           <Link href='/about'>
             <a>
               <button
-                className='bg-white text-lg border border-green-700 rounded-3xl py-2 px-8 text-green-700
-                          focus:outline-none hover:bg-green-700 hover:text-white
+                className='bg-white text-lg font-semibold border border-primary  rounded-3xl py-2 px-8 text-primary
+                          focus:outline-none hover:bg-primary hover:text-white
                           transition duration-300'
                 type='button'
               >
-                  Find out more about us.
+                  Find out more about us
               </button>
             </a>
           </Link>
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className='py-10' >
+        <section className='mt-20 py-10' >
           <div className='relative'>
             <div className='absolute left-0 top-1/2 border-b-2 border-gray-100 w-full' />
             <p className='relative left-1/2 transform -translate-x-1/2 text-center w-max px-10
@@ -81,17 +81,15 @@ export default function Home() {
               Featured Products
             </p>
           </div>
-          <p className='pt-4 w-1/2 mx-auto font-light text-base text-center'>
+          <p className='pt-6 w-1/2 mx-auto font-light text-base text-center'>
             Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.
           </p>
-          <CardGrid className='pt-10' childPerRow={5} products={products?.slice(0,5)} />
+          <CardGrid className='pt-16' childPerRow={5} products={products?.slice(0,5)} />
           <div className='text-center pt-12'>
             <Link href='/shop/1'>
               <a>
                 <button
-                  className='bg-gray-700 border rounded-lg py-3 px-8 text-white
-                            focus:outline-none hover:bg-secondary
-                            transition duration-300'
+                  className='bg-primary border rounded-lg py-3 px-8 text-white font-semibold text-lg focus:outline-none'
                   type='button'
                 >
                     View more
@@ -101,44 +99,46 @@ export default function Home() {
           </div>
         </section>
 
-         <section className='py-10 flex flex-wrap justify-center gap-x-8'>
-          <div className='bg-primary-bright' style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
-            <div className='relative w-1/2 h-full' >
+        <section className='my-20 flex flex-wrap justify-center gap-x-8'>
+          <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
+            <div className='relative h-full' >
               <Image
                   quality="100"
-                  src={'/kobe.png'}
+                  src={'/ps5.jpg'}
                   alt={"Shopping isometric"}
                   layout='fill'
-                  objectFit='fill'
+                  objectFit='cover'
               />
-              <p className='relative left-full pl-2 top-1/4'>
+              <p className='relative w-1/2 pl-8 pt-8 text-white'>
+                <span className='text-lg font-oswald tracking-wide'>ELECTRONICS</span>
+                <br />
+                <span className='block mt-2 text-4xl 3xl:text-5xl font-semibold font-rubik text-secondary tracking-tight '>GAMING CONSOLES</span>
+                <span className='block text-sm mt-2 cursor-pointer'>Up to 30% off ᐅ</span>
+              </p>
+            </div>
+          </div>
+
+          <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
+            <div className='relative h-full' >
+              <Image
+                  quality="100"
+                  src={'/kobe-bryant.jpg'}
+                  alt={"Shopping isometric"}
+                  layout='fill'
+                  objectFit='cover'
+              />
+              <p className='relative w-1/2 left-1/3 pl-8 top-1/4 text-white'>
                 <span className='text-lg font-oswald'>HONORING</span>
                 <br />
-                <span className='text-4xl 3xl:text-5xl font-semibold font-rubik text-gray-800 tracking-tight '>BLACK MAMBA</span>
+                <span className='text-4xl 3xl:text-5xl font-semibold font-rubik text-yellow-300 tracking-tight '>BLACK MAMBA</span>
                 <span className='block text-sm mt-3 cursor-pointer'>View Collection ᐅ</span>
               </p>
             </div>
           </div>
-          <div className='bg-pink-300'  style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
-            <div className='relative w-2/5 h-full'>
-              <Image
-                  quality="100"
-                  src={'/skincare.png'}
-                  alt={"Shopping isometric"}
-                  layout='fill'
-                  objectFit='contain'
-              />
-              <p className='relative flex-grow left-full top-1/3'>
-                <span className='text-lg font-oswald'>HEALTH & BEAUTY</span>
-                <br />
-                <span className='text-4xl 3xl:text-5xl font-semibold font-rubik text-gray-800 tracking-tight '>SKINCARE</span>
-                <span className='block text-sm mt-2.5 cursor-pointer'>View Collection ᐅ</span>
-              </p>
-            </div>
-          </div>
+
         </section>
 
-        <section className='py-10' >
+        <section className='mt-20 pt-10 mb-28' >
           <div className='relative'>
             <div className='absolute left-0 top-1/2 border-b-2 border-gray-100 w-full' />
             <p className='relative left-1/2 transform -translate-x-1/2 text-center w-max px-10
@@ -146,17 +146,15 @@ export default function Home() {
               New Arrivals
             </p>
           </div>
-          <p className='pt-4 w-1/2 mx-auto font-light text-base text-center'>
+          <p className='pt-6 w-1/2 mx-auto font-light text-base text-center'>
             Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.
           </p>
-          <CardGrid className='pt-10' childPerRow={5} products={products?.slice(5,10)} />
+          <CardGrid className='pt-16' childPerRow={5} products={products?.slice(5,10)} />
           <div className='text-center pt-12'>
             <Link href='/shop/1'>
               <a>
                 <button
-                  className='bg-gray-700 border rounded-lg py-3 px-8 text-white
-                            focus:outline-none hover:bg-secondary
-                            transition duration-300'
+                  className='bg-primary border rounded-lg py-3 px-8 text-white font-semibold text-lg focus:outline-none'
                   type='button'
                 >
                     View more

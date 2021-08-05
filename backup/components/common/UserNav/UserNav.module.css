@@ -1,0 +1,14 @@
+.user {
+  @apply flex items-center justify-evenly w-28 h-12 text-call-to-action;
+  @apply transition duration-300 ease-in-out;
+  @apply border border-call-to-action font-medium rounded;
+
+  &:focus {
+    outline: 0;
+    outline: none;
+  }
+
+  & svg {
+    @apply fill-current text-call-to-action;
+  }
+}
