@@ -1,4 +1,4 @@
-FROM node:14.17-alpine
+FROM node:14.15-alpine
 WORKDIR /next
 COPY . .
 RUN npm run build

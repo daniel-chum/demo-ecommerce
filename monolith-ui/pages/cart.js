@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import CartGrid from "../components/Cart/CartGrid";
-import CheckOut from "../components/Cart/CheckOut";
+import CartGrid from "../components/cart/CartGrid";
+import CheckOut from "../components/cart/CheckOut";
 import { deleteCart, partialUpdateCart } from "../api/cart";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
