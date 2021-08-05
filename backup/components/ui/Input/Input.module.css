@@ -1,9 +1,0 @@
-.input {
-
-  &:focus {
-
-    & + label {
-      @apply text-primary ;
-    }
-  }
-}
