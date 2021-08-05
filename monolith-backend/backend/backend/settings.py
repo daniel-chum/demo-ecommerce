@@ -32,7 +32,7 @@ DEBUG = bool(int(os.getenv('DEBUG', 1)))
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = os.getenv('ALLOWED_HOSTS')
 if ALLOWED_HOSTS_ENV:
-    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.replace(" ", "").split(','))
 
 # Application definition
 
