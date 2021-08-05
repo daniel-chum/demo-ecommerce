@@ -8,7 +8,7 @@ module.exports = {
     ];
   },
   images: {
-    domains: ["localhost"],
+    domains: ["127.0.0.1", "localhost"],
     loader: 'imgix'
   },
 };
