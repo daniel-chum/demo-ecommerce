@@ -9,10 +9,12 @@ const PopUp = (props) => {
                     className='fixed w-60 h-40 bg-gray-900 bg-opacity-90 text-white border flex flex-col items-center justify-evenly z-50'
                     style={{ left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }}
                 >
-                    {props.loader ?
-                        <FontAwesomeIcon icon={faCircleNotch} className='h-20 animate-spin' /> :
-                        <FontAwesomeIcon icon={faCheckCircle} className='h-20' />
-                    }
+                    <div className='h-20'>
+                        {props.loader ?
+                            <FontAwesomeIcon icon={faCircleNotch} className='animate-spin' /> :
+                            <FontAwesomeIcon icon={faCheckCircle} className='' />
+                        }
+                    </div>
                     <span className='text-lg font-rubik'>{props.children}</span>
                 </div>
                 )

@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { useState } from "react";
-import s from './UserMenu.module.css'
-import cn from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
@@ -32,8 +30,8 @@ const UserMenu = ({ user, cart, logout }) => {
         </span>
         <Link href='/cart'>
           <a className='contents'>
-            <button className='focus:outline-none'>
-              <FontAwesomeIcon icon={faShoppingCart} className='h-6 text-secondary cursor-pointer'/>
+            <button className='w-full h-6 focus:outline-none'>
+              <FontAwesomeIcon icon={faShoppingCart} className='text-secondary cursor-pointer'/>
             </button>
           </a>
         </Link>
@@ -43,9 +41,9 @@ const UserMenu = ({ user, cart, logout }) => {
         onMouseLeave={() => setDisplay(!display)}
         className='relative '
       >
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center h-6'>
           <span className='border-dotted border-secondary leading-tight mr-2 cursor-default' style={{ borderBottomWidth: '2.5px' }}>{user.username}</span>
-          <FontAwesomeIcon icon={faUser} className='h-6 text-secondary' />
+          <FontAwesomeIcon icon={faUser} className='w-full text-secondary' />
         </div>
         {display && (
           <div className= "fadeIn absolute lg:-right-2 lg:w-40 lg:h-auto">
