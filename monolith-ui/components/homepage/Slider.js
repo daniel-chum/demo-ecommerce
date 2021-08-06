@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Carousel } from '../ui'
 
 const Slider = ({
@@ -22,12 +21,10 @@ const Slider = ({
                     </button>
                 </div>
                  <div className='relative w-full h-full z-40'>
-                        <Image
-                            quality="100"
-                            src='/lebron-soldiers.png'
-                            alt='Sneaker Banner'
-                            layout='fill'
-                            objectFit='cover'
+                    <img
+                        src='/lebron-soldiers.png'
+                        alt='Sneaker Banner'
+                        className='object-cover'
                         />
                 </div>
             </li>
@@ -47,12 +44,10 @@ const Slider = ({
                     </button>
                 </div>
                  <div className='relative w-full h-full z-40'>
-                        <Image
-                            quality="100"
+                        <img
                             src='/groceries-banner.png'
                             alt='Groceries Banner'
-                            layout='fill'
-                            objectFit='cover'
+                            className='object-cover'
                         />
                 </div>
             </li>
@@ -72,12 +67,10 @@ const Slider = ({
                     </button>
                 </div>
                  <div className='relative w-full h-full z-40'>
-                        <Image
-                            quality="100"
+                        <img
                             src='/furniture.png'
                             alt='Groceries Banner'
-                            layout='fill'
-                            objectFit='cover'
+                            className='object-cover'
                         />
                 </div>
             </li>

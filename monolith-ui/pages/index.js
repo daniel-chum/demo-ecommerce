@@ -3,8 +3,6 @@ import { getProductList } from "../api/products";
 import CardGrid from "../components/product/Card/CardGrid";
 import { useState, useEffect } from "react";
 import Link from 'next/link'
-import Image from 'next/image'
-
 
 export default function Home() {
   const [products, setProducts] = useState(null);
@@ -47,12 +45,10 @@ export default function Home() {
 
         <section className='relative'  style={{ aspectRatio: '2.5/1' }}>
           <div className='w-full h-full relative z-40'>
-            <Image
-              quality="100"
+            <img
               src={'/dog.jpg'}
-              alt={"Shopping isometric"}
-              layout='fill'
-              objectFit='cover'
+              alt="Shopping isometric"
+              className= 'object-cover'
             />
           </div>
           <div
@@ -102,12 +98,10 @@ export default function Home() {
         <section className='my-20 flex flex-wrap justify-center gap-x-8'>
           <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
             <div className='relative h-full' >
-              <Image
-                  quality="100"
-                  src={'/ps5.jpg'}
-                  alt={"Shopping isometric"}
-                  layout='fill'
-                  objectFit='cover'
+              <img
+                  src='/ps5.jpg'
+                  alt="Shopping isometric"
+                  className= 'object-cover'
               />
               <p className='relative w-1/2 pl-8 pt-8 text-white'>
                 <span className='text-lg font-oswald tracking-wide'>ELECTRONICS</span>
@@ -120,12 +114,10 @@ export default function Home() {
 
           <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
             <div className='relative h-full' >
-              <Image
-                  quality="100"
-                  src={'/kobe-bryant.jpg'}
-                  alt={"Shopping isometric"}
-                  layout='fill'
-                  objectFit='cover'
+              <img
+                  src='/kobe-bryant.jpg'
+                  alt="Shopping isometric"
+                  className= 'object-cover'
               />
               <p className='relative w-1/2 left-1/3 pl-8 top-1/4 text-white'>
                 <span className='text-lg font-oswald'>HONORING</span>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
@@ -107,7 +107,7 @@ const Carousel = ({
     loading.current = false
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     setChildPosition()
     setParentPosition(0)

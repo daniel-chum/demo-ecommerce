@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { getProduct } from '../../api/products'
 import FilePreviewContainer from "../../components/ui/FilePreview/FilePreviewContainer";
 import { addCart } from '../../api/cart'
@@ -104,12 +103,10 @@ const ProductItem = () => {
               let visiblity = (index === picIndex) ? "opacity-100 z-30" : "opacity-0 z-0";
               return (
                 <div key={image.image} className={`${visiblity} bg-gray-100 absolute w-full h-full transition duration-300`}>
-                  <Image
-                    quality="100"
+                  <img
                     src={image.image || placeholderImg}
                     alt={product.title || "Product Image"}
-                    layout='fill'
-                    objectFit='contain'
+                    className='object-contain'
                   />
                 </div>
               )

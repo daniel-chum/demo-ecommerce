@@ -1,35 +1,5 @@
-###########
-# BUILDER #
-###########
-
 # pull official base image
-FROM python:3.9-alpine as builder
-
-# set work directory
-WORKDIR /usr/src/app
-
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# install psycopg2 dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
-
-# install dependencies
-COPY /requirements.txt requirements.txt
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
-
-RUN python -m pip install pip
-RUN python -m pip install Pillow
-
-COPY . .
-#########
-# FINAL #
-#########
-
-# pull official base image
-FROM python:3.9-alpine
+FROM python:3.8.3-alpine
 
 # create directory for the app user
 RUN mkdir -p /home/app
@@ -43,15 +13,29 @@ ENV APP_HOME=/home/app/web
 RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/static
 RUN mkdir $APP_HOME/media
+
+# set work directory
 WORKDIR $APP_HOME
 
-# install dependencies
-RUN apk update && apk add libpq
-COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip install --no-cache /wheels/*
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# copy project
+RUN pip install --upgrade pip
+
+RUN apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql \
+    && apk add postgresql-dev \
+    && apk add jpeg-dev zlib-dev libjpeg 
+    
+     
+# install dependencies
+COPY /requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+RUN apk del build-deps
+
 COPY . $APP_HOME
 RUN chmod +x $APP_HOME/entrypoint.prod.sh
 

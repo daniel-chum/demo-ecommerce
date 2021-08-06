@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from 'next/link';
 import Carousel from "../../ui/Carousel";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -55,12 +54,10 @@ const ListingGrid = ({ productList, handleDeleteButton, className }) => {
                   let link = image.image
                   return (
                     <div key={index} className='flex-none bg-gray-100'>
-                      <Image
-                        quality="100"
+                      <img
                         src={link || placeholderImg}
                         alt={product.title || "Listing Image"}
-                        layout='fill'
-                        objectFit='contain'
+                        className='object-contain'
                       />
                     </div>
                   )

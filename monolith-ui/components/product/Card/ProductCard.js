@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from 'next/link'
 
 const ProductCard = ({ product, handleButton, ...props }) => {
@@ -14,12 +13,10 @@ const ProductCard = ({ product, handleButton, ...props }) => {
         <Link href={`/product/${product.id}`}>
           <a className='contents'>
             <div className='relative w-full cursor-pointer bg-gray-100' style={{aspectRatio: '1/1'}}>
-              <Image
-              quality="100"
+              <img
               src={product?.images[0]?.image || placeholderImg}
               alt={product.title || "Product Image"}
-              layout='fill'
-              objectFit='contain'
+              className='object-contain'
               />
             </div>
           </a>

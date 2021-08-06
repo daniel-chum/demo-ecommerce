@@ -1,6 +1,5 @@
 import React from 'react'
 import Marquee from "react-fast-marquee";
-import Image from 'next/image'
 import { useUI } from "../components/ui/context"
 
 export default function About() {
@@ -22,13 +21,10 @@ export default function About() {
             className='flex items-center bg-background-2'
             style={{ height: '70vh', clipPath: 'ellipse(80% 70% at 50% 30%)' }}
             >
-                <Image
-                    quality="100"
-                    src={'/global.jpg'}
-                    alt={"Listing Image"}
-                    layout='fill'
-                    objectFit='cover'
-                    className='opacity-20'
+                <img
+                    src='/global.jpg'
+                    alt="Listing Image"
+                    className='opacity-20 object-cover'
                 />
                 <div className='pt w-1/3 mx-auto pb-4 text-center font-rubik font-medium text-white text-6xl '>
                     <h1>Welcome to the leading platform in digital commerce.</h1>
@@ -56,12 +52,10 @@ export default function About() {
             </section>
             <section className='py-10 w-8/12  mx-auto flex flex-wrap justify-center gap-x-20'>
                 <div className='relative' style={{ width: 'calc(10rem + 20%)', height: 'calc(10rem + 25vh)'}}>
-                    <Image
-                        quality="100"
-                        src={'/shopping.png'}
-                        alt={"Shopping isometric"}
-                        layout='fill'
-                        objectFit='fill'
+                    <img
+                        src='/shopping.png'
+                        alt="Shopping isometric"
+                        className='object-fill'
                     />
                 </div>
                 <div className='flex flex-col justify-center' style={{ width: 'calc(10rem + 20%)', height: 'calc(10rem + 25vh)' }}>
@@ -75,12 +69,11 @@ export default function About() {
                     <p className='font-light text-lg text-font-gray pt-4'>Lorem ipsum dolor amet mustache knausgaard +1, blue bottle waistcoat tbh semiotics artisan synth stumptown gastropub cornhole celiac swag. Brunch raclette vexillologist post-ironic glossier ennui XOXO. </p>
                 </div>
                 <div className='relative ' style={{ width: 'calc(10rem + 20%)', height: 'calc(10rem + 25vh)' }}>
-                    <Image
+                    <img
                         quality="100"
-                        src={'/business.png'}
-                        alt={"Business isometric"}
-                        layout='fill'
-                        objectFit='fill'
+                        src='/business.png'
+                        alt="Business isometric"
+                        className='object-fill'
                     />
                 </div>
             </section>
@@ -93,12 +86,10 @@ export default function About() {
                 <Marquee gradient={false} speed="150" >
                     {ICONS.map((icon, index) => (
                         <div className='relative w-48 h-20 mx-10 mt-6'>
-                            <Image
-                                quality="100"
+                            <img
                                 src={icon}
-                                alt={"Listing Image"}
-                                layout='fill'
-                                objectFit='contain'
+                                alt="Listing Image"
+                                className='object-contain'
                             />
                         </div>
                     ))}
