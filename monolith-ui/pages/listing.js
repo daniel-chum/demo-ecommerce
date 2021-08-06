@@ -14,7 +14,7 @@ export default function Listing() {
 
   // Upload fields
   const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("0.00");
   const [images, setImages] = useState([]);
 
   const [message, setMessage] = useState('');

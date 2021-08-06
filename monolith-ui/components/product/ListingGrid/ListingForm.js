@@ -25,6 +25,7 @@ const ListingForm = ({
         onChange={setPrice}
         value={price}
         label="PRICE"
+        prefix='$'
       />
       <span className="text-secondary-bright pt-4 pl-1">IMAGE</span>
       <FileUpload files={images} setFiles={setImages}></FileUpload>
