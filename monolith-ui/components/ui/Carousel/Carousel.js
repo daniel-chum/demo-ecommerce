@@ -143,7 +143,9 @@ const Carousel = ({
           style= {{left:'5%', height:'calc(20px + 7%)', aspectRatio: '1/1'}}
           onClick={() => handleNewIndex(selectedIndex - 1)}
         >
-          <FontAwesomeIcon icon={faChevronLeft} className='text-white' style={{ height: '30%' }}/>
+          <div style={{ height: '30%' }}>
+            <FontAwesomeIcon icon={faChevronLeft} className='h-full w-full text-white'/>
+          </div>
         </button>
         <button
           className='z-40 absolute top-1/2 transform -translate-y-2/4 rotate-180
@@ -152,7 +154,9 @@ const Carousel = ({
           style= {{right:'5%', height:'calc(20px + 7%)', aspectRatio: '1/1'}}
           onClick={() => handleNewIndex(selectedIndex + 1)}
         >
-          <FontAwesomeIcon icon={faChevronLeft} className='text-white' style={{ height: '30%' }}/>
+          <div style={{ height: '30%' }}>
+            <FontAwesomeIcon icon={faChevronLeft} className='h-full w-full text-white' />
+          </div>
         </button>
       </div>
       <div className={`absolute bottom-0.5 w-full h-6 text-center ${dotGap}`}>

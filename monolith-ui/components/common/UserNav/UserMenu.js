@@ -30,8 +30,8 @@ const UserMenu = ({ user, cart, logout }) => {
         </span>
         <Link href='/cart'>
           <a className='contents'>
-            <button className='w-full h-6 focus:outline-none'>
-              <FontAwesomeIcon icon={faShoppingCart} className='text-secondary cursor-pointer'/>
+            <button className='h-6 focus:outline-none'>
+              <FontAwesomeIcon icon={faShoppingCart} className='w-full h-full text-secondary cursor-pointer'/>
             </button>
           </a>
         </Link>
@@ -43,7 +43,7 @@ const UserMenu = ({ user, cart, logout }) => {
       >
         <div className='flex justify-center items-center h-6'>
           <span className='border-dotted border-secondary leading-tight mr-2 cursor-default' style={{ borderBottomWidth: '2.5px' }}>{user.username}</span>
-          <FontAwesomeIcon icon={faUser} className='w-full text-secondary' />
+          <FontAwesomeIcon icon={faUser} className='h-full w-full text-secondary' />
         </div>
         {display && (
           <div className= "fadeIn absolute lg:-right-2 lg:w-40 lg:h-auto">
