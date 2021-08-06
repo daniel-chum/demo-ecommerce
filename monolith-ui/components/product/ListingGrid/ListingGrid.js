@@ -57,7 +57,7 @@ const ListingGrid = ({ productList, handleDeleteButton, className }) => {
                       <img
                         src={link || placeholderImg}
                         alt={product.title || "Listing Image"}
-                        className='object-contain'
+                        className='object-contain w-full h-full'
                       />
                     </div>
                   )

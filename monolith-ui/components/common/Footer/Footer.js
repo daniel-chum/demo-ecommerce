@@ -56,15 +56,11 @@ export default function Footer(props) {
       </div>
       <div className='flex justify-between items-center border-t border-gray-50 border-opacity-10 mt-8 pt-2 pb-2'>
         <p>Copyright © <span className='text-primary'>Chum</span>. All Right Reserved.</p>
-        <div className='relative w-96 h-10'>
-          <Image
-            quality="100"
-            src='/payment.png'
-            alt='Payment gateways'
-            layout='fill'
-            objectFit='scale-down'
-          />
-        </div>
+        <img
+          src='/payment.png'
+          alt='Payment gateways'
+          className='object-scale-down w-96 h-10'
+        />
       </div>
     </div>
   );

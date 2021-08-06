@@ -44,13 +44,11 @@ export default function Home() {
         </section>
 
         <section className='relative'  style={{ aspectRatio: '2.5/1' }}>
-          <div className='w-full h-full relative z-40'>
-            <img
-              src='/dog.jpg'
-              alt="Shopping isometric"
-              className='object-cover'
-            />
-          </div>
+          <img
+            src='/dog.jpg'
+            alt="Shopping isometric"
+            className='object-cover w-full h-full'
+          />
           <div
             className='absolute top-1/3 transform translate-x-1/4 z-50
                       flex flex-col justify-center gap-y-4
@@ -96,36 +94,32 @@ export default function Home() {
         </section>
 
         <section className='my-20 flex flex-wrap justify-center gap-x-8'>
-          <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
-            <div className='relative h-full' >
-              <img
-                  src='/ps5.jpg'
-                  alt="Shopping isometric"
-                  className= 'object-cover'
-              />
-              <p className='relative w-1/2 pl-8 pt-8 text-white'>
-                <span className='text-lg font-oswald tracking-wide'>ELECTRONICS</span>
-                <br />
-                <span className='block mt-2 text-4xl 3xl:text-5xl font-semibold font-rubik text-secondary tracking-tight '>GAMING CONSOLES</span>
-                <span className='block text-sm mt-2 cursor-pointer'>Up to 30% off ᐅ</span>
-              </p>
-            </div>
+          <div className='relative' style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
+            <img
+                src='/ps5.jpg'
+                alt="Shopping isometric"
+                className= 'absolute object-contain h-full w-full'
+            />
+            <p className='relative h-full  w-1/2 pl-8 pt-8 text-white'>
+              <span className='text-lg font-oswald tracking-wide'>ELECTRONICS</span>
+              <br />
+              <span className='block mt-2 text-4xl 3xl:text-5xl font-semibold font-rubik text-secondary tracking-tight '>GAMING CONSOLES</span>
+              <span className='block text-sm mt-2 cursor-pointer'>Up to 30% off ᐅ</span>
+            </p>
           </div>
 
-          <div style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
-            <div className='relative h-full' >
-              <img
-                  src='/kobe-bryant.jpg'
-                  alt="Shopping isometric"
-                  className= 'object-cover'
-              />
-              <p className='relative w-1/2 left-1/3 pl-8 top-1/4 text-white'>
-                <span className='text-lg font-oswald'>HONORING</span>
-                <br />
-                <span className='text-4xl 3xl:text-5xl font-semibold font-rubik text-yellow-300 tracking-tight '>BLACK MAMBA</span>
-                <span className='block text-sm mt-3 cursor-pointer'>View Collection ᐅ</span>
-              </p>
-            </div>
+          <div className='relative' style={{ width: 'calc(12rem + 24% )', aspectRatio: '1.85/1' }}>
+            <img
+                src='/kobe-bryant.jpg'
+                alt="Shopping isometric"
+                className= 'absolute object-cover h-full w-full'
+            />
+            <p className='relative w-1/2 left-1/3 pl-8 top-1/4 text-white'>
+              <span className='text-lg font-oswald'>HONORING</span>
+              <br />
+              <span className='text-4xl 3xl:text-5xl font-semibold font-rubik text-yellow-300 tracking-tight '>BLACK MAMBA</span>
+              <span className='block text-sm mt-3 cursor-pointer'>View Collection ᐅ</span>
+            </p>
           </div>
 
         </section>

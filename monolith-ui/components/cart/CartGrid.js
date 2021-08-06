@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -34,13 +33,12 @@ const CartGrid = ({ cartList, handleDeleteButton, handleQuantityButton, classNam
               <td className='pl-4' style={{ width: '12%' }}>
                 <Link href={`/product/${product.id}`}>
                   <a>
-                    <div className='relative w-11/12 bg-gray-100' style={{ aspectRatio: '1/1' }}>
-                      <Image
-                        quality="100"
+                    <div className='bg-gray-100' >
+                      <img
                         src={product.images[0].image || placeholderImg}
                         alt={product.title || "Product Image"}
-                        layout='fill'
-                        objectFit='contain'
+                        className='object-contain'
+                        style={{ aspectRatio: '1/1' }}
                       />
                     </div>
                   </a>

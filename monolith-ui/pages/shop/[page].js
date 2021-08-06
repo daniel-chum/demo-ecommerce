@@ -95,28 +95,28 @@ export default function Shop() {
                     </div>
                 </section>
 
-                <section className='flex-grow'>
-                <div className='flex flex-wrap justify-between px-6 py-5 border border-gray-300' >
-                    <div className='flex items-center gap-x-3'>
-                    <FontAwesomeIcon icon={faTh} className='h-4 text-gray-600 cursor-pointer' />
-                    <FontAwesomeIcon icon={faList} className='h-4 text-gray-600 cursor-pointer' />
-                    <p className='mx-10 font-light text-base'>
-                        {`Showing ${ (page-1) * products?.page_size + 1 }-${ (page-1) * products?.page_size + products?.results.length } of ${products?.count} results`}
-                    </p>
+                <section className='flex-grow w-3/5'>
+                    <div className='flex flex-wrap justify-between px-6 py-5 border border-gray-300' >
+                        <div className='flex items-center gap-x-3'>
+                        <FontAwesomeIcon icon={faTh} className='h-4 text-gray-600 cursor-pointer' />
+                        <FontAwesomeIcon icon={faList} className='h-4 text-gray-600 cursor-pointer' />
+                        <p className='mx-10 font-light text-base'>
+                            {`Showing ${ (page-1) * products?.page_size + 1 }-${ (page-1) * products?.page_size + products?.results.length } of ${products?.count} results`}
+                        </p>
+                        </div>
+                        <div>
+                        <label className='mr-3'>Sort by</label>
+                        <select className='border border-gray-200 font-light focus:outline-none'>
+                            <option value='default'>Default sorting</option>
+                            <option value="popularity">Sort by popularity</option>
+                            <option value="rating">Sort by average rating</option>
+                        </select>
+                        </div>
                     </div>
-                    <div>
-                    <label className='mr-3'>Sort by</label>
-                    <select className='border border-gray-200 font-light focus:outline-none'>
-                        <option value='default'>Default sorting</option>
-                        <option value="popularity">Sort by popularity</option>
-                        <option value="rating">Sort by average rating</option>
-                    </select>
+                    <CardGrid className='pt-10' products={products?.results} />
+                    <div className='flex flex-wrap justify-center items-center gap-x-4 mt-10 px-6 py-5 border border-gray-300' >
+                        <Pagination page={page} next={products?.next} previous={products?.previous} count={products?.count} display={products?.display} />
                     </div>
-                </div>
-                <CardGrid className='pt-10' products={products?.results} />
-                <div className='flex flex-wrap justify-center items-center gap-x-4 mt-10 px-6 py-5 border border-gray-300' >
-                    <Pagination page={page} next={products?.next} previous={products?.previous} count={products?.count} display={products?.display} />
-                </div>
                 </section>
             </div>
         </div>

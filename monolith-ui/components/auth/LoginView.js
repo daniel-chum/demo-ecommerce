@@ -1,7 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import { Button, Input } from "../ui";
 import { useUI } from "../ui/context";
 import { useAuth } from "../../lib/hooks/auth";
+
+import { PopUp } from "../../components/ui";
 
 const LoginView = () => {
   // Form State
@@ -11,8 +13,11 @@ const LoginView = () => {
   const { setModalView, closeModal } = useUI();
   const { logIn } = useAuth();
 
+  const [loading, setLoading] = useState(false)
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     try {
       setMessage("");
@@ -23,7 +28,7 @@ const LoginView = () => {
       setMessage(errors.response.data.detail);
       setUsername("");
       setPassword("");
-    }
+    } finally { setLoading(false) }
   };
 
   return (
@@ -74,6 +79,9 @@ const LoginView = () => {
           </div>
         </div>
       </form>
+      <PopUp display={loading} loader={true}>
+        <span className='animate-pulse'>PROCESSING ...</span>
+      </PopUp>
     </div>
   );
 };

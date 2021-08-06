@@ -12,13 +12,12 @@ const ProductCard = ({ product, handleButton, ...props }) => {
       >
         <Link href={`/product/${product.id}`}>
           <a className='contents'>
-            <div className='relative w-full cursor-pointer bg-gray-100' style={{aspectRatio: '1/1'}}>
-              <img
-              src={product?.images[0]?.image || placeholderImg}
-              alt={product.title || "Product Image"}
-              className='object-contain'
-              />
-            </div>
+            <img
+            src={product?.images[0]?.image || placeholderImg}
+            alt={product.title || "Product Image"}
+            className='relative object-contain w-full cursor-pointer bg-gray-100 '
+            style={{aspectRatio: '1/1'}}
+            />
           </a>
         </Link>
         <span>{product.title}</span>

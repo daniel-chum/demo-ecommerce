@@ -20,13 +20,11 @@ const Slider = ({
                             Shop now
                     </button>
                 </div>
-                 <div className='relative w-full h-full z-40'>
-                    <img
-                        src='/lebron-soldiers.png'
-                        alt='Sneaker Banner'
-                        className='object-cover'
-                        />
-                </div>
+                <img
+                    src='/lebron-soldiers.png'
+                    alt='Sneaker Banner'
+                    className='object-cover w-full h-full'
+                    />
             </li>
             <li className='z-50'>
                 <div
@@ -43,13 +41,12 @@ const Slider = ({
                             Shop now
                     </button>
                 </div>
-                 <div className='relative w-full h-full z-40'>
-                        <img
-                            src='/groceries-banner.png'
-                            alt='Groceries Banner'
-                            className='object-cover'
-                        />
-                </div>
+                    <img
+                        src='/groceries-banner.png'
+                        alt='Groceries Banner'
+                        className='object-cover w-full h-full'
+                    />
+
             </li>
             <li className='z-50'>
                 <div
@@ -66,13 +63,11 @@ const Slider = ({
                             Shop now
                     </button>
                 </div>
-                 <div className='relative w-full h-full z-40'>
-                        <img
-                            src='/furniture.png'
-                            alt='Groceries Banner'
-                            className='object-cover'
-                        />
-                </div>
+                    <img
+                        src='/furniture.png'
+                        alt='Groceries Banner'
+                        className='object-cover w-full h-full'
+                    />
             </li>
         </Carousel>
     )

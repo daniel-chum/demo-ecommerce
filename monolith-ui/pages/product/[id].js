@@ -106,7 +106,7 @@ const ProductItem = () => {
                   <img
                     src={image.image || placeholderImg}
                     alt={product.title || "Product Image"}
-                    className='object-contain'
+                    className='h-full w-full object-contain'
                   />
                 </div>
               )

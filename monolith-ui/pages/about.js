@@ -24,7 +24,7 @@ export default function About() {
                 <img
                     src='/global.jpg'
                     alt="Listing Image"
-                    className='opacity-20 object-cover'
+                    className='absolute opacity-20 object-cover'
                 />
                 <div className='pt w-1/3 mx-auto pb-4 text-center font-rubik font-medium text-white text-6xl '>
                     <h1>Welcome to the leading platform in digital commerce.</h1>
@@ -77,7 +77,7 @@ export default function About() {
                     />
                 </div>
             </section>
-            <section className='py-20 mt-16 bg-primary-bright '>
+            <section className='pt-20 mt-16 bg-primary-bright '>
                 <p className='pt-10 w-1/3 mx-auto pb-4 text-center font-rubik font-medium text-primary text-5xl '>
                     <span>Running on solid foundations.</span>
                     <br />
@@ -85,11 +85,11 @@ export default function About() {
                 </p>
                 <Marquee gradient={false} speed="150" >
                     {ICONS.map((icon, index) => (
-                        <div className='relative w-48 h-20 mx-10 mt-6'>
+                        <div className='relative mx-10 mt-12 mb-6'>
                             <img
                                 src={icon}
                                 alt="Listing Image"
-                                className='object-contain'
+                                className='w-48 h-20 object-contain'
                             />
                         </div>
                     ))}
