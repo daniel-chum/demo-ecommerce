@@ -11,8 +11,8 @@ const PopUp = (props) => {
                 >
                     <div className='h-20'>
                         {props.loader ?
-                            <FontAwesomeIcon icon={faCircleNotch} className='w-full h-full animate-spin' /> :
-                            <FontAwesomeIcon icon={faCheckCircle} className='w-full h-full' />
+                            <FontAwesomeIcon icon={faCircleNotch} size='6x' className='w-full h-full animate-spin' /> :
+                            <FontAwesomeIcon icon={faCheckCircle} size='6x 'className='w-full h-full' />
                         }
                     </div>
                     <span className='text-lg font-rubik'>{props.children}</span>
