@@ -3,6 +3,7 @@ import { getProductList } from "../api/products";
 import CardGrid from "../components/product/Card/CardGrid";
 import { useState, useEffect } from "react";
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   const [products, setProducts] = useState(null);
@@ -45,10 +46,13 @@ export default function Home() {
 
         <section className='relative'  style={{ aspectRatio: '2.5/1' }}>
           <div className='w-full h-full relative z-40'>
-            <img
-              src={'/dog.jpg'}
+            <Image
+              quality='100'
+              src='/dog.jpg'
               alt="Shopping isometric"
-              className= 'object-cover'
+              layout='fill'
+              objectFit='cover'
+
             />
           </div>
           <div
