@@ -12,11 +12,19 @@ services:
       - 8000
     env_file:
       - ./.env.prod
+    depends_on:
+      - db
   frontend:
     build:
       context: ./monolith-ui
     volumes:
       - next_build:/next/out
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
   nginx:
     image: nginx:1.21-alpine
     volumes:
@@ -32,6 +40,6 @@ services:
 
 volumes:
   next_build:
+  postgres_data:
   static_volume:
   media_volume:
-
