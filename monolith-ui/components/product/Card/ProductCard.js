@@ -20,7 +20,7 @@ const ProductCard = ({ product, handleButton, ...props }) => {
             />
           </a>
         </Link>
-        <span>{product.title}</span>
+        <span className='text-center'>{product.title}</span>
         <span>{`$${product.price}`}</span>
       </div>
     </li>

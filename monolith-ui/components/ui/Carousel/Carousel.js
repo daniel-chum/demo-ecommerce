@@ -109,7 +109,6 @@ const Carousel = ({
 
   useLayoutEffect(() => {
 
-    setChildPosition()
     setParentPosition(0)
 
   }, [])
@@ -127,9 +126,11 @@ const Carousel = ({
 
         {props.children.map((child, index) => {
 
+          let style = {transform: `translateX(${100 * index}%)`}
           return React.cloneElement(child, {
             key:  index,
             className: `${child.props.className} absolute w-full h-full`,
+            style: style
             })
           })
         }
