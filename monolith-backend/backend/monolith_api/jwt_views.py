@@ -49,6 +49,13 @@ class RefreshToken(TokenViewBaseWithCookie):
 class Logout(APIView):
 
     def post(self, *args, **kwargs):
-        resp = Response({})
-        resp.delete_cookie("refresh_token")
+
+        cookie = self.request.COOKIES.get("refresh_token")
+
+        if cookie != None:
+            resp = Response({})
+            resp.delete_cookie("refresh_token")
+            return resp
+
+        resp = Response({"non_field_errors": ["No refresh token cookie found"]}, status=status.HTTP_400_BAD_REQUEST)
         return resp

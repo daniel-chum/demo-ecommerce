@@ -3,7 +3,6 @@ from rest_framework import serializers
 from monolith_api.models import Product, Cart, ProductImages
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt import serializers as jwt_serializers
 from rest_framework_simplejwt.settings import api_settings as jwt_settings
 from rest_framework_simplejwt.tokens import RefreshToken
