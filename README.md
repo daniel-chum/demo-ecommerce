@@ -59,6 +59,7 @@ $ cd demo-ecommerce/monolith-ui
 $ npm install
 $ npm run dev
 ```
+4. Browse localhost:3000 on your browser
 
 # Run on Docker
 To run on docker follow these simple example steps.
@@ -73,6 +74,7 @@ git clone https://github.com/daniel-chum/demo-ecommerce.git
 $ cd demo-ecommerce
 $ docker-compose -f docker-compose.dev.yml up -d --build
 ```
+3. Browse localhost:80 on your browser
 ### Run on production environment
 ```console.
 $ docker-compose -f docker-compose.yml up -d --build
