@@ -17,6 +17,7 @@ services:
   frontend:
     build:
       context: ./monolith-ui
+      dockerfile: dev.Dockerfile
     volumes:
       - next_build:/next/out
   db:

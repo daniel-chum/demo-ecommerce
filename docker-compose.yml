@@ -15,6 +15,7 @@ services:
   frontend:
     build:
       context: ./monolith-ui
+      dockerfile: Dockerfile
     volumes:
       - next_build:/next/out
   nginx:
@@ -34,4 +35,3 @@ volumes:
   next_build:
   static_volume:
   media_volume:
-
