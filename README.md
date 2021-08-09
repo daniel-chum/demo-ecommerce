@@ -1,4 +1,4 @@
-# E-commerce Platform
+# Demo E-commerce Platform
 
 Demo live at: [demo.danielchum.com](http://demo.danielchum.com)
 
@@ -17,7 +17,7 @@ A demo e-commerce website where users can
 * AWS EC2
 * AWS RDS (Postgresql)
 
-# Features 
+# Features
 * Performant by default
 * SEO Ready
 * UI Components
@@ -47,13 +47,12 @@ git clone https://github.com/daniel-chum/demo-ecommerce.git
 2. Install python packages and run django rest framework
 ```console.
 $ cd demo-ecommerce/monolith-backend
-$ python3 -m venv djangoenv  
-$ source djangoenv/bin/activate  
+$ python3 -m venv djangoenv
+$ source djangoenv/bin/activate
 $ cd backend
 $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
-
 3. Install NPM packages
 ```console.
 $ cd demo-ecommerce/monolith-ui
@@ -69,23 +68,12 @@ To run on docker follow these simple example steps.
 ```console.
 git clone https://github.com/daniel-chum/demo-ecommerce.git
 ```
-2. Install python packages and run django rest framework
+2. Run docker compose
 ```console.
-$ cd demo-ecommerce/monolith-backend
-$ python3 -m venv djangoenv  
-$ source djangoenv/bin/activate  
-$ cd backend
-$ pip install -r requirements.txt
-$ python manage.py runserver
+$ cd demo-ecommerce
+$ docker-compose -f docker-compose.dev.yml up -d --build
 ```
-
-3. Install NPM packages
+### Run on production environment
 ```console.
-$ cd demo-ecommerce/monolith-ui
-$ npm install
-$ npm run dev
+$ docker-compose -f docker-compose.yml up -d --build
 ```
-
-
-
-
