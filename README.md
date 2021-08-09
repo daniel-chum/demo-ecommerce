@@ -17,7 +17,7 @@ A demo e-commerce website where users can
 * AWS EC2
 * AWS RDS (Postgresql)
 
-# Features
+# Features 
 * Performant by default
 * SEO Ready
 * UI Components
@@ -47,8 +47,8 @@ git clone https://github.com/daniel-chum/demo-ecommerce.git
 2. Install python packages and run django rest framework
 ```console.
 $ cd demo-ecommerce/monolith-backend
-$ python3 -m venv djangoenv
-$ source djangoenv/bin/activate
+$ python3 -m venv djangoenv  
+$ source djangoenv/bin/activate  
 $ cd backend
 $ pip install -r requirements.txt
 $ python manage.py runserver
@@ -72,8 +72,8 @@ git clone https://github.com/daniel-chum/demo-ecommerce.git
 2. Install python packages and run django rest framework
 ```console.
 $ cd demo-ecommerce/monolith-backend
-$ python3 -m venv djangoenv
-$ source djangoenv/bin/activate
+$ python3 -m venv djangoenv  
+$ source djangoenv/bin/activate  
 $ cd backend
 $ pip install -r requirements.txt
 $ python manage.py runserver
@@ -85,3 +85,7 @@ $ cd demo-ecommerce/monolith-ui
 $ npm install
 $ npm run dev
 ```
+
+
+
+
