@@ -1,4 +1,4 @@
-# Demo E-commerce Platform
+# E-commerce Platform
 
 Demo live at: [demo.danielchum.com](http://demo.danielchum.com)
 
