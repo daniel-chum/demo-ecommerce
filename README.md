@@ -79,3 +79,6 @@ $ docker-compose -f docker-compose.dev.yml up -d --build
 ```console.
 $ docker-compose -f docker-compose.yml up -d --build
 ```
+
+# Contact
+Daniel Chum - szewen.chum@gmail.com
