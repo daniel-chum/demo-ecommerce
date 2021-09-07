@@ -88,6 +88,6 @@ $ python3 -m venv djangoenv
 $ source djangoenv/bin/activate
 $ cd backend
 $ python manage.py test
-
+```
 # Contact
 Daniel Chum - szewen.chum@gmail.com
