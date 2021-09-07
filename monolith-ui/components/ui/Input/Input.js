@@ -15,7 +15,7 @@ const Input = (props) => {
       <div className={cn('flex justify-center items-center ', className, borderStyle)}>
         <span>{prefix}</span>
         <input
-          className={cn('pl-1 w-full h-full outline-none font-light border-gray-300 focus:border-primary', s.input)}
+          className={cn('pl-1 pb-1 w-full h-full outline-none font-light border-gray-300 focus:border-primary', s.input)}
           onChange={handleOnChange}
           value={value}
           autoComplete="off"
@@ -25,7 +25,7 @@ const Input = (props) => {
           {...rest}
         />
       </div>
-      <label className='text-secondary-bright transition duration-300 ease-in-out'>{label}</label>
+      <label className='pb-1 text-secondary-bright transition duration-300 ease-in-out'>{label}</label>
     </div>
   );
 };

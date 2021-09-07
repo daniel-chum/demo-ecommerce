@@ -20,7 +20,7 @@ const UserMenu = ({ user, cart, logout }) => {
   const [display, setDisplay] = useState(false);
 
   return (
-    <div className='flex justify-center items-center font-rubik text-secondary'>
+    <div className='pr-6 flex justify-center items-center font-rubik text-secondary'>
       <div className='relative flex justify-center items-center mr-8'>
         <span className='absolute left-5 bottom-4
                         text-xs font-semibold

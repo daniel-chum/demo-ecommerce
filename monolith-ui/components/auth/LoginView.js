@@ -3,8 +3,6 @@ import { Button, Input } from "../ui";
 import { useUI } from "../ui/context";
 import { useAuth } from "../../lib/hooks/auth";
 
-import { PopUp } from "../../components/ui";
-
 const LoginView = () => {
   // Form State
   const [username, setUsername] = useState("");
@@ -51,16 +49,13 @@ const LoginView = () => {
             label='Username'
             onChange={setUsername}
             value={username}
-
           />
           <Input
             type="password"
             label="Password"
             onChange={setPassword}
             value={password}
-            className='pb-2'
           />
-
           <Button
             variant="slim"
             type="submit"
@@ -79,9 +74,6 @@ const LoginView = () => {
           </div>
         </div>
       </form>
-      <PopUp display={loading} loader={true}>
-        <span className='animate-pulse'>PROCESSING ...</span>
-      </PopUp>
     </div>
   );
 };

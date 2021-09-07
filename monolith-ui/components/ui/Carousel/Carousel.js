@@ -1,6 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import cn from 'classnames'
 
 const Carousel = ({
   ...props
@@ -117,7 +118,7 @@ const Carousel = ({
   const dotGap = props.dotGap? props.dotGap : 'space-x-2'
 
   return (
-    <section className='relative mx-auto overflow-hidden' style={props.style}>
+    <section className={cn('relative overflow-hidden', props.className)} style={props.style}>
       <ol
         className='relative w-full h-full transition-all duration-300 ease-in-out'
         ref={slider}

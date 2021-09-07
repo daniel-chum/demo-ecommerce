@@ -8,7 +8,7 @@ const CartGrid = ({ cartList, handleDeleteButton, handleQuantityButton, classNam
   const HEADER = ['', 'PRODUCT', 'PRICE', 'QUANTITY', 'TOTAL', '']
 
   return (
-    <table className={`${className}`}>
+    <table className={`${className} mb-20`}>
       <thead
         className='grid justify-items-center items-center'
         style={{

@@ -8,6 +8,10 @@ module.exports = {
         'oswald': ["'Oswald', sans-serif"],
         'chicle': ["'Chicle', cursive"],
       },
+      height: {
+        '60vh': '60vh',
+        '80vh': '80vh',
+      },
       fontSize: {
         'sm': '.825rem'
       },

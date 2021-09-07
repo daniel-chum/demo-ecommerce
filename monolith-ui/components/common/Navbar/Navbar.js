@@ -6,7 +6,7 @@ import UserNav from "../../common/UserNav/UserNav";
 const Navbar = () => {
 
   return (
-    <div className="sticky top-0 z-50 w-full flex justify-between px-48 py-2 bg-white shadow-magical">
+    <div className="sticky top-0 z-50 w-full flex justify-between pl-10 lg:px-32 xl:px-48 py-2 bg-white shadow-magical">
       <Link href='/'>
         <a>
           <Logo />
