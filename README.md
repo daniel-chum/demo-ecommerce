@@ -23,7 +23,7 @@ A 7-page demo e-commerce website with membership where users can
 * SEO Ready
 * UI Components
 * Standardized Data Hooks
-* JWT Authentication
+* JWT Authentication (Access Token in memory and Refresh Token in HTTP-only cookie)
 
 # APIs
 * Customer Cart
